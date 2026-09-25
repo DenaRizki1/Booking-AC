@@ -29,7 +29,7 @@ php artisan key:generate
 # 3. Database (utf8mb4)
 mysql -u root -e "CREATE DATABASE booking_ac CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
 mysql -u root -e "CREATE DATABASE booking_ac_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
-php artisan migrate
+php artisan migrate --seed   # data awal (+ data demo bila APP_ENV=local)
 
 # 4. Jalankan
 npm run dev          # Vite
@@ -37,6 +37,18 @@ php artisan serve    # http://127.0.0.1:8000 (atau lewat Herd: http://booking-ac
 ```
 
 Sesuaikan `DB_USERNAME` / `DB_PASSWORD` di `.env` bila MySQL Anda memakai password.
+Reset database lokal kapan saja: `php artisan migrate:fresh --seed` (**hanya di lokal**).
+
+## Akun login
+
+| Peran | Email | Password | Keterangan |
+|---|---|---|---|
+| Admin | `admin@booking-ac.test` | `password` | Dibuat `AdminSeeder` di semua environment — **ganti password di produksi** |
+| Teknisi (demo) | `rudi@`, `ahmad@`, `dimas@`, `yoga@booking-ac.test` | `password` | Hanya lokal (`DemoSeeder`) |
+| Client (demo) | mis. `dena.rizki@example.com` | – | Client masuk lewat Google; akun demo hanya untuk data |
+
+Data demo: 4 teknisi, 2 helper, 5 client, 20 order (semua status, termasuk 1 klaim garansi) dengan jadwal relatif terhadap hari ini.
+Identitas perusahaan masih placeholder **SejukAC** (T-004) dan bisa diubah di menu Pengaturan admin.
 
 ## Test & kualitas kode
 

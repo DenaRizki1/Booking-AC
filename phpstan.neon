@@ -8,3 +8,6 @@ parameters:
         - config
         - database
         - routes
+
+    # Baca isi method casts() model agar tipe atribut (enum, datetime, array) dikenali.
+    parseModelCastsMethod: true

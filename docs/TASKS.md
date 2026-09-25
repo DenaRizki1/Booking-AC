@@ -61,7 +61,7 @@ flowchart LR
 | [x] | T-203 | Migration kelompok C (teknisi, helper, cuti) | S | Inti | T-201 |
 | [x] | T-204 | Migration kelompok D (order & turunannya) | M | Inti | T-202, T-203 |
 | [x] | T-205 | Model, relasi, cast & factory | M | Inti | T-204 |
-| [ ] | T-206 | Seeder data awal + data demo | M | Inti | T-205 |
+| [x] | T-206 | Seeder data awal + data demo | M | Inti | T-205 |
 | **F3** | | **Auth & role** | | | |
 | [ ] | T-301 | Login Google untuk client | M | Inti | T-205, T-002 |
 | [ ] | T-302 | Login admin & teknisi (email + password) | S | Inti | T-205 |
