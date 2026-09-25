@@ -56,7 +56,7 @@ flowchart LR
 | [x] | T-104 | Tooling: Pest, Pint, Larastan | S | Inti | T-101 |
 | [x] | T-105 | PHP Enum (role, status, dll.) | S | Inti | T-101 |
 | **F2** | | **Database** | | | |
-| [ ] | T-201 | Migration kelompok A (users, settings, alamat) | S | Inti | T-105 |
+| [x] | T-201 | Migration kelompok A (users, settings, alamat) | S | Inti | T-105 |
 | [ ] | T-202 | Migration kelompok B (master AC, layanan, harga) | S | Inti | T-201 |
 | [ ] | T-203 | Migration kelompok C (teknisi, helper, cuti) | S | Inti | T-201 |
 | [ ] | T-204 | Migration kelompok D (order & turunannya) | M | Inti | T-202, T-203 |

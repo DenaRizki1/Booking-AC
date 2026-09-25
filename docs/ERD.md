@@ -173,7 +173,7 @@ Index: `user_id`.
 |---|---|---|---|---|
 | id | BIGINT UNSIGNED | – | AI | PK |
 | company_name | VARCHAR(120) | – | | |
-| phone, email | VARCHAR | ✓ | NULL | Kontak perusahaan |
+| phone, email | VARCHAR(20) / VARCHAR(191) | ✓ | NULL | Kontak perusahaan |
 | address | TEXT | – | | |
 | lat, lng | DECIMAL(10,7) | – | | Titik kantor (acuan jarak) |
 | open_time | TIME | – | 08:00 | Jam operasional mulai |
@@ -186,7 +186,7 @@ Index: `user_id`.
 | fee_per_km | INT UNSIGNED | – | 3000 | Tarif per km di luar radius gratis |
 | cancel_limit_hours | SMALLINT UNSIGNED | – | 3 | Batas client membatalkan sendiri |
 | warranty_days | SMALLINT UNSIGNED | – | 7 | Garansi default |
-| bank_name, bank_account_no, bank_account_name | VARCHAR | ✓ | NULL | Info transfer di halaman pembayaran |
+| bank_name, bank_account_no, bank_account_name | VARCHAR(100) / VARCHAR(50) / VARCHAR(120) | ✓ | NULL | Info transfer di halaman pembayaran |
 
 ---
 
