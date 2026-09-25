@@ -120,6 +120,110 @@
             </x-card>
         @endunless
 
+        {{-- Laporan & pembayaran (setelah SELESAI) --}}
+        @if (in_array($order->status, [OrderStatus::SELESAI, OrderStatus::LUNAS], true))
+            <x-card title="Laporan pekerjaan" x-data="{ photo: null }">
+                @if ($order->completed_at)
+                    <x-slot:actions><span class="text-[13px] text-muted">Dikirim {{ $order->completed_at->format('H:i') }}</span></x-slot:actions>
+                @endif
+
+                <div class="space-y-3">
+                    @foreach ($order->items as $item)
+                        @php($over = $item->final_price !== null && $item->final_price > $item->est_price_max)
+                        <article class="rounded-2xl bg-surface-bg p-4">
+                            <div class="flex justify-between gap-3">
+                                <div class="min-w-0">
+                                    <p class="text-[13px] font-extrabold tracking-wide text-primary uppercase">Unit {{ $loop->iteration }} · {{ $item->service_name }}</p>
+                                    <p class="font-bold text-ink">{{ $item->unit_label }}</p>
+                                </div>
+                                <p class="shrink-0 text-[17px] font-extrabold text-ink tabular-nums">{{ $item->final_price !== null ? Format::rupiah($item->final_price) : '–' }}</p>
+                            </div>
+
+                            <div class="mt-3 grid grid-cols-2 gap-2">
+                                @foreach ([\App\Enums\PhotoKind::SEBELUM, \App\Enums\PhotoKind::SESUDAH] as $kind)
+                                    @php($photos = $item->photos->where('kind', $kind))
+                                    <div @class(['relative aspect-[4/3] overflow-hidden rounded-xl', 'bg-[#DCE4F0]' => $kind === \App\Enums\PhotoKind::SEBELUM, 'bg-blue-100' => $kind !== \App\Enums\PhotoKind::SEBELUM])>
+                                        <span @class(['absolute top-2 left-2 z-10 rounded-md px-2 py-0.5 text-xs font-bold', 'bg-white text-ink' => $kind === \App\Enums\PhotoKind::SEBELUM, 'bg-primary text-white' => $kind !== \App\Enums\PhotoKind::SEBELUM])>{{ $kind->label() }}</span>
+                                        @if ($photos->isNotEmpty())
+                                            @php($first = $photos->first())
+                                            <button type="button" class="size-full" x-on:click="photo = @js(Storage::disk('public')->url($first->path))">
+                                                <img src="{{ Storage::disk('public')->url($first->path) }}" alt="Foto {{ strtolower($kind->label()) }} unit {{ $loop->parent->iteration }}" loading="lazy" class="size-full object-cover">
+                                                @if ($photos->count() > 1)
+                                                    <span class="absolute right-2 bottom-2 rounded-md bg-navy/70 px-1.5 text-xs font-bold text-white">+{{ $photos->count() - 1 }}</span>
+                                                @endif
+                                            </button>
+                                        @else
+                                            <span class="flex size-full items-center justify-center text-xs text-muted">Belum ada foto</span>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            @if ($item->work_note)
+                                <p class="mt-3 text-[15px] text-ink-soft">{{ $item->work_note }}</p>
+                            @endif
+                            @if ($over || $item->price_note)
+                                <div class="mt-3 flex gap-2 rounded-xl bg-warning-50 p-3 text-sm text-warning-900">
+                                    <x-icon name="circle-alert" class="mt-0.5 size-4 shrink-0" />
+                                    <p>{{ $over ? 'Di atas estimasi: ' : '' }}{{ $item->price_note }}@if ($over) (+{{ Format::rupiah($item->final_price - $item->est_price_max) }})@endif</p>
+                                </div>
+                            @endif
+                        </article>
+                    @endforeach
+                </div>
+
+                @if ($order->technician_note)
+                    <p class="mt-3 text-[15px] text-ink-soft"><span class="font-semibold text-ink">Catatan teknisi:</span> {{ $order->technician_note }}</p>
+                @endif
+
+                {{-- Lightbox --}}
+                <div x-show="photo" x-cloak x-transition.opacity class="fixed inset-0 z-50 flex items-center justify-center bg-navy/85 p-4" x-on:click="photo = null" x-on:keydown.escape.window="photo = null" role="dialog" aria-modal="true" aria-label="Foto laporan">
+                    <img :src="photo" alt="" class="max-h-[85vh] max-w-full rounded-xl object-contain">
+                    <button type="button" class="absolute top-4 right-4 flex size-12 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25" x-on:click="photo = null">
+                        <x-icon name="x" class="size-6" /><span class="sr-only">Tutup foto</span>
+                    </button>
+                </div>
+            </x-card>
+
+            @php($serviceTotal = (int) ($order->final_price ?? $order->items->sum('final_price')))
+            <x-card title="Pembayaran">
+                <x-slot:actions>
+                    @if ($order->status === OrderStatus::LUNAS)
+                        <x-badge variant="success">Lunas</x-badge>
+                    @elseif ((int) $order->grand_total === 0)
+                        <x-badge variant="primary">Tanpa biaya</x-badge>
+                    @else
+                        <x-badge variant="warning">Belum dibayar</x-badge>
+                    @endif
+                </x-slot:actions>
+
+                <dl class="space-y-2 text-[15px]">
+                    <div class="flex justify-between"><dt class="text-muted">Layanan ({{ $order->items->count() }} unit)</dt><dd class="font-bold text-ink">{{ Format::rupiah($serviceTotal) }}</dd></div>
+                    <div class="flex justify-between"><dt class="text-muted">Transport</dt><dd class="font-bold text-ink">{{ $order->transport_fee === 0 ? 'Gratis' : Format::rupiah($order->transport_fee) }}</dd></div>
+                </dl>
+                <div class="mt-3 flex items-end justify-between border-t border-line pt-3">
+                    <span class="text-lg font-extrabold text-ink">Total</span>
+                    <span class="text-2xl font-extrabold tracking-tight text-navy tabular-nums">{{ Format::rupiah((int) ($order->grand_total ?? $serviceTotal + $order->transport_fee)) }}</span>
+                </div>
+
+                @if ($order->status === OrderStatus::LUNAS)
+                    <p class="mt-3 text-sm text-success-700">Dibayar {{ $order->payment_method?->label() ? 'secara '.strtolower($order->payment_method->label()) : '' }} pada {{ Format::date($order->paid_at ?? $order->updated_at) }}. Terima kasih!</p>
+                @elseif ((int) $order->grand_total === 0)
+                    <p class="mt-3 text-sm text-muted">Order garansi — tidak ada tagihan.</p>
+                @else
+                    <p class="mt-3 text-sm text-muted">
+                        Bayar tunai ke teknisi, atau transfer ke
+                        @if ($settings->bank_name && $settings->bank_account_no)
+                            <strong class="text-ink">{{ $settings->bank_name }} {{ $settings->bank_account_no }}</strong> a.n. <strong class="text-ink">{{ $settings->bank_account_name ?? $settings->company_name }}</strong>.
+                        @else
+                            rekening {{ $settings->company_name }} (hubungi admin).
+                        @endif
+                        Admin akan menandai lunas setelah pembayaran diterima.
+                    </p>
+                @endif
+            </x-card>
+        @endif
+
         {{-- Lokasi & catatan --}}
         <x-card title="Lokasi">
             <p class="text-[15px] text-ink">{{ $order->address_snapshot }}</p>

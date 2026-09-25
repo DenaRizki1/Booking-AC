@@ -90,7 +90,7 @@ flowchart LR
 | [x] | T-604 | Buat order — jadwal, ringkasan & simpan | L | Inti | T-603, T-503, T-504, T-505 |
 | [x] | T-605 | Order saya + detail & timeline | M | Inti | T-604 |
 | [x] | T-606 | Batalkan order (batas 3 jam) | S | Inti | T-605 |
-| [ ] | T-607 | Lihat laporan & info pembayaran | S | Inti | T-605 |
+| [x] | T-607 | Lihat laporan & info pembayaran | S | Inti | T-605 |
 | [ ] | T-608 | Rating & ulasan | S | Inti | T-607 |
 | [ ] | T-609 | Klaim garansi | M | Lanjutan | T-607 |
 | **F7** | | **Admin — operasional order** | | | |

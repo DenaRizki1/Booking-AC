@@ -50,7 +50,7 @@ class OrderController extends Controller
 
         /** @var User $client */
         $client = $request->user();
-        $order->load(['items', 'technician.user', 'helper', 'statusLogs', 'parentOrder:id,code']);
+        $order->load(['items.photos', 'technician.user', 'helper', 'statusLogs', 'parentOrder:id,code']);
 
         return view('client.orders.show', [
             'order' => $order,

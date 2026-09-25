@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use App\Enums\PaymentMethod;
+use App\Enums\PhotoKind;
 use App\Enums\UserRole;
 use App\Models\AcBrand;
 use App\Models\CompanySettings;
@@ -25,6 +26,8 @@ use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * Data demo untuk pengembangan lokal: 4 teknisi, 2 helper, 5 client, 20 order berbagai status.
@@ -300,6 +303,10 @@ class DemoSeeder extends Seeder
             }
 
             $item->save();
+
+            if ($completed) {
+                $this->attachDemoPhotos($order, $item);
+            }
         }
 
         if ($completed) {
@@ -469,6 +476,55 @@ class DemoSeeder extends Seeder
 
             $from = $to;
         }
+    }
+
+    /**
+     * Foto contoh SEBELUM & SESUDAH (gambar sederhana, dibuat dengan GD) untuk laporan demo.
+     */
+    private function attachDemoPhotos(Order $order, OrderItem $item): void
+    {
+        if (! function_exists('imagecreatetruecolor') || $order->technician === null) {
+            return;
+        }
+
+        foreach ([PhotoKind::SEBELUM, PhotoKind::SESUDAH] as $kind) {
+            $path = "demo/{$order->code}-{$item->sort_order}-".strtolower($kind->value).'.jpg';
+            Storage::disk('public')->put($path, $this->demoImage($kind, $item->unit_label));
+
+            $order->photos()->create([
+                'order_item_id' => $item->id,
+                'kind' => $kind,
+                'path' => $path,
+                'uploaded_by' => $order->technician->user_id,
+            ]);
+        }
+    }
+
+    private function demoImage(PhotoKind $kind, string $label): string
+    {
+        $after = $kind === PhotoKind::SESUDAH;
+        $image = imagecreatetruecolor(800, 600);
+        $color = fn (int $r, int $g, int $b) => (int) imagecolorallocate($image, $r, $g, $b);
+
+        imagefilledrectangle($image, 0, 0, 800, 600, $after ? $color(212, 228, 251) : $color(220, 228, 240));
+        // Unit indoor AC.
+        imagefilledrectangle($image, 180, 200, 620, 330, $color(255, 255, 255));
+        imagefilledrectangle($image, 180, 300, 620, 330, $after ? $color(232, 240, 254) : $color(160, 170, 186));
+        imagefilledellipse($image, 220, 235, 18, 18, $after ? $color(39, 194, 129) : $color(180, 35, 24));
+        // Aliran udara (sesudah) atau tetesan kotor (sebelum).
+        foreach ([300, 400, 500] as $x) {
+            $after
+                ? imagefilledrectangle($image, $x - 4, 360, $x + 4, 440, $color(29, 99, 237))
+                : imagefilledellipse($image, $x, 380, 16, 24, $color(120, 128, 140));
+        }
+        imagestring($image, 5, 30, 30, strtoupper($kind->label()), $color(0, 8, 77));
+        imagestring($image, 4, 30, 560, Str::ascii(str_replace(['½', '¾', '·'], [' 1/2', ' 3/4', '-'], $label)), $color(0, 8, 77));
+
+        ob_start();
+        imagejpeg($image, null, 80);
+        imagedestroy($image);
+
+        return (string) ob_get_clean();
     }
 
     private function seedLeaves(): void
