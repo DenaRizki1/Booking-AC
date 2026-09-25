@@ -48,6 +48,64 @@ enum OrderStatus: string
     }
 
     /**
+     * Kalimat status untuk client (kartu order aktif & detail).
+     */
+    public function clientMessage(): string
+    {
+        return match ($this) {
+            self::MENUNGGU => 'Menunggu konfirmasi admin',
+            self::DITUGASKAN => 'Teknisi sudah ditugaskan',
+            self::DIKONFIRMASI => 'Teknisi siap datang',
+            self::DALAM_PERJALANAN => 'Teknisi dalam perjalanan',
+            self::DIKERJAKAN => 'Sedang dikerjakan',
+            self::SELESAI => 'Pekerjaan selesai',
+            self::LUNAS => 'Pembayaran lunas',
+            self::DITOLAK => 'Order ditolak',
+            self::DIBATALKAN => 'Order dibatalkan',
+        };
+    }
+
+    /**
+     * Order masih berjalan (belum selesai dikerjakan & belum berakhir).
+     */
+    public function isActive(): bool
+    {
+        return in_array($this, self::activeCases(), true);
+    }
+
+    /**
+     * @return list<self>
+     */
+    public static function activeCases(): array
+    {
+        return [self::MENUNGGU, self::DITUGASKAN, self::DIKONFIRMASI, self::DALAM_PERJALANAN, self::DIKERJAKAN];
+    }
+
+    /**
+     * Urutan tahap untuk progress bar: MENUNGGU … SELESAI (LUNAS dihitung selesai).
+     *
+     * @return list<self>
+     */
+    public static function progressSteps(): array
+    {
+        return [self::MENUNGGU, self::DITUGASKAN, self::DIKONFIRMASI, self::DALAM_PERJALANAN, self::DIKERJAKAN, self::SELESAI];
+    }
+
+    /**
+     * Posisi di progressSteps() (0-based); null untuk DITOLAK/DIBATALKAN.
+     */
+    public function progressIndex(): ?int
+    {
+        if ($this === self::LUNAS) {
+            return count(self::progressSteps()) - 1;
+        }
+
+        $index = array_search($this, self::progressSteps(), true);
+
+        return $index === false ? null : $index;
+    }
+
+    /**
      * Status yang mengunci jadwal teknisi/helper (dipakai cek bentrok).
      */
     public function locksSchedule(): bool
