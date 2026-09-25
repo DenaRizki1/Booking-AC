@@ -59,7 +59,7 @@ flowchart LR
 | [x] | T-201 | Migration kelompok A (users, settings, alamat) | S | Inti | T-105 |
 | [x] | T-202 | Migration kelompok B (master AC, layanan, harga) | S | Inti | T-201 |
 | [x] | T-203 | Migration kelompok C (teknisi, helper, cuti) | S | Inti | T-201 |
-| [ ] | T-204 | Migration kelompok D (order & turunannya) | M | Inti | T-202, T-203 |
+| [x] | T-204 | Migration kelompok D (order & turunannya) | M | Inti | T-202, T-203 |
 | [ ] | T-205 | Model, relasi, cast & factory | M | Inti | T-204 |
 | [ ] | T-206 | Seeder data awal + data demo | M | Inti | T-205 |
 | **F3** | | **Auth & role** | | | |
