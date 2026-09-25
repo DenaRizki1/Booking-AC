@@ -38,10 +38,12 @@ php artisan serve    # http://127.0.0.1:8000 (atau lewat Herd: http://booking-ac
 
 Sesuaikan `DB_USERNAME` / `DB_PASSWORD` di `.env` bila MySQL Anda memakai password.
 
-## Test
+## Test & kualitas kode
 
 Test memakai database MySQL terpisah `booking_ac_test` (lihat `phpunit.xml`).
 
 ```bash
-php artisan test
+composer test      # Pest
+composer lint      # Laravel Pint (format otomatis)
+composer analyse   # Larastan level 5
 ```
