@@ -18,6 +18,8 @@ use App\Models\ServicePrice;
 use App\Models\StaffLeave;
 use App\Models\Technician;
 use App\Models\User;
+use App\Services\DistanceService;
+use App\Services\TransportFeeCalculator;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
@@ -548,25 +550,13 @@ class DemoSeeder extends Seeder
         return sprintf('ORD-%s-%04d', $period, $this->codeCounters[$period]);
     }
 
-    /**
-     * Haversine sederhana untuk data demo (logika resmi ada di DistanceService, T-501).
-     */
     private function distanceKm(float $lat, float $lng): float
     {
-        $fromLat = deg2rad((float) $this->settings->lat);
-        $toLat = deg2rad($lat);
-        $deltaLat = $toLat - $fromLat;
-        $deltaLng = deg2rad($lng - (float) $this->settings->lng);
-
-        $a = sin($deltaLat / 2) ** 2 + cos($fromLat) * cos($toLat) * sin($deltaLng / 2) ** 2;
-
-        return round(2 * 6371 * asin(sqrt($a)), 2);
+        return app(DistanceService::class)->fromOffice($lat, $lng, $this->settings);
     }
 
     private function transportFee(float $distanceKm): int
     {
-        $free = (float) $this->settings->free_radius_km;
-
-        return $distanceKm <= $free ? 0 : (int) ceil($distanceKm - $free) * $this->settings->fee_per_km;
+        return app(TransportFeeCalculator::class)->feeFor($distanceKm, $this->settings);
     }
 }
