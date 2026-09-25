@@ -34,4 +34,5 @@ Route::get('/order/estimate', [OrderUnitsController::class, 'estimate'])->name('
 Route::get('/order/baru/jadwal', [OrderScheduleController::class, 'create'])->name('orders.schedule');
 Route::post('/order', [OrderScheduleController::class, 'store'])->middleware('throttle:10,1')->name('orders.store');
 
+Route::get('/order', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/order/{order:code}', [OrderController::class, 'show'])->name('orders.show');
