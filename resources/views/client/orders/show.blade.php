@@ -258,6 +258,30 @@
             </x-card>
         @endif
 
+        {{-- Garansi --}}
+        @php($warrantyUntil = $order->order_type === OrderType::REGULER && in_array($order->status, [OrderStatus::SELESAI, OrderStatus::LUNAS], true) ? $order->items->max('warranty_until') : null)
+        @if ($warrantyUntil)
+            <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4">
+                <span @class(['flex size-12 shrink-0 items-center justify-center rounded-xl', 'bg-success-50 text-success' => $warrantyUntil->gte(today()), 'bg-surface-bg text-muted' => $warrantyUntil->lt(today())])>
+                    <x-icon name="shield-check" class="size-6" />
+                </span>
+                <div class="min-w-0 flex-1">
+                    @if ($warrantyUntil->gte(today()))
+                        <p class="font-bold text-ink">Garansi aktif</p>
+                        <p class="text-[13px] text-muted">Sampai {{ Format::date($warrantyUntil) }}</p>
+                    @else
+                        <p class="font-bold text-ink">Garansi berakhir</p>
+                        <p class="text-[13px] text-muted">{{ Format::date($warrantyUntil) }}</p>
+                    @endif
+                </div>
+                @if ($claimableCount > 0)
+                    <x-button :href="route('client.orders.warranty', $order)" variant="secondary" size="sm">Klaim Garansi</x-button>
+                @elseif ($activeClaim)
+                    <a href="{{ route('client.orders.show', $activeClaim) }}" class="inline-flex min-h-11 items-center text-right text-[13px] font-bold text-primary">Klaim {{ $activeClaim->code }} diproses</a>
+                @endif
+            </div>
+        @endif
+
         {{-- Lokasi & catatan --}}
         <x-card title="Lokasi">
             <p class="text-[15px] text-ink">{{ $order->address_snapshot }}</p>

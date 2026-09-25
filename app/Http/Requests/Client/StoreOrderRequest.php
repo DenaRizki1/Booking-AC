@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Client;
 
+use App\Support\BookingCalendar;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class StoreOrderRequest extends FormRequest
 {
-    public const BOOKING_DAYS = 14;
+    public const BOOKING_DAYS = BookingCalendar::DAYS;
 
     public function authorize(): bool
     {

@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Services\OrderStatusService;
 use App\Services\ReviewService;
+use App\Services\WarrantyClaimService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class OrderController extends Controller
         return view('client.orders.index', ['orders' => $orders, 'tab' => $tab, 'counts' => $counts]);
     }
 
-    public function show(Request $request, Order $order, OrderStatusService $statuses, ReviewService $reviews): View
+    public function show(Request $request, Order $order, OrderStatusService $statuses, ReviewService $reviews, WarrantyClaimService $warranties): View
     {
         Gate::authorize('view', $order);
 
@@ -58,6 +59,8 @@ class OrderController extends Controller
             'canCancel' => in_array(OrderStatus::DIBATALKAN, $statuses->allowedTransitions($order, $client), true),
             'settings' => CompanySettings::current(),
             'canReview' => $reviews->canReview($order, $client),
+            'claimableCount' => $warranties->claimableItems($order)->count(),
+            'activeClaim' => $order->warrantyClaims()->whereIn('status', OrderStatus::activeCases())->latest()->first(),
         ]);
     }
 

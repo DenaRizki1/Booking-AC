@@ -117,7 +117,7 @@
                     <p class="font-bold text-ink">Garansi aktif</p>
                     <p class="truncate text-[13px] text-muted">{{ $warranty->order->code }} · s/d {{ $warranty->warranty_until->translatedFormat('j M Y') }}</p>
                 </div>
-                <a href="{{ $to('client.orders.show', $warranty->order) }}" class="inline-flex min-h-11 items-center px-2 text-[15px] font-bold text-primary">Klaim</a>
+                <a href="{{ route('client.orders.warranty', $warranty->order) }}" class="inline-flex min-h-11 items-center px-2 text-[15px] font-bold text-primary">Klaim</a>
             </div>
         @endif
 

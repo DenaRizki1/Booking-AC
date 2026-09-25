@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Client;
 
 use App\Enums\OrderStatus;
-use App\Enums\OrderType;
 use App\Http\Controllers\Controller;
-use App\Models\OrderItem;
 use App\Models\Service;
 use App\Models\User;
+use App\Services\WarrantyClaimService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -15,6 +14,8 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    public function __construct(private readonly WarrantyClaimService $warranties) {}
+
     public function __invoke(Request $request): View
     {
         /** @var User $client */
@@ -33,7 +34,7 @@ class HomeController extends Controller
             'activeOrder' => $activeOrders->first(),
             'otherActiveCount' => max(0, $activeOrders->count() - 1),
             'services' => $this->servicesWithStartingPrice(),
-            'warranty' => $this->latestActiveWarranty($client),
+            'warranty' => $this->warranties->latestClaimableItem($client),
         ]);
     }
 
@@ -56,21 +57,5 @@ class HomeController extends Controller
             ->orderBy('sort_order')
             ->orderBy('name')
             ->get();
-    }
-
-    /**
-     * Unit dengan garansi masih berlaku yang paling lama masa berlakunya.
-     */
-    private function latestActiveWarranty(User $client): ?OrderItem
-    {
-        return OrderItem::query()
-            ->whereDate('warranty_until', '>=', today())
-            ->whereHas('order', fn (Builder $order) => $order
-                ->where('user_id', $client->id)
-                ->where('order_type', OrderType::REGULER)
-                ->whereIn('status', [OrderStatus::SELESAI, OrderStatus::LUNAS]))
-            ->with('order:id,code')
-            ->orderByDesc('warranty_until')
-            ->first();
     }
 }
