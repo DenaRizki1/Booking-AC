@@ -6,6 +6,8 @@ use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use App\Enums\PaymentMethod;
 use Database\Factories\OrderFactory;
+use DateTimeInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -101,6 +103,27 @@ class Order extends Model
             'cancelled_at' => 'datetime',
             'paid_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Order yang masih mengunci jadwal (semua status kecuali DITOLAK & DIBATALKAN).
+     *
+     * @param  Builder<Order>  $query
+     */
+    public function scopeLocksSchedule(Builder $query): void
+    {
+        $query->whereIn('status', OrderStatus::scheduleLockingValues());
+    }
+
+    /**
+     * Order yang rentang terkuncinya [scheduled_start, blocked_until) beririsan dengan rentang baru.
+     *
+     * @param  Builder<Order>  $query
+     */
+    public function scopeOverlapping(Builder $query, DateTimeInterface $start, DateTimeInterface $blockedUntil): void
+    {
+        $query->where('scheduled_start', '<', $blockedUntil)
+            ->where('blocked_until', '>', $start);
     }
 
     /**

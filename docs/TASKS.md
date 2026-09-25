@@ -80,7 +80,7 @@ flowchart LR
 | **F5** | | **Logika inti (service class + unit test)** | | | |
 | [x] | T-501 | Jarak Haversine & biaya transport | S | Inti | T-205 |
 | [x] | T-502 | Kalkulasi harga & durasi order | S | Inti | T-205 |
-| [ ] | T-503 | Cek jadwal bentrok & slot tersedia | L | Inti | T-205 |
+| [x] | T-503 | Cek jadwal bentrok & slot tersedia | L | Inti | T-205 |
 | [ ] | T-504 | Mesin status order + log | M | Inti | T-205 |
 | [ ] | T-505 | Generator kode order | S | Inti | T-205 |
 | **F6** | | **Client** | | | |
