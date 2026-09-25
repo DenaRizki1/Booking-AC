@@ -6,6 +6,7 @@ use App\Models\Helper;
 use App\Models\Technician;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // URL resource berbahasa Indonesia: /alamat/tambah, /alamat/{id}/ubah.
+        Route::resourceVerbs(['create' => 'tambah', 'edit' => 'ubah']);
+
         // Alias tipe polymorphic yang disimpan di database (staff_leaves.staff_type,
         // notifications.notifiable_type). Model lain tidak boleh dipakai di relasi morph.
         Relation::enforceMorphMap([

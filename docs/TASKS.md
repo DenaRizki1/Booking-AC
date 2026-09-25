@@ -85,7 +85,7 @@ flowchart LR
 | [x] | T-505 | Generator kode order | S | Inti | T-205 |
 | **F6** | | **Client** | | | |
 | [x] | T-601 | Layout mobile client + beranda | M | Inti | T-103, T-304 |
-| [ ] | T-602 | Alamat saya + pilih titik di peta | L | Inti | T-601, T-501 |
+| [x] | T-602 | Alamat saya + pilih titik di peta | L | Inti | T-601, T-501 |
 | [ ] | T-603 | Buat order — langkah unit AC | L | Inti | T-602, T-502, T-405 |
 | [ ] | T-604 | Buat order — jadwal, ringkasan & simpan | L | Inti | T-603, T-503, T-504, T-505 |
 | [ ] | T-605 | Order saya + detail & timeline | M | Inti | T-604 |
