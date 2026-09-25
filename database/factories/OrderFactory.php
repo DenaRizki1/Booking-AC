@@ -45,7 +45,8 @@ class OrderFactory extends Factory
         $priceMin = fake()->numberBetween(15, 60) * 5000;
 
         return [
-            'code' => sprintf('ORD-%s-%04d', now()->format('ym'), fake()->unique()->numberBetween(1, 9999)),
+            // Nomor 5000+ agar tidak bentrok dengan OrderCodeGenerator (mulai 0001) di test.
+            'code' => sprintf('ORD-%s-%04d', now()->format('ym'), fake()->unique()->numberBetween(5000, 9999)),
             'order_type' => OrderType::REGULER,
             'parent_order_id' => null,
             'user_id' => User::factory(),

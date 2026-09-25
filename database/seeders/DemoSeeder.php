@@ -19,6 +19,7 @@ use App\Models\StaffLeave;
 use App\Models\Technician;
 use App\Models\User;
 use App\Services\DistanceService;
+use App\Services\OrderCodeGenerator;
 use App\Services\TransportFeeCalculator;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
@@ -68,9 +69,6 @@ class DemoSeeder extends Seeder
 
     /** @var array<string, CarbonImmutable> */
     private array $days = [];
-
-    /** @var array<string, int> nomor urut kode order per bulan (YYMM) */
-    private array $codeCounters = [];
 
     public function run(): void
     {
@@ -544,10 +542,7 @@ class DemoSeeder extends Seeder
 
     private function nextCode(CarbonImmutable $createdAt): string
     {
-        $period = $createdAt->format('ym');
-        $this->codeCounters[$period] = ($this->codeCounters[$period] ?? 0) + 1;
-
-        return sprintf('ORD-%s-%04d', $period, $this->codeCounters[$period]);
+        return app(OrderCodeGenerator::class)->next($createdAt);
     }
 
     private function distanceKm(float $lat, float $lng): float

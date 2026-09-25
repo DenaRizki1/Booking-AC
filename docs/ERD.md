@@ -68,6 +68,7 @@ erDiagram
 | D. Order & transaksi | `orders`, `order_items`, `order_photos`, `reviews`, `order_status_logs` |
 
 Ditambah tabel bawaan Laravel: `password_reset_tokens`, `sessions`, `cache`, `jobs`, `failed_jobs`, `notifications` (notifikasi in-app).
+Tabel pendukung: `order_code_sequences` (nomor urut kode order per bulan, lihat bagian 5).
 
 ---
 
@@ -564,6 +565,17 @@ Aturan: min. 1 foto `SESUDAH` per item sebelum laporan bisa dikirim.
 
 Index: `technician_id`. Setelah simpan → hitung ulang `technicians.avg_rating` & `review_count`.
 
+### `order_code_sequences` — nomor urut kode order
+
+| Kolom | Tipe | Null | Keterangan |
+|---|---|---|---|
+| period | CHAR(4) | – | **PK**. `YYMM`, mis. `2610` |
+| last_number | INT UNSIGNED | – | Nomor terakhir yang dipakai di bulan itu |
+
+Tanpa timestamps. Dinaikkan oleh `OrderCodeGenerator` dengan satu statement atomik
+`INSERT … ON DUPLICATE KEY UPDATE last_number = LAST_INSERT_ID(last_number + 1)` → aman dipakai bersamaan,
+nomor otomatis mulai dari 1 tiap bulan baru.
+
 ### `order_status_logs`
 
 | Kolom | Tipe | Null | Keterangan |
@@ -687,5 +699,6 @@ WHERE o.user_id = :client AND o.order_type = 'REGULER'
 12. `reviews`
 13. `order_status_logs`
 14. `notifications` (`php artisan make:notifications-table`)
+15. `order_code_sequences`
 
 **Seeder awal:** 1 admin, `company_settings` (1 baris), merk, PK, tipe, 4 layanan + matriks harga contoh.

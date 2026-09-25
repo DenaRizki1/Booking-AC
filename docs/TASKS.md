@@ -82,7 +82,7 @@ flowchart LR
 | [x] | T-502 | Kalkulasi harga & durasi order | S | Inti | T-205 |
 | [x] | T-503 | Cek jadwal bentrok & slot tersedia | L | Inti | T-205 |
 | [x] | T-504 | Mesin status order + log | M | Inti | T-205 |
-| [ ] | T-505 | Generator kode order | S | Inti | T-205 |
+| [x] | T-505 | Generator kode order | S | Inti | T-205 |
 | **F6** | | **Client** | | | |
 | [ ] | T-601 | Layout mobile client + beranda | M | Inti | T-103, T-304 |
 | [ ] | T-602 | Alamat saya + pilih titik di peta | L | Inti | T-601, T-501 |
