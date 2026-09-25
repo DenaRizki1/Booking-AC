@@ -71,10 +71,7 @@
                     <p class="text-xs font-bold text-warning-900">Mode lokal — masuk sebagai client demo (tanpa Google):</p>
                     <div class="mt-2 flex flex-wrap gap-2">
                         @foreach ($demoClients as $demo)
-                            <form method="POST" action="{{ route('dev.login-as', $demo) }}">
-                                @csrf
-                                <button type="submit" class="min-h-11 rounded-lg border border-warning/40 bg-white px-3 text-[13px] font-semibold text-warning-900 hover:bg-warning-50">{{ $demo->name }}</button>
-                            </form>
+                            <a href="{{ route('dev.login-as', $demo) }}" class="inline-flex min-h-11 items-center rounded-lg border border-warning/40 bg-white px-3 text-[13px] font-semibold text-warning-900 hover:bg-warning-50">{{ $demo->name }}</a>
                         @endforeach
                     </div>
                 </div>

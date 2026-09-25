@@ -30,4 +30,4 @@ Route::get('/dev/ui', function () {
 
     return view('dev.ui');
 })->name('dev.ui');
-Route::post('/dev/login-as/{user}', LoginAsController::class)->name('dev.login-as');
+Route::get('/dev/login-as/{user}', LoginAsController::class)->name('dev.login-as');

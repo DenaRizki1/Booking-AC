@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureClientProfileIsComplete;
 use App\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -13,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::middleware(['web', 'auth', 'role:client'])
+            Route::middleware(['web', 'auth', 'role:client', 'profile.complete'])
                 ->name('client.')
                 ->group(base_path('routes/client.php'));
 
@@ -31,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'role' => EnsureUserHasRole::class,
+            'profile.complete' => EnsureClientProfileIsComplete::class,
         ]);
 
         // User yang sudah login diarahkan ke halaman awal perannya.

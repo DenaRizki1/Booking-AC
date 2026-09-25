@@ -2,7 +2,6 @@
 
 use App\Enums\UserRole;
 use App\Models\User;
-use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
 use Laravel\Socialite\Two\User as GoogleUser;
@@ -113,14 +112,12 @@ it('menangani login Google yang gagal atau dibatalkan', function () {
 it('menyediakan login demo hanya di environment local', function () {
     $client = User::factory()->create();
 
-    $this->post(route('dev.login-as', $client))->assertNotFound();
+    $this->get(route('dev.login-as', $client))->assertNotFound();
     $this->assertGuest();
 
     app()->detectEnvironment(fn () => 'local');
 
     $this->get('/masuk')->assertSee('Mode lokal')->assertSee($client->name);
-    $this->withoutMiddleware(ValidateCsrfToken::class)
-        ->post(route('dev.login-as', $client))
-        ->assertRedirect(route('client.home'));
+    $this->get(route('dev.login-as', $client))->assertRedirect(route('client.home'));
     $this->assertAuthenticatedAs($client);
 });
