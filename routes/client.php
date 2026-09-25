@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Client\AddressController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\OrderController;
+use App\Http\Controllers\Client\Orders\OrderScheduleController;
 use App\Http\Controllers\Client\Orders\OrderUnitsController;
 use App\Http\Controllers\Client\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +31,7 @@ Route::get('/order/baru', [OrderUnitsController::class, 'create'])->name('orders
 Route::put('/order/baru/draft', [OrderUnitsController::class, 'saveDraft'])->name('orders.draft');
 Route::post('/order/baru', [OrderUnitsController::class, 'store'])->name('orders.units');
 Route::get('/order/estimate', [OrderUnitsController::class, 'estimate'])->name('orders.estimate');
-// Sementara — diganti di T-604 (jadwal, ringkasan & simpan).
-Route::get('/order/baru/jadwal', fn () => redirect()->route('client.orders.create'))->name('orders.schedule');
+Route::get('/order/baru/jadwal', [OrderScheduleController::class, 'create'])->name('orders.schedule');
+Route::post('/order', [OrderScheduleController::class, 'store'])->middleware('throttle:10,1')->name('orders.store');
+
+Route::get('/order/{order:code}', [OrderController::class, 'show'])->name('orders.show');
