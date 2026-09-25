@@ -36,3 +36,4 @@ Route::post('/order', [OrderScheduleController::class, 'store'])->middleware('th
 
 Route::get('/order', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/order/{order:code}', [OrderController::class, 'show'])->name('orders.show');
+Route::post('/order/{order:code}/batal', [OrderController::class, 'cancel'])->name('orders.cancel');

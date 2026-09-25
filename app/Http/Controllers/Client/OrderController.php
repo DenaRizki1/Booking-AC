@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Client;
 
 use App\Enums\OrderStatus;
+use App\Exceptions\InvalidStatusTransitionException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\CancelOrderRequest;
+use App\Models\CompanySettings;
 use App\Models\Order;
 use App\Models\User;
+use App\Services\OrderStatusService;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
@@ -38,12 +44,34 @@ class OrderController extends Controller
         return view('client.orders.index', ['orders' => $orders, 'tab' => $tab, 'counts' => $counts]);
     }
 
-    public function show(Order $order): View
+    public function show(Request $request, Order $order, OrderStatusService $statuses): View
     {
         Gate::authorize('view', $order);
 
+        /** @var User $client */
+        $client = $request->user();
         $order->load(['items', 'technician.user', 'helper', 'statusLogs', 'parentOrder:id,code']);
 
-        return view('client.orders.show', ['order' => $order]);
+        return view('client.orders.show', [
+            'order' => $order,
+            'canCancel' => in_array(OrderStatus::DIBATALKAN, $statuses->allowedTransitions($order, $client), true),
+            'settings' => CompanySettings::current(),
+        ]);
+    }
+
+    /**
+     * Client membatalkan order sendiri (≥ cancel_limit_hours sebelum jadwal, alasan wajib).
+     */
+    public function cancel(CancelOrderRequest $request, Order $order, OrderStatusService $statuses): RedirectResponse
+    {
+        Gate::authorize('view', $order);
+
+        try {
+            $statuses->transition($order, OrderStatus::DIBATALKAN, $request->user(), $request->string('reason')->toString());
+        } catch (InvalidStatusTransitionException|AuthorizationException $e) {
+            return back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('client.orders.show', $order)->with('success', 'Order dibatalkan.');
     }
 }

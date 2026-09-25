@@ -13,7 +13,8 @@
         ['Selesai', $order->completed_at, $index >= 5],
     ];
     $technician = $order->technician;
-    $settings = \App\Models\CompanySettings::current();
+    $cancellableStatus = in_array($order->status, [OrderStatus::MENUNGGU, OrderStatus::DITUGASKAN, OrderStatus::DIKONFIRMASI], true);
+    $officeWa = Format::whatsappUrl($settings->phone);
 @endphp
 
 <x-layouts.client :title="$order->code" :nav="false">
@@ -130,6 +131,44 @@
                 </div>
             @endif
         </x-card>
+
+        {{-- Batalkan / hubungi admin --}}
+        @if ($canCancel)
+            <x-card>
+                <p class="text-sm text-muted">Pembatalan gratis paling lambat {{ $settings->cancel_limit_hours }} jam sebelum jadwal (s/d {{ Format::shortDate($order->scheduled_start->copy()->subHours($settings->cancel_limit_hours)) }}, {{ $order->scheduled_start->copy()->subHours($settings->cancel_limit_hours)->format('H:i') }}).</p>
+                <x-button variant="danger" block icon="circle-x" class="mt-3" x-on:click="$dispatch('open-modal', 'cancel-order')">Batalkan order</x-button>
+            </x-card>
+
+            <x-modal name="cancel-order" title="Batalkan order?" :show="$errors->has('reason')">
+                <form id="cancel-order-form" method="POST" action="{{ route('client.orders.cancel', $order) }}" class="space-y-3">
+                    @csrf
+                    <p class="text-[15px] text-ink-soft">Order <strong>{{ $order->code }}</strong> akan dibatalkan dan jadwal teknisi dilepas.</p>
+                    <x-textarea name="reason" label="Alasan pembatalan" rows="3" placeholder="Mis. ada acara mendadak" required autofocus />
+                </form>
+                <x-slot:footer>
+                    <x-button variant="secondary" x-on:click="$dispatch('close-modal', 'cancel-order')">Kembali</x-button>
+                    <x-button type="submit" form="cancel-order-form" variant="danger-solid">Ya, batalkan</x-button>
+                </x-slot:footer>
+            </x-modal>
+        @elseif ($cancellableStatus || $order->status->isActive())
+            <x-card>
+                <p class="text-sm text-muted">
+                    @if ($cancellableStatus)
+                        Batas pembatalan mandiri ({{ $settings->cancel_limit_hours }} jam sebelum jadwal) sudah lewat. Untuk membatalkan atau mengubah jadwal, hubungi admin.
+                    @else
+                        Ada kendala? Hubungi admin {{ $settings->company_name }}.
+                    @endif
+                </p>
+                <div class="mt-3 grid grid-cols-2 gap-2">
+                    @if ($officeWa)
+                        <x-button :href="$officeWa" target="_blank" rel="noopener" variant="secondary" icon="message-circle">WhatsApp</x-button>
+                    @endif
+                    @if ($settings->phone)
+                        <x-button :href="'tel:'.$settings->phone" variant="secondary" icon="phone">Telepon</x-button>
+                    @endif
+                </div>
+            </x-card>
+        @endif
 
         {{-- Riwayat status --}}
         <details class="rounded-card border border-line bg-white">
