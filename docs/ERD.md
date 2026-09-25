@@ -58,7 +58,7 @@ erDiagram
     }
 ```
 
-**17 tabel aplikasi** dalam 4 kelompok:
+**16 tabel aplikasi** dalam 4 kelompok:
 
 | Kelompok | Tabel |
 |---|---|

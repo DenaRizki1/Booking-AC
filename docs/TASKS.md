@@ -60,7 +60,7 @@ flowchart LR
 | [x] | T-202 | Migration kelompok B (master AC, layanan, harga) | S | Inti | T-201 |
 | [x] | T-203 | Migration kelompok C (teknisi, helper, cuti) | S | Inti | T-201 |
 | [x] | T-204 | Migration kelompok D (order & turunannya) | M | Inti | T-202, T-203 |
-| [ ] | T-205 | Model, relasi, cast & factory | M | Inti | T-204 |
+| [x] | T-205 | Model, relasi, cast & factory | M | Inti | T-204 |
 | [ ] | T-206 | Seeder data awal + data demo | M | Inti | T-205 |
 | **F3** | | **Auth & role** | | | |
 | [ ] | T-301 | Login Google untuk client | M | Inti | T-205, T-002 |
@@ -197,7 +197,7 @@ flowchart LR
 - **Selesai jika:** `migrate:fresh` sukses; `SHOW INDEX` memperlihatkan index jadwal `(technician_id, scheduled_start)` dan `(helper_id, scheduled_start)`.
 
 #### T-205 · Model, relasi, cast & factory
-- Model untuk 17 tabel, relasi lengkap (termasuk `parentOrder`, `warrantyClaims`, `claimedItem`, morph `leaves`), cast enum/datetime/decimal, `SoftDeletes` di tabel yang relevan.
+- Model untuk 16 tabel aplikasi, relasi lengkap (termasuk `parentOrder`, `warrantyClaims`, `claimedItem`, morph `leaves`), cast enum/datetime/decimal, `SoftDeletes` di tabel yang relevan.
 - `CompanySettings::current()` (1 baris, di-cache, cache dihapus saat update).
 - Factory untuk semua model.
 - **Selesai jika:** test relasi utama lulus (order → items → photos, teknisi → orders, dll.).
