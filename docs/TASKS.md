@@ -45,7 +45,7 @@ flowchart LR
 | | ID | Task | Ukuran | Prioritas | Butuh |
 |---|---|---|---|---|---|
 | **F0** | | **Persiapan** | | | |
-| [ ] | T-001 | 👤 Install Laravel Herd, MySQL & buat database | S | Inti | – |
+| [x] | T-001 | 👤 Install Laravel Herd, MySQL & buat database | S | Inti | – |
 | [ ] | T-002 | 👤 Buat Google OAuth Client ID | S | Inti | – |
 | [ ] | T-003 | 👤 Siapkan SMTP dev (Mailpit/Mailtrap) | S | Lanjutan | – |
 | [ ] | T-004 | 👤 Tetapkan nama perusahaan, logo, rekening | S | Inti | – |
@@ -130,6 +130,7 @@ flowchart LR
 - Buat database `booking_ac` (utf8mb4) dan user-nya.
 - Tautkan folder `Booking-AC` di Herd → aplikasi terbuka di `http://booking-ac.test`.
 - **Selesai jika:** `php -v` ≥ 8.3, `composer -V` jalan, bisa login ke MySQL.
+- *Status:* MySQL 9.3 (Homebrew) aktif, database `booking_ac` + `booking_ac_test` dibuat. PHP masih 8.2 (cukup untuk Laravel 12); Herd belum terpasang → pakai `php artisan serve`.
 
 #### T-002 · 👤 Google OAuth Client ID
 - Google Cloud Console → buat project → OAuth consent screen (External) → Credentials → OAuth Client ID (Web).
