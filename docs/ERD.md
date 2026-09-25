@@ -352,12 +352,14 @@ Cuti teknisi & helper dalam satu tabel (relasi polymorphic Laravel `morphs('staf
 | Kolom | Tipe | Null | Keterangan |
 |---|---|---|---|
 | id | BIGINT UNSIGNED | – | PK |
-| staff_type | VARCHAR(191) | – | `App\Models\Technician` atau `App\Models\Helper` (pakai `Relation::morphMap` → `technician` / `helper`) |
+| staff_type | VARCHAR(191) | – | Alias morph `technician` / `helper` (`Relation::enforceMorphMap` di `AppServiceProvider`) |
 | staff_id | BIGINT UNSIGNED | – | id teknisi / helper |
 | leave_date | DATE | – | Tanggal cuti (1 baris per hari) |
 | reason | VARCHAR(255) | ✓ | |
 
 **Unique:** `(staff_type, staff_id, leave_date)`.
+
+> Morph map juga memuat `user` → `App\Models\User`, karena `notifications.notifiable_type` memakai relasi morph dan `enforceMorphMap` menolak model yang tidak terdaftar.
 
 ---
 
