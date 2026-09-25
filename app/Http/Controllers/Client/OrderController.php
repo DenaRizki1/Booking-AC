@@ -10,6 +10,7 @@ use App\Models\CompanySettings;
 use App\Models\Order;
 use App\Models\User;
 use App\Services\OrderStatusService;
+use App\Services\ReviewService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,18 +45,19 @@ class OrderController extends Controller
         return view('client.orders.index', ['orders' => $orders, 'tab' => $tab, 'counts' => $counts]);
     }
 
-    public function show(Request $request, Order $order, OrderStatusService $statuses): View
+    public function show(Request $request, Order $order, OrderStatusService $statuses, ReviewService $reviews): View
     {
         Gate::authorize('view', $order);
 
         /** @var User $client */
         $client = $request->user();
-        $order->load(['items.photos', 'technician.user', 'helper', 'statusLogs', 'parentOrder:id,code']);
+        $order->load(['items.photos', 'technician.user', 'helper', 'statusLogs', 'parentOrder:id,code', 'review']);
 
         return view('client.orders.show', [
             'order' => $order,
             'canCancel' => in_array(OrderStatus::DIBATALKAN, $statuses->allowedTransitions($order, $client), true),
             'settings' => CompanySettings::current(),
+            'canReview' => $reviews->canReview($order, $client),
         ]);
     }
 

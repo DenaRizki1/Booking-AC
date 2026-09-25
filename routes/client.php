@@ -6,6 +6,7 @@ use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\Orders\OrderScheduleController;
 use App\Http\Controllers\Client\Orders\OrderUnitsController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +38,4 @@ Route::post('/order', [OrderScheduleController::class, 'store'])->middleware('th
 Route::get('/order', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/order/{order:code}', [OrderController::class, 'show'])->name('orders.show');
 Route::post('/order/{order:code}/batal', [OrderController::class, 'cancel'])->name('orders.cancel');
+Route::post('/order/{order:code}/ulasan', [ReviewController::class, 'store'])->name('orders.review');

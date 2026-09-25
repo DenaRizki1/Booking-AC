@@ -21,6 +21,7 @@ use App\Models\Technician;
 use App\Models\User;
 use App\Services\DistanceService;
 use App\Services\OrderCodeGenerator;
+use App\Services\ReviewService;
 use App\Services\TransportFeeCalculator;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
@@ -547,10 +548,7 @@ class DemoSeeder extends Seeder
     private function refreshTechnicianRatings(): void
     {
         foreach ($this->technicians as $technician) {
-            $technician->update([
-                'avg_rating' => round((float) $technician->reviews()->avg('rating'), 2),
-                'review_count' => $technician->reviews()->count(),
-            ]);
+            app(ReviewService::class)->refreshRating($technician);
         }
     }
 

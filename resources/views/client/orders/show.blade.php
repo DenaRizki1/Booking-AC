@@ -224,6 +224,40 @@
             </x-card>
         @endif
 
+        {{-- Ulasan --}}
+        @if ($canReview)
+            <x-card :title="'Beri ulasan untuk '.Str::before($technician->user->name, ' ')">
+                <form method="POST" action="{{ route('client.orders.review', $order) }}" x-data="{ rating: {{ (int) old('rating', 0) }}, hover: 0 }" class="space-y-4">
+                    @csrf
+                    <fieldset>
+                        <legend class="sr-only">Rating</legend>
+                        <div class="flex gap-1" x-on:mouseleave="hover = 0">
+                            @foreach (range(1, 5) as $star)
+                                <label class="cursor-pointer" x-on:mouseenter="hover = {{ $star }}">
+                                    <input type="radio" name="rating" value="{{ $star }}" x-model.number="rating" class="peer sr-only" @checked((int) old('rating') === $star)>
+                                    <span class="flex size-12 items-center justify-center rounded-xl peer-focus-visible:ring-4 peer-focus-visible:ring-primary/25">
+                                        <svg viewBox="0 0 24 24" class="size-9" :class="(hover || rating) >= {{ $star }} ? 'fill-warning text-warning' : 'fill-line text-line'" aria-hidden="true"><path stroke="currentColor" stroke-width="1" d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg>
+                                        <span class="sr-only">{{ $star }} bintang</span>
+                                    </span>
+                                </label>
+                            @endforeach
+                        </div>
+                        <x-field-error name="rating" />
+                    </fieldset>
+                    <x-textarea name="comment" label="Ulasan (opsional)" rows="3" placeholder="Mis. teknisi datang tepat waktu dan rapi." />
+                    <x-button type="submit" block ::disabled="!rating">Kirim Ulasan</x-button>
+                </form>
+            </x-card>
+        @elseif ($order->review)
+            <x-card title="Ulasan Anda">
+                <p class="text-xl text-warning" aria-label="{{ $order->review->rating }} dari 5 bintang">{{ str_repeat('★', $order->review->rating) }}<span class="text-line">{{ str_repeat('★', 5 - $order->review->rating) }}</span></p>
+                @if ($order->review->comment)
+                    <p class="mt-2 text-[15px] text-ink-soft">{{ $order->review->comment }}</p>
+                @endif
+                <p class="mt-2 text-[13px] text-muted">{{ Format::date($order->review->created_at) }}</p>
+            </x-card>
+        @endif
+
         {{-- Lokasi & catatan --}}
         <x-card title="Lokasi">
             <p class="text-[15px] text-ink">{{ $order->address_snapshot }}</p>
