@@ -24,13 +24,6 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [StaffLoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
-// Halaman awal sementara per peran — diganti di T-303 (route group + middleware role), T-401, T-601, T-801.
-Route::middleware('auth')->group(function () {
-    Route::view('/beranda', 'admin.dashboard')->name('client.home');
-    Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
-    Route::view('/teknisi', 'teknisi.tasks')->name('teknisi.tasks');
-});
-
 // Alat pengembangan — hanya untuk APP_ENV=local (dicek di tiap handler).
 Route::get('/dev/ui', function () {
     abort_unless(app()->environment('local'), 404);

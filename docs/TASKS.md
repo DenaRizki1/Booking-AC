@@ -65,7 +65,7 @@ flowchart LR
 | **F3** | | **Auth & role** | | | |
 | [x] | T-301 | Login Google untuk client | M | Inti | T-205, T-002 |
 | [x] | T-302 | Login admin & teknisi (email + password) | S | Inti | T-205 |
-| [ ] | T-303 | Middleware role, route group, policy dasar | S | Inti | T-301, T-302 |
+| [x] | T-303 | Middleware role, route group, policy dasar | S | Inti | T-301, T-302 |
 | [ ] | T-304 | Lengkapi profil client (no. HP) | S | Inti | T-303 |
 | **F4** | | **Admin — master data** | | | |
 | [ ] | T-401 | Layout admin + sidebar | S | Inti | T-103, T-303 |
