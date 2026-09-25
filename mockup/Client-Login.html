@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client — Login</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F4F7FC;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 844px; overflow: hidden; background: #FFFFFF; display: flex; flex-direction: column;">
+  <div style="position: relative; height: 470px; background: #1D63ED; color: #FFFFFF; padding: 28px 24px 0; display: flex; flex-direction: column; overflow: hidden;">
+    <div style="position: absolute; width: 360px; height: 360px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.14); right: -150px; top: -120px;"></div>
+    <div style="position: absolute; width: 240px; height: 240px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.14); right: -90px; top: -60px;"></div>
+    <div style="display: flex; align-items: center; gap: 10px; position: relative;">
+      <div style="width: 40px; height: 40px; border-radius: 12px; background: #FFFFFF; color: #1D63ED; display: flex; align-items: center; justify-content: center;">
+        <svg class="ic" viewBox="0 0 24 24" style="width: 24px; height: 24px; stroke-width: 2.2;"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><path d="m20 16-4-4 4-4"></path><path d="m4 8 4 4-4 4"></path><path d="m16 4-4 4-4-4"></path><path d="m8 20 4-4 4 4"></path></svg>
+      </div>
+      <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.3px;">SejukAC</div>
+    </div>
+    <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative;">
+      <svg width="300" height="260" viewBox="0 0 300 260" fill="none">
+        <rect x="30" y="40" width="240" height="84" rx="18" fill="#FFFFFF"></rect>
+        <rect x="30" y="98" width="240" height="26" rx="0" fill="#E8F0FE"></rect>
+        <rect x="30" y="40" width="240" height="84" rx="18" stroke="#00084D" stroke-opacity="0.08" stroke-width="2"></rect>
+        <line x1="54" y1="108" x2="246" y2="108" stroke="#1D63ED" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round"></line>
+        <line x1="54" y1="116" x2="246" y2="116" stroke="#1D63ED" stroke-opacity="0.2" stroke-width="3" stroke-linecap="round"></line>
+        <rect x="206" y="58" width="44" height="20" rx="6" fill="#00084D"></rect>
+        <text x="228" y="72" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="700" fill="#7FB0FF">18°</text>
+        <circle cx="58" cy="68" r="5" fill="#27C281"></circle>
+        <path d="M80 150c10 10 -10 22 0 34s-10 22 0 34" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M150 150c10 10 -10 22 0 34s-10 22 0 34" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M220 150c10 10 -10 22 0 34s-10 22 0 34" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M115 160c8 8 -8 18 0 28" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M185 160c8 8 -8 18 0 28" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round"></path>
+      </svg>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 28px; position: relative;">
+      <span style="height: 32px; padding: 0 12px; border-radius: 999px; background: rgba(255,255,255,0.16); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center;">Cuci AC</span>
+      <span style="height: 32px; padding: 0 12px; border-radius: 999px; background: rgba(255,255,255,0.16); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center;">Perbaikan</span>
+      <span style="height: 32px; padding: 0 12px; border-radius: 999px; background: rgba(255,255,255,0.16); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center;">Instalasi</span>
+      <span style="height: 32px; padding: 0 12px; border-radius: 999px; background: rgba(255,255,255,0.16); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center;">Isi Freon</span>
+    </div>
+  </div>
+  <div style="flex-grow: 1; padding: 32px 24px 28px; display: flex; flex-direction: column; gap: 12px;">
+    <h1 style="margin: 0; font-size: 30px; line-height: 1.15; font-weight: 800; letter-spacing: -0.8px; color: #00084D;">Servis AC tanpa ribet, teknisi datang tepat jadwal.</h1>
+    <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #5B6780;">Pilih unit, layanan, dan jam. Estimasi harga langsung terlihat, bayar setelah pekerjaan selesai.</p>
+    <div style="flex-grow: 1;"></div>
+    <button style="height: 54px; border-radius: 14px; border: 1.5px solid #D5DEEE; background: #FFFFFF; color: #0B1533; font-family: inherit; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer;">
+      <span style="width: 26px; height: 26px; border-radius: 50%; background: #E8F0FE; color: #1D63ED; font-weight: 800; font-size: 14px; display: inline-flex; align-items: center; justify-content: center;">G</span>
+      Masuk dengan Google
+    </button>
+    <p style="margin: 4px 0 0; font-size: 12px; line-height: 1.5; color: #5B6780; text-align: center;">Dengan masuk, Anda menyetujui <a href="#">Syarat Layanan</a> dan <a href="#">Kebijakan Privasi</a>.</p>
+    <div style="display: flex; justify-content: center; padding-top: 8px;">
+      <a href="#" style="font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; min-height: 44px;">
+        <svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="m10 17 5-5-5-5"></path><path d="M15 12H3"></path></svg>
+        Masuk sebagai Admin / Teknisi
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

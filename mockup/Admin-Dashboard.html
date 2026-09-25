@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Dashboard</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F4F7FC;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.nav{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:10px;font-size:14px;font-weight:600;color:rgba(255,255,255,0.74)}
+.nav:hover{color:#FFFFFF;background:rgba(255,255,255,0.06)}
+.nav-on{background:#1D63ED;color:#FFFFFF}
+.card{background:#FFFFFF;border:1px solid #E3E8F2;border-radius:16px}
+.stat{padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.stat-k{font-size:13px;font-weight:600;color:#5B6780;display:flex;align-items:center;gap:8px}
+.stat-v{font-size:28px;font-weight:800;letter-spacing:-0.6px;color:#00084D;font-variant-numeric:tabular-nums}
+.stat-s{font-size:12px;color:#5B6780}
+th{font-size:12px;font-weight:700;color:#5B6780;text-align:left;padding:10px 16px;text-transform:uppercase;letter-spacing:0.4px;background:#F8FAFD;border-bottom:1px solid #E3E8F2}
+td{font-size:13px;padding:14px 16px;border-bottom:1px solid #EEF2F8;vertical-align:middle}
+.pill{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:700}
+.btn-sm{height:36px;padding:0 14px;border-radius:10px;border:0;background:#1D63ED;color:#FFFFFF;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 1440px; height: 900px; overflow: hidden; display: flex; background: #F4F7FC;">
+  <aside style="width: 248px; background: #00084D; color: #FFFFFF; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 24px;">
+      <div style="width: 36px; height: 36px; border-radius: 10px; background: #1D63ED; display: flex; align-items: center; justify-content: center;"><svg class="ic" viewBox="0 0 24 24" style="stroke-width: 2.2;"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><path d="m20 16-4-4 4-4"></path><path d="m4 8 4 4-4 4"></path><path d="m16 4-4 4-4-4"></path><path d="m8 20 4-4 4 4"></path></svg></div>
+      <div><div style="font-size: 17px; font-weight: 800;">SejukAC</div><div style="font-size: 11px; opacity: 0.6;">Panel Admin</div></div>
+    </div>
+    <a href="#" class="nav nav-on"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>Dashboard</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg><span style="flex-grow: 1;">Order</span><span style="min-width: 22px; height: 22px; border-radius: 11px; background: #F5A524; color: #00084D; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">4</span></a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Jadwal</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"></path><circle cx="7.5" cy="7.5" r="1"></circle></svg>Layanan &amp; Harga</a>
+    <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: rgba(255,255,255,0.5); padding: 18px 14px 6px;">MASTER DATA</div>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>Teknisi</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>Helper</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Client</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>Ulasan</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg>Pengaturan</a>
+    <div style="flex-grow: 1;"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.06);">
+      <div style="width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #00084D; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center;">AD</div>
+      <div style="flex-grow: 1;"><div style="font-size: 13px; font-weight: 700;">Admin Operasional</div><div style="font-size: 11px; opacity: 0.6;">admin@sejukac.id</div></div>
+    </div>
+  </aside>
+
+  <main style="flex-grow: 1; padding: 28px 32px; display: flex; flex-direction: column; gap: 24px; min-width: 0;">
+    <header style="display: flex; align-items: center; gap: 16px;">
+      <div style="flex-grow: 1;">
+        <h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.5px;">Dashboard</h1>
+        <div style="font-size: 13px; color: #5B6780;">Sabtu, 26 September 2026</div>
+      </div>
+      <label style="width: 300px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E3E8F2; display: flex; align-items: center; gap: 10px; padding: 0 14px;">
+        <svg class="ic" viewBox="0 0 24 24" style="color: #5B6780; width: 18px; height: 18px;"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input placeholder="Cari order, client, teknisi…" aria-label="Cari" style="border: 0; outline: none; font: inherit; font-size: 13px; flex-grow: 1; min-width: 0;">
+      </label>
+      <button aria-label="Notifikasi" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #E3E8F2; background: #FFFFFF; color: #0B1533; display: flex; align-items: center; justify-content: center; position: relative;"><svg class="ic" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg><span style="position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 50%; background: #E5484D; border: 2px solid #FFFFFF;"></span></button>
+    </header>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+      <div class="card stat" style="background: #1D63ED; border-color: #1D63ED; color: #FFFFFF;">
+        <div class="stat-k" style="color: rgba(255,255,255,0.85);">Menunggu assign</div>
+        <div class="stat-v" style="color: #FFFFFF;">4</div>
+        <div class="stat-s" style="color: rgba(255,255,255,0.85);">1 dijadwalkan hari ini</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-k">Jadwal hari ini</div>
+        <div class="stat-v">5</div>
+        <div class="stat-s">3 teknisi aktif · 1 cuti</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-k">Belum lunas</div>
+        <div class="stat-v">Rp1.284.000</div>
+        <div class="stat-s">5 order selesai</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-k">Rating rata-rata</div>
+        <div class="stat-v">4,8 <span style="font-size: 18px; color: #F5A524;">★</span></div>
+        <div class="stat-s">dari 126 ulasan</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 20px; flex-grow: 1; min-height: 0;">
+      <section class="card" style="display: flex; flex-direction: column; overflow: hidden;">
+        <div style="display: flex; align-items: center; padding: 18px 20px; gap: 12px;">
+          <h2 style="margin: 0; font-size: 16px; font-weight: 800; flex-grow: 1;">Order menunggu assign</h2>
+          <a href="#" style="font-size: 13px; font-weight: 700;">Lihat semua order</a>
+        </div>
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead><tr><th>Order</th><th>Client &amp; alamat</th><th>Unit &amp; layanan</th><th>Jadwal</th><th style="text-align: right;">Aksi</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div style="font-weight: 700;">ORD-2409-0015</div><span class="pill" style="background: #FDE8E8; color: #9B1C1C; margin-top: 4px;">Hari ini</span></td>
+              <td><div style="font-weight: 600;">Siti Rahma</div><div style="font-size: 12px; color: #5B6780;">Tebet · 6,2 km</div></td>
+              <td><div style="font-weight: 600;">2 unit</div><div style="font-size: 12px; color: #5B6780;">Instalasi, Cuci AC · <b style="color: #6B3F00;">wajib helper</b></div></td>
+              <td class="num"><div style="font-weight: 600;">Sab, 26 Sep</div><div style="font-size: 12px; color: #5B6780;">14:00–17:00</div></td>
+              <td style="text-align: right;"><button class="btn-sm">Assign</button></td>
+            </tr>
+            <tr>
+              <td><div style="font-weight: 700;">ORD-2409-0016</div></td>
+              <td><div style="font-weight: 600;">Hendra Wijaya</div><div style="font-size: 12px; color: #5B6780;">Cilandak · 11,0 km</div></td>
+              <td><div style="font-weight: 600;">3 unit</div><div style="font-size: 12px; color: #5B6780;">Cuci AC</div></td>
+              <td class="num"><div style="font-weight: 600;">Min, 27 Sep</div><div style="font-size: 12px; color: #5B6780;">09:00–12:00</div></td>
+              <td style="text-align: right;"><button class="btn-sm">Assign</button></td>
+            </tr>
+            <tr>
+              <td><div style="font-weight: 700;">ORD-2409-0017</div></td>
+              <td><div style="font-weight: 600;">Toko Makmur</div><div style="font-size: 12px; color: #5B6780;">Pancoran · 4,1 km</div></td>
+              <td><div style="font-weight: 600;">1 unit</div><div style="font-size: 12px; color: #5B6780;">Perbaikan</div></td>
+              <td class="num"><div style="font-weight: 600;">Min, 27 Sep</div><div style="font-size: 12px; color: #5B6780;">13:00–15:00</div></td>
+              <td style="text-align: right;"><button class="btn-sm">Assign</button></td>
+            </tr>
+            <tr>
+              <td><div style="font-weight: 700;">ORD-2409-0019</div><span class="pill" style="background: #E3F6EC; color: #0B5C3B; margin-top: 4px;">Garansi</span></td>
+              <td><div style="font-weight: 600;">Budi Santoso</div><div style="font-size: 12px; color: #5B6780;">Mampang · 7,3 km</div></td>
+              <td><div style="font-weight: 600;">1 unit</div><div style="font-size: 12px; color: #5B6780;">Klaim dari ORD-2409-0003</div></td>
+              <td class="num"><div style="font-weight: 600;">Sen, 28 Sep</div><div style="font-size: 12px; color: #5B6780;">10:00–11:00</div></td>
+              <td style="text-align: right;"><button class="btn-sm">Assign</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div style="display: flex; flex-direction: column; gap: 20px; min-height: 0;">
+        <section class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center;">
+            <h2 style="margin: 0; font-size: 16px; font-weight: 800; flex-grow: 1;">Beban teknisi hari ini</h2>
+            <a href="#" style="font-size: 13px; font-weight: 700;">Jadwal</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px;"><b>Rudi Setiawan</b><span class="num" style="color: #5B6780;">2 order · 4,5 jam</span></div>
+            <div style="height: 8px; border-radius: 4px; background: #EEF2F8;"><div style="width: 45%; height: 8px; border-radius: 4px; background: #1D63ED;"></div></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px;"><b>Bima Pratama</b><span class="num" style="color: #5B6780;">2 order · 4 jam</span></div>
+            <div style="height: 8px; border-radius: 4px; background: #EEF2F8;"><div style="width: 40%; height: 8px; border-radius: 4px; background: #1D63ED;"></div></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px;"><b>Fajar Nugroho</b><span class="num" style="color: #5B6780;">1 order · 2,5 jam</span></div>
+            <div style="height: 8px; border-radius: 4px; background: #EEF2F8;"><div style="width: 25%; height: 8px; border-radius: 4px; background: #1D63ED;"></div></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; color: #5B6780;"><b style="color: #5B6780;">Dimas Aditya</b><span class="pill" style="background: #EEF2F8; color: #33415C;">Cuti</span></div>
+        </section>
+
+        <section class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="margin: 0; font-size: 16px; font-weight: 800;">Ulasan terbaru</h2>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px;"><b>Lina M. → Fajar</b><span style="color: #F5A524; letter-spacing: 1px;">★★★★★</span></div>
+            <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #33415C;">Instalasi rapi, pipa dirapikan dengan duct. Mantap.</p>
+          </div>
+          <div style="height: 1px; background: #EEF2F8;"></div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px;"><b>Andi P. → Rudi</b><span style="color: #F5A524; letter-spacing: 1px;">★★★★<span style="color: #D5DEEE;">★</span></span></div>
+            <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #33415C;">Datang sedikit terlambat, tapi hasil cuci bersih.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

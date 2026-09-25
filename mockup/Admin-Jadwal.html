@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Jadwal Teknisi</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F4F7FC;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.nav{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:10px;font-size:14px;font-weight:600;color:rgba(255,255,255,0.74)}
+.nav:hover{color:#FFFFFF;background:rgba(255,255,255,0.06)}
+.nav-on{background:#1D63ED;color:#FFFFFF}
+.card{background:#FFFFFF;border:1px solid #E3E8F2;border-radius:16px}
+.who{width:208px;flex-shrink:0;display:flex;align-items:center;gap:10px;padding-right:12px}
+.av{width:34px;height:34px;border-radius:50%;background:#00084D;color:#FFFFFF;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lane{position:relative;width:880px;height:64px;border-bottom:1px solid #EEF2F8}
+.b{position:absolute;top:10px;height:44px;border-radius:10px;padding:5px 10px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;font-size:12px;line-height:1.3}
+.b b{font-size:12px}
+.buf{position:absolute;right:0;top:0;bottom:0;width:44px;background:repeating-linear-gradient(135deg, rgba(255,255,255,0.0) 0 5px, rgba(255,255,255,0.45) 5px 10px)}
+.buf-d{background:repeating-linear-gradient(135deg, rgba(0,8,77,0.0) 0 5px, rgba(0,8,77,0.08) 5px 10px)}
+.sec{font-size:11px;font-weight:700;color:#5B6780;text-transform:uppercase;letter-spacing:0.5px;padding:10px 0 4px}
+.seg{height:36px;padding:0 14px;border-radius:9px;border:0;background:transparent;font-family:inherit;font-size:13px;font-weight:700;color:#5B6780;cursor:pointer}
+.lg{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#33415C}
+.lg span{width:16px;height:12px;border-radius:4px}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 1440px; height: 900px; overflow: hidden; display: flex; background: #F4F7FC;">
+  <aside style="width: 248px; background: #00084D; color: #FFFFFF; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 24px;">
+      <div style="width: 36px; height: 36px; border-radius: 10px; background: #1D63ED; display: flex; align-items: center; justify-content: center;"><svg class="ic" viewBox="0 0 24 24" style="stroke-width: 2.2;"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><path d="m20 16-4-4 4-4"></path><path d="m4 8 4 4-4 4"></path><path d="m16 4-4 4-4-4"></path><path d="m8 20 4-4 4 4"></path></svg></div>
+      <div><div style="font-size: 17px; font-weight: 800;">SejukAC</div><div style="font-size: 11px; opacity: 0.6;">Panel Admin</div></div>
+    </div>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>Dashboard</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg><span style="flex-grow: 1;">Order</span><span style="min-width: 22px; height: 22px; border-radius: 11px; background: #F5A524; color: #00084D; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">3</span></a>
+    <a href="#" class="nav nav-on"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Jadwal</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"></path><circle cx="7.5" cy="7.5" r="1"></circle></svg>Layanan &amp; Harga</a>
+    <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: rgba(255,255,255,0.5); padding: 18px 14px 6px;">MASTER DATA</div>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>Teknisi</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>Helper</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Client</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>Ulasan</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg>Pengaturan</a>
+    <div style="flex-grow: 1;"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.06);">
+      <div style="width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #00084D; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center;">AD</div>
+      <div style="flex-grow: 1;"><div style="font-size: 13px; font-weight: 700;">Admin Operasional</div><div style="font-size: 11px; opacity: 0.6;">admin@sejukac.id</div></div>
+    </div>
+  </aside>
+
+  <main style="flex-grow: 1; padding: 24px 32px; display: flex; flex-direction: column; gap: 18px; min-width: 0;">
+    <header style="display: flex; align-items: center; gap: 16px;">
+      <div style="flex-grow: 1;">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.4px;">Jadwal Teknisi &amp; Helper</h1>
+        <div style="font-size: 13px; color: #5B6780;">Jam operasional 08:00–18:00 · buffer perjalanan 30 menit</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button aria-label="Hari sebelumnya" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #E3E8F2; background: #FFFFFF; color: #0B1533; display: flex; align-items: center; justify-content: center;"><svg class="ic" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
+        <div style="height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid #E3E8F2; background: #FFFFFF; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700;"><svg class="ic" viewBox="0 0 24 24" style="color: #1D63ED; width: 18px; height: 18px;"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Sabtu, 26 Sep 2026</div>
+        <button aria-label="Hari berikutnya" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #E3E8F2; background: #FFFFFF; color: #0B1533; display: flex; align-items: center; justify-content: center;"><svg class="ic" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></button>
+      </div>
+      <div style="display: flex; padding: 4px; border-radius: 12px; background: #E8EDF5;">
+        <button class="seg" style="background: #FFFFFF; color: #0B1533; box-shadow: 0 1px 3px rgba(0,8,77,0.1);">Hari</button>
+        <button class="seg">Minggu</button>
+      </div>
+    </header>
+
+    <section class="card" style="padding: 16px 20px 8px; position: relative;">
+      <div style="display: flex; border-bottom: 1px solid #E3E8F2; padding-bottom: 8px;">
+        <div class="who" style="font-size: 12px; font-weight: 700; color: #5B6780;">Tim</div>
+        <div class="num" style="display: flex; width: 880px; font-size: 12px; font-weight: 600; color: #5B6780;">
+          <span style="width: 88px;">08:00</span><span style="width: 88px;">09:00</span><span style="width: 88px;">10:00</span><span style="width: 88px;">11:00</span><span style="width: 88px;">12:00</span><span style="width: 88px;">13:00</span><span style="width: 88px;">14:00</span><span style="width: 88px;">15:00</span><span style="width: 88px;">16:00</span><span style="width: 88px;">17:00</span>
+        </div>
+      </div>
+
+      <div style="position: absolute; left: 550px; top: 44px; bottom: 8px; width: 2px; background: #E5484D; z-index: 2;"></div>
+      <div style="position: absolute; left: 528px; top: 30px; height: 18px; padding: 0 6px; border-radius: 5px; background: #E5484D; color: #FFFFFF; font-size: 11px; font-weight: 700; display: flex; align-items: center; z-index: 3;" class="num">11:40</div>
+
+      <div class="sec">Teknisi</div>
+      <div style="display: flex; align-items: center;">
+        <div class="who"><span class="av">RS</span><div><div style="font-size: 13px; font-weight: 700;">Rudi Setiawan</div><div style="font-size: 11px; color: #5B6780;">3 order · 8 jam</div></div></div>
+        <div class="lane" style="background: repeating-linear-gradient(90deg, transparent 0 87px, #EEF2F8 87px 88px);">
+          <div class="b" style="left: 0; width: 132px; background: #E3F6EC; color: #0B5C3B;"><b>ORD-0010</b><span>Selesai</span><span class="buf buf-d"></span></div>
+          <div class="b" style="left: 264px; width: 264px; background: #1D63ED; color: #FFFFFF;"><b>ORD-0012 · Dena R.</b><span>2 unit · Dalam perjalanan</span><span class="buf"></span></div>
+          <div class="b" style="left: 530px; width: 306px; background: #FFFFFF; border: 1.5px dashed #1D63ED; color: #1A3A7A;"><b>ORD-0015 · Siti R.</b><span>2 unit · Ditugaskan</span><span class="buf buf-d"></span></div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div class="who"><span class="av">BP</span><div><div style="font-size: 13px; font-weight: 700;">Bima Pratama</div><div style="font-size: 11px; color: #5B6780;">2 order · 4 jam</div></div></div>
+        <div class="lane" style="background: repeating-linear-gradient(90deg, transparent 0 87px, #EEF2F8 87px 88px);">
+          <div class="b" style="left: 88px; width: 220px; background: #00084D; color: #FFFFFF;"><b>ORD-0011 · Andi P.</b><span>Perbaikan · Dikerjakan</span><span class="buf"></span></div>
+          <div class="b" style="left: 572px; width: 132px; background: #D4E4FB; color: #1A3A7A;"><b>ORD-0014</b><span>Dikonfirmasi</span><span class="buf buf-d"></span></div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div class="who"><span class="av">FN</span><div><div style="font-size: 13px; font-weight: 700;">Fajar Nugroho</div><div style="font-size: 11px; color: #5B6780;">1 order · 2,5 jam</div></div></div>
+        <div class="lane" style="background: repeating-linear-gradient(90deg, transparent 0 87px, #EEF2F8 87px 88px);">
+          <div class="b" style="left: 176px; width: 220px; background: #D4E4FB; color: #1A3A7A;"><b>ORD-0013 · Lina M.</b><span>Instalasi · Dikonfirmasi</span><span class="buf buf-d"></span></div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div class="who"><span class="av" style="background: #9AA5BA;">DA</span><div><div style="font-size: 13px; font-weight: 700; color: #5B6780;">Dimas Aditya</div><div style="font-size: 11px; color: #5B6780;">Cuti</div></div></div>
+        <div class="lane"><div style="position: absolute; left: 0; right: 0; top: 10px; height: 44px; border-radius: 10px; background: repeating-linear-gradient(135deg, #F4F7FC 0 8px, #E8EDF5 8px 16px); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #5B6780;">Cuti sepanjang hari</div></div>
+      </div>
+
+      <div class="sec" style="padding-top: 14px;">Helper <span style="text-transform: none; letter-spacing: 0; font-weight: 600;">(tanpa aplikasi)</span></div>
+      <div style="display: flex; align-items: center;">
+        <div class="who"><span class="av" style="background: #E8F0FE; color: #1D63ED;">AG</span><div><div style="font-size: 13px; font-weight: 700;">Agus</div><div style="font-size: 11px; color: #5B6780;">Ikut Rudi</div></div></div>
+        <div class="lane" style="background: repeating-linear-gradient(90deg, transparent 0 87px, #EEF2F8 87px 88px);">
+          <div class="b" style="left: 264px; width: 264px; background: #E8F0FE; color: #1A3A7A;"><b>ORD-0012</b><span>bersama Rudi</span><span class="buf buf-d"></span></div>
+          <div class="b" style="left: 530px; width: 306px; background: #FFFFFF; border: 1.5px dashed #1D63ED; color: #1A3A7A;"><b>ORD-0015</b><span>bersama Rudi · wajib helper</span><span class="buf buf-d"></span></div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div class="who"><span class="av" style="background: #E8F0FE; color: #1D63ED;">YG</span><div><div style="font-size: 13px; font-weight: 700;">Yoga</div><div style="font-size: 11px; color: #5B6780;">Ikut Fajar, Bima</div></div></div>
+        <div class="lane" style="background: repeating-linear-gradient(90deg, transparent 0 87px, #EEF2F8 87px 88px); border-bottom: 0;">
+          <div class="b" style="left: 176px; width: 220px; background: #E8F0FE; color: #1A3A7A;"><b>ORD-0013</b><span>bersama Fajar</span><span class="buf buf-d"></span></div>
+          <div class="b" style="left: 572px; width: 132px; background: #E8F0FE; color: #1A3A7A;"><b>ORD-0014</b><span>bersama Bima</span><span class="buf buf-d"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <span class="lg"><span style="background: #E3F6EC;"></span>Selesai</span>
+      <span class="lg"><span style="background: #00084D;"></span>Dikerjakan</span>
+      <span class="lg"><span style="background: #1D63ED;"></span>Dalam perjalanan</span>
+      <span class="lg"><span style="background: #D4E4FB;"></span>Dikonfirmasi teknisi</span>
+      <span class="lg"><span style="background: #FFFFFF; border: 1.5px dashed #1D63ED;"></span>Ditugaskan (menunggu teknisi)</span>
+      <span class="lg"><span style="background: repeating-linear-gradient(135deg, #E3E8F2 0 3px, #FFFFFF 3px 6px); border: 1px solid #E3E8F2;"></span>Buffer perjalanan</span>
+      <span style="flex-grow: 1;"></span>
+      <a href="#" style="height: 44px; padding: 0 16px; border-radius: 12px; background: #FFF3DC; color: #6B3F00; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">3 order menunggu (27–28 Sep)<svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="m9 18 6-6-6-6"></path></svg></a>
+    </div>
+  </main>
+</div>
+</body>
+</html>

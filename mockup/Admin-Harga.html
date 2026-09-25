@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Matriks Harga Layanan</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F4F7FC;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.nav{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:10px;font-size:14px;font-weight:600;color:rgba(255,255,255,0.74)}
+.nav:hover{color:#FFFFFF;background:rgba(255,255,255,0.06)}
+.nav-on{background:#1D63ED;color:#FFFFFF}
+.card{background:#FFFFFF;border:1px solid #E3E8F2;border-radius:16px}
+.h2{margin:0;font-size:15px;font-weight:800}
+.tab{height:44px;padding:0 4px;font-size:14px;font-weight:700;color:#5B6780;display:inline-flex;align-items:center;border-bottom:2.5px solid transparent}
+.tab-on{color:#1D63ED;border-bottom-color:#1D63ED}
+.cell{border:1.5px solid #E3E8F2;border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;background:#FFFFFF}
+.cell-hl{border-color:#1D63ED;background:#F2F6FE}
+.ci{width:74px;height:30px;border:1px solid #E3E8F2;border-radius:8px;padding:0 8px;font:inherit;font-size:13px;font-weight:700;color:#0B1533;font-variant-numeric:tabular-nums;background:#FFFFFF}
+.cj{width:40px;height:26px;border:1px solid #E3E8F2;border-radius:7px;padding:0 6px;font:inherit;font-size:12px;font-weight:600;color:#33415C;text-align:center;background:#FFFFFF}
+.rowh{font-size:14px;font-weight:800;color:#00084D;display:flex;align-items:center}
+.colh{font-size:12px;font-weight:700;color:#5B6780;text-transform:uppercase;letter-spacing:0.4px;padding:0 4px}
+.sw{width:34px;height:20px;border-radius:10px;background:#1D63ED;position:relative;flex-shrink:0}
+.sw::after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#FFFFFF}
+.sw-off{background:#C3CCDB}
+.sw-off::after{right:auto;left:2px}
+.fl{font-size:12px;font-weight:700;color:#33415C;display:block;margin-bottom:6px}
+.fi{width:100%;height:44px;border:1.5px solid #E3E8F2;border-radius:10px;padding:0 12px;font:inherit;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;color:#0B1533}
+.apply{height:44px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between;padding:0 12px;cursor:pointer}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 1440px; height: 900px; overflow: hidden; display: flex; background: #F4F7FC;">
+  <aside style="width: 248px; background: #00084D; color: #FFFFFF; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 24px;">
+      <div style="width: 36px; height: 36px; border-radius: 10px; background: #1D63ED; display: flex; align-items: center; justify-content: center;"><svg class="ic" viewBox="0 0 24 24" style="stroke-width: 2.2;"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><path d="m20 16-4-4 4-4"></path><path d="m4 8 4 4-4 4"></path><path d="m16 4-4 4-4-4"></path><path d="m8 20 4-4 4 4"></path></svg></div>
+      <div><div style="font-size: 17px; font-weight: 800;">SejukAC</div><div style="font-size: 11px; opacity: 0.6;">Panel Admin</div></div>
+    </div>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>Dashboard</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg><span style="flex-grow: 1;">Order</span><span style="min-width: 22px; height: 22px; border-radius: 11px; background: #F5A524; color: #00084D; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">4</span></a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Jadwal</a>
+    <a href="#" class="nav nav-on"><svg class="ic" viewBox="0 0 24 24"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"></path><circle cx="7.5" cy="7.5" r="1"></circle></svg>Layanan &amp; Harga</a>
+    <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: rgba(255,255,255,0.5); padding: 18px 14px 6px;">MASTER DATA</div>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>Teknisi</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>Helper</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Client</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>Ulasan</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg>Pengaturan</a>
+    <div style="flex-grow: 1;"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.06);">
+      <div style="width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #00084D; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center;">AD</div>
+      <div style="flex-grow: 1;"><div style="font-size: 13px; font-weight: 700;">Admin Operasional</div><div style="font-size: 11px; opacity: 0.6;">admin@sejukac.id</div></div>
+    </div>
+  </aside>
+
+  <main style="flex-grow: 1; padding: 24px 32px; display: flex; flex-direction: column; gap: 16px; min-width: 0;">
+    <header style="display: flex; align-items: flex-end; gap: 16px;">
+      <div style="flex-grow: 1;">
+        <div style="font-size: 13px; color: #5B6780; display: flex; align-items: center; gap: 6px;"><a href="#">Layanan &amp; Harga</a><svg class="ic" viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="m9 18 6-6-6-6"></path></svg>Cuci AC</div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <h1 style="margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.4px;">Cuci AC</h1>
+          <span style="height: 26px; padding: 0 10px; border-radius: 999px; background: #E3F6EC; color: #0B5C3B; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center;">Aktif</span>
+        </div>
+      </div>
+      <button style="height: 44px; padding: 0 18px; border-radius: 12px; border: 1.5px solid #E3E8F2; background: #FFFFFF; color: #33415C; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;">Batal</button>
+      <button style="height: 44px; padding: 0 18px; border-radius: 12px; border: 0; background: #1D63ED; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;">Simpan perubahan</button>
+    </header>
+
+    <nav style="display: flex; gap: 24px; border-bottom: 1px solid #E3E8F2;">
+      <a href="#" class="tab">Info layanan</a>
+      <a href="#" class="tab tab-on">Matriks harga</a>
+      <a href="#" class="tab">Garansi</a>
+    </nav>
+
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 20px; flex-grow: 1; min-height: 0;">
+      <section class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div><h2 class="h2">Harga per PK × Tipe</h2><div style="font-size: 12px; color: #5B6780;">Rupiah · estimasi durasi dalam jam · matikan sakelar jika kombinasi tidak dilayani</div></div>
+          <span style="font-size: 12px; font-weight: 700; color: #33415C;">17 dari 18 aktif</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 76px repeat(3, minmax(0, 1fr)); gap: 8px;">
+          <div></div>
+          <div class="colh">Standar</div>
+          <div class="colh">Low Watt</div>
+          <div class="colh" style="color: #1D63ED;">Inverter ▾</div>
+
+          <div class="rowh">½ PK</div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="75.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="90.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="75.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="90.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell cell-hl"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="90.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="110.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+
+          <div class="rowh">¾ PK</div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="75.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="90.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="75.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="90.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell cell-hl"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="90.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="110.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+
+          <div class="rowh">1 PK</div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="75.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="90.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="75.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="90.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell cell-hl"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="90.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="110.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+
+          <div class="rowh">1½ PK</div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="90.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="110.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="90.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="110.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell cell-hl"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="110.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="130.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1,5" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+
+          <div class="rowh">2 PK</div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="110.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="130.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1,5" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="110.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="130.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1,5" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell cell-hl"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="130.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="160.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1,5" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+
+          <div class="rowh">2½ PK</div>
+          <div class="cell"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="130.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="160.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="1,5" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+          <div class="cell" style="background: #F8FAFD; border-style: dashed;"><div style="height: 30px; display: flex; align-items: center; font-size: 13px; font-weight: 700; color: #5B6780;">Tidak dilayani</div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><span>Nonaktif</span><span style="flex-grow: 1;"></span><span class="sw sw-off"></span></div></div>
+          <div class="cell cell-hl"><div style="display: flex; align-items: center; gap: 6px;"><input class="ci" value="150.000" aria-label="Harga mulai"><span style="color: #9AA5BA;">–</span><input class="ci" value="180.000" aria-label="Harga sampai"></div><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B6780;"><input class="cj" value="2" aria-label="Estimasi jam">jam<span style="flex-grow: 1;"></span><span class="sw"></span></div></div>
+        </div>
+      </section>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <section class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 14px; border-color: #C9D8F8;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width: 36px; height: 36px; border-radius: 10px; background: #E8F0FE; color: #1D63ED; display: flex; align-items: center; justify-content: center;"><svg class="ic" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg></span>
+            <div><h2 class="h2">Isi cepat</h2><div style="font-size: 12px; color: #5B6780;">Isi sekali, terapkan ke banyak sel</div></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+            <div><label class="fl" for="qmin">Harga mulai</label><input id="qmin" class="fi" value="75.000"></div>
+            <div><label class="fl" for="qmax">Harga sampai</label><input id="qmax" class="fi" value="90.000"></div>
+          </div>
+          <div><label class="fl" for="qjam">Estimasi durasi (jam)</label><input id="qjam" class="fi" value="1"></div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span class="fl" style="margin: 0;">Terapkan ke</span>
+            <button class="apply" style="border: 0; background: #1D63ED; color: #FFFFFF;">Semua kombinasi<span style="font-size: 12px; opacity: 0.85;">18 sel</span></button>
+            <button class="apply" style="border: 1.5px solid #C9D8F8; background: #FFFFFF; color: #1D63ED;">Baris PK: 1½ PK<svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="m6 9 6 6 6-6"></path></svg></button>
+            <button class="apply" style="border: 1.5px solid #1D63ED; background: #F2F6FE; color: #1D63ED;">Kolom tipe: Inverter<svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="m6 9 6 6 6-6"></path></svg></button>
+          </div>
+          <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #33415C;">Sel bergaris biru = target pilihan saat ini. Setelah diterapkan, sel masih bisa diedit satu per satu.</p>
+        </section>
+
+        <section class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+          <h2 class="h2">Pengaturan layanan</h2>
+          <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px;"><span><b>Wajib helper</b><br><span style="color: #5B6780; font-size: 12px;">Admin harus memilih helper</span></span><span class="sw sw-off"></span></div>
+          <div style="height: 1px; background: #EEF2F8;"></div>
+          <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px;"><span><b>Garansi</b><br><span style="color: #5B6780; font-size: 12px;">Kosongkan = default pengaturan</span></span><span style="height: 36px; padding: 0 12px; border-radius: 10px; border: 1.5px solid #E3E8F2; display: inline-flex; align-items: center; font-weight: 700;">7 hari</span></div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

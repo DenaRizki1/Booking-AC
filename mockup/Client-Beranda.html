@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client — Beranda</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F4F7FC;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.svc{background:#FFFFFF;border:1px solid #E3E8F2;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;text-align:left;font-family:inherit;cursor:pointer}
+.svc-ic{width:40px;height:40px;border-radius:12px;background:#E8F0FE;color:#1D63ED;display:flex;align-items:center;justify-content:center}
+.nav{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:600;color:#5B6780;min-height:44px;justify-content:center}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 960px; overflow: hidden; background: #F4F7FC; display: flex; flex-direction: column; position: relative;">
+  <div style="padding: 20px 20px 16px; background: #FFFFFF; display: flex; flex-direction: column; gap: 14px; border-bottom: 1px solid #E3E8F2;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: #00084D; color: #FFFFFF; font-weight: 700; display: flex; align-items: center; justify-content: center;">DR</div>
+      <div style="flex-grow: 1;">
+        <div style="font-size: 13px; color: #5B6780;">Selamat pagi,</div>
+        <div style="font-size: 18px; font-weight: 800; letter-spacing: -0.3px;">Dena Rizki</div>
+      </div>
+      <button aria-label="Notifikasi" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #E3E8F2; background: #FFFFFF; color: #0B1533; display: flex; align-items: center; justify-content: center; position: relative;">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+        <span style="position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 50%; background: #E5484D; border: 2px solid #FFFFFF;"></span>
+      </button>
+    </div>
+    <button style="height: 44px; border-radius: 12px; border: 0; background: #F4F7FC; display: flex; align-items: center; gap: 10px; padding: 0 12px; font-family: inherit; text-align: left; cursor: pointer;">
+      <svg class="ic" viewBox="0 0 24 24" style="color: #1D63ED;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      <span style="flex-grow: 1; font-size: 13px; color: #33415C;"><b style="color: #0B1533;">Rumah</b> · Jl. Kemang Raya No. 12</span>
+      <svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px; color: #5B6780;"><path d="m6 9 6 6 6-6"></path></svg>
+    </button>
+  </div>
+
+  <div style="padding: 20px; display: flex; flex-direction: column; gap: 22px; flex-grow: 1;">
+    <div style="background: #1D63ED; color: #FFFFFF; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden;">
+      <div style="position: absolute; width: 180px; height: 180px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.15); right: -60px; top: -70px;"></div>
+      <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; opacity: 0.85;">Order aktif</span>
+        <span style="font-size: 12px; font-weight: 600; opacity: 0.85;">ORD-2409-0012</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; position: relative;">
+        <span style="width: 10px; height: 10px; border-radius: 50%; background: #7CF0B6; box-shadow: 0 0 0 4px rgba(124,240,182,0.25);"></span>
+        <span style="font-size: 20px; font-weight: 800; letter-spacing: -0.3px;">Teknisi dalam perjalanan</span>
+      </div>
+      <div style="display: flex; gap: 6px; position: relative;">
+        <span style="flex: 1; height: 5px; border-radius: 3px; background: #FFFFFF;"></span>
+        <span style="flex: 1; height: 5px; border-radius: 3px; background: #FFFFFF;"></span>
+        <span style="flex: 1; height: 5px; border-radius: 3px; background: #FFFFFF;"></span>
+        <span style="flex: 1; height: 5px; border-radius: 3px; background: #FFFFFF;"></span>
+        <span style="flex: 1; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.3);"></span>
+        <span style="flex: 1; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.3);"></span>
+      </div>
+      <div style="background: rgba(0,8,77,0.28); border-radius: 14px; padding: 12px; display: flex; align-items: center; gap: 12px; position: relative;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: #FFFFFF; color: #1D63ED; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center;">RS</div>
+        <div style="flex-grow: 1;">
+          <div style="font-size: 14px; font-weight: 700;">Rudi Setiawan</div>
+          <div style="font-size: 12px; opacity: 0.85;">Teknisi · ★ 4,9 · + Helper Agus</div>
+        </div>
+        <a href="#" aria-label="Hubungi teknisi" style="width: 40px; height: 40px; border-radius: 12px; background: #FFFFFF; color: #1D63ED; display: flex; align-items: center; justify-content: center;">
+          <svg class="ic" viewBox="0 0 24 24" style="width: 18px; height: 18px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </a>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 13px; position: relative;">
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Sab, 26 Sep · 11:00–13:30</span>
+        <span style="font-weight: 700;">2 unit</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 800; letter-spacing: -0.2px;">Pilih layanan</h2>
+        <a href="#" style="font-size: 13px; font-weight: 600;">Semua</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+        <button class="svc">
+          <span class="svc-ic"><svg class="ic" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg></span>
+          <span style="font-size: 15px; font-weight: 700; color: #0B1533;">Cuci AC</span>
+          <span style="font-size: 12px; color: #5B6780;">Mulai Rp75rb · ±1 jam</span>
+        </button>
+        <button class="svc">
+          <span class="svc-ic"><svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
+          <span style="font-size: 15px; font-weight: 700; color: #0B1533;">Perbaikan</span>
+          <span style="font-size: 12px; color: #5B6780;">Mulai Rp100rb · ±2 jam</span>
+        </button>
+        <button class="svc">
+          <span class="svc-ic"><svg class="ic" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="M3 8l9 5 9-5"></path><path d="M12 13v8"></path></svg></span>
+          <span style="font-size: 15px; font-weight: 700; color: #0B1533;">Instalasi</span>
+          <span style="font-size: 12px; color: #5B6780;">Mulai Rp350rb · ±2 jam</span>
+        </button>
+        <button class="svc">
+          <span class="svc-ic"><svg class="ic" viewBox="0 0 24 24"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"></path></svg></span>
+          <span style="font-size: 15px; font-weight: 700; color: #0B1533;">Isi Freon</span>
+          <span style="font-size: 12px; color: #5B6780;">Mulai Rp150rb · ±1 jam</span>
+        </button>
+      </div>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #E3E8F2; border-radius: 16px; padding: 14px; display: flex; align-items: center; gap: 12px;">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: #E3F6EC; color: #0F7B4F; display: flex; align-items: center; justify-content: center;">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+      </span>
+      <div style="flex-grow: 1;">
+        <div style="font-size: 14px; font-weight: 700;">Garansi aktif</div>
+        <div style="font-size: 12px; color: #5B6780;">ORD-2409-0003 · s/d 2 Okt 2026</div>
+      </div>
+      <a href="#" style="font-size: 13px; font-weight: 700; min-height: 44px; display: inline-flex; align-items: center;">Klaim</a>
+    </div>
+
+    <div style="flex-grow: 1;"></div>
+    <button style="height: 54px; border-radius: 14px; border: 0; background: #1D63ED; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;">
+      <svg class="ic" viewBox="0 0 24 24" style="stroke-width: 2.4;"><path d="M12 5v14M5 12h14"></path></svg>
+      Buat Order
+    </button>
+  </div>
+
+  <nav style="height: 72px; background: #FFFFFF; border-top: 1px solid #E3E8F2; display: flex; padding: 8px 8px 12px;">
+    <a href="#" class="nav" style="color: #1D63ED;"><svg class="ic" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Beranda</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg>Order</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>Alamat</a>
+    <a href="#" class="nav"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Profil</a>
+  </nav>
+</div>
+</body>
+</html>

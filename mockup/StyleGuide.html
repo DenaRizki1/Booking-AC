@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style Guide</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#FFFFFF;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.h{margin:0 0 12px;font-size:12px;font-weight:800;color:#5B6780;text-transform:uppercase;letter-spacing:0.6px}
+.sw{display:flex;flex-direction:column;gap:6px}
+.chip{height:56px;border-radius:12px;border:1px solid rgba(0,8,77,0.08)}
+.nm{font-size:12px;font-weight:700}
+.hx{font-size:11px;color:#5B6780;font-variant-numeric:tabular-nums}
+.pill{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 960px; height: 640px; box-sizing: border-box; padding: 36px 40px; background: #FFFFFF; display: flex; flex-direction: column; gap: 28px;">
+  <div style="display: flex; align-items: center; gap: 14px;">
+    <div style="width: 44px; height: 44px; border-radius: 12px; background: #1D63ED; color: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><path d="m20 16-4-4 4-4"></path><path d="m4 8 4 4-4 4"></path><path d="m16 4-4 4-4-4"></path><path d="m8 20 4-4 4 4"></path></svg></div>
+    <div style="flex-grow: 1;"><div style="font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">SejukAC — Style Guide</div><div style="font-size: 13px; color: #5B6780;">Biru Docker sebagai warna utama · Plus Jakarta Sans · radius 12–18px</div></div>
+  </div>
+
+  <div>
+    <h2 class="h">Warna</h2>
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px;">
+      <div class="sw"><div class="chip" style="background: #1D63ED;"></div><span class="nm">Primary</span><span class="hx">#1D63ED</span></div>
+      <div class="sw"><div class="chip" style="background: #1650C4;"></div><span class="nm">Primary hover</span><span class="hx">#1650C4</span></div>
+      <div class="sw"><div class="chip" style="background: #00084D;"></div><span class="nm">Navy</span><span class="hx">#00084D</span></div>
+      <div class="sw"><div class="chip" style="background: #E8F0FE;"></div><span class="nm">Blue 50</span><span class="hx">#E8F0FE</span></div>
+      <div class="sw"><div class="chip" style="background: #F4F7FC;"></div><span class="nm">Background</span><span class="hx">#F4F7FC</span></div>
+      <div class="sw"><div class="chip" style="background: #E3E8F2;"></div><span class="nm">Border</span><span class="hx">#E3E8F2</span></div>
+      <div class="sw"><div class="chip" style="background: #0B1533;"></div><span class="nm">Teks</span><span class="hx">#0B1533</span></div>
+      <div class="sw"><div class="chip" style="background: #5B6780;"></div><span class="nm">Teks sekunder</span><span class="hx">#5B6780</span></div>
+      <div class="sw"><div class="chip" style="background: #0F7B4F;"></div><span class="nm">Sukses</span><span class="hx">#0F7B4F / #E3F6EC</span></div>
+      <div class="sw"><div class="chip" style="background: #F5A524;"></div><span class="nm">Peringatan</span><span class="hx">#F5A524 / #FFF3DC</span></div>
+      <div class="sw"><div class="chip" style="background: #B42318;"></div><span class="nm">Bahaya</span><span class="hx">#B42318 / #FDE8E8</span></div>
+      <div class="sw"><div class="chip" style="background: #FFFFFF;"></div><span class="nm">Surface</span><span class="hx">#FFFFFF</span></div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px;">
+    <div>
+      <h2 class="h">Tipografi</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="font-size: 30px; font-weight: 800; letter-spacing: -0.8px; color: #00084D;">Judul 30 / ExtraBold</div>
+        <div style="font-size: 18px; font-weight: 800;">Subjudul 18 / ExtraBold</div>
+        <div style="font-size: 15px; font-weight: 500;">Isi 15 / Medium — teks utama form & kartu</div>
+        <div style="font-size: 12px; font-weight: 600; color: #5B6780;">Keterangan 12 / SemiBold — label & meta</div>
+        <div style="font-size: 20px; font-weight: 800; color: #00084D; font-variant-numeric: tabular-nums;">Rp197.000 – Rp232.000</div>
+      </div>
+    </div>
+    <div>
+      <h2 class="h">Komponen</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; gap: 10px;">
+          <button style="height: 48px; padding: 0 20px; border-radius: 12px; border: 0; background: #1D63ED; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 700;">Utama</button>
+          <button style="height: 48px; padding: 0 20px; border-radius: 12px; border: 1.5px solid #C9D8F8; background: #FFFFFF; color: #1D63ED; font-family: inherit; font-size: 15px; font-weight: 700;">Sekunder</button>
+          <button style="height: 48px; padding: 0 20px; border-radius: 12px; border: 1.5px solid #F2C4C4; background: #FFFFFF; color: #B42318; font-family: inherit; font-size: 15px; font-weight: 700;">Tolak</button>
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="pill" style="background: #FFF3DC; color: #6B3F00;">Menunggu</span>
+          <span class="pill" style="background: #FFFFFF; color: #1A3A7A; border: 1.5px dashed #1D63ED;">Ditugaskan</span>
+          <span class="pill" style="background: #D4E4FB; color: #1A3A7A;">Dikonfirmasi</span>
+          <span class="pill" style="background: #1D63ED; color: #FFFFFF;">Perjalanan</span>
+          <span class="pill" style="background: #00084D; color: #FFFFFF;">Dikerjakan</span>
+          <span class="pill" style="background: #E3F6EC; color: #0B5C3B;">Selesai</span>
+          <span class="pill" style="background: #FDE8E8; color: #9B1C1C;">Ditolak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

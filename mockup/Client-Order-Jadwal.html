@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client — Order, Jadwal &amp; Ringkasan</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F4F7FC;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.h2{margin:0;font-size:15px;font-weight:800}
+.day{flex:1;height:72px;border-radius:14px;border:1.5px solid #E3E8F2;background:#FFFFFF;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:#0B1533}
+.day-on{background:#1D63ED;border-color:#1D63ED;color:#FFFFFF}
+.slot{height:44px;border-radius:12px;border:1.5px solid #E3E8F2;background:#FFFFFF;font-family:inherit;font-size:14px;font-weight:700;color:#0B1533;cursor:pointer;font-variant-numeric:tabular-nums}
+.slot-off{background:#F4F7FC;color:#9AA5BA;text-decoration:line-through;border-color:#F4F7FC;cursor:not-allowed}
+.slot-on{background:#1D63ED;border-color:#1D63ED;color:#FFFFFF}
+.row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;font-size:13px}
+.icon-btn{width:44px;height:44px;border-radius:10px;border:1px solid #E3E8F2;background:#FFFFFF;color:#0B1533;display:flex;align-items:center;justify-content:center;cursor:pointer}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 1240px; overflow: hidden; background: #F4F7FC; display: flex; flex-direction: column;">
+  <div style="background: #FFFFFF; padding: 16px 20px; border-bottom: 1px solid #E3E8F2; display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button aria-label="Kembali" class="icon-btn"><svg class="ic" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
+      <h1 style="margin: 0; font-size: 18px; font-weight: 800; flex-grow: 1;">Buat Order</h1>
+    </div>
+    <ol style="margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700;">
+      <li style="display: flex; align-items: center; gap: 6px; color: #0F7B4F;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #E3F6EC; color: #0F7B4F; display: inline-flex; align-items: center; justify-content: center;"><svg class="ic" viewBox="0 0 24 24" style="width: 14px; height: 14px; stroke-width: 3;"><path d="M20 6 9 17l-5-5"></path></svg></span>Unit AC</li>
+      <li style="flex-grow: 1; height: 2px; background: #1D63ED;"></li>
+      <li style="display: flex; align-items: center; gap: 6px; color: #1D63ED;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #1D63ED; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center;">2</span>Jadwal</li>
+      <li style="flex-grow: 1; height: 2px; background: #E3E8F2;"></li>
+      <li style="display: flex; align-items: center; gap: 6px; color: #5B6780;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #E3E8F2; color: #5B6780; display: inline-flex; align-items: center; justify-content: center;">3</span>Ringkasan</li>
+    </ol>
+  </div>
+
+  <div style="padding: 20px; display: flex; flex-direction: column; gap: 22px; flex-grow: 1;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <h2 class="h2">Pilih tanggal</h2>
+        <span style="font-size: 13px; font-weight: 600; color: #33415C;">September 2026</span>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="day"><span style="font-size: 11px; font-weight: 600; opacity: 0.7;">Jum</span><span style="font-size: 18px; font-weight: 800;">25</span></button>
+        <button class="day day-on"><span style="font-size: 11px; font-weight: 600; opacity: 0.85;">Sab</span><span style="font-size: 18px; font-weight: 800;">26</span></button>
+        <button class="day" style="color: #9AA5BA; background: #F4F7FC; border-color: #F4F7FC;"><span style="font-size: 11px; font-weight: 600;">Min</span><span style="font-size: 18px; font-weight: 800;">27</span><span style="font-size: 9px; font-weight: 700;">PENUH</span></button>
+        <button class="day"><span style="font-size: 11px; font-weight: 600; opacity: 0.7;">Sen</span><span style="font-size: 18px; font-weight: 800;">28</span></button>
+        <button class="day"><span style="font-size: 11px; font-weight: 600; opacity: 0.7;">Sel</span><span style="font-size: 18px; font-weight: 800;">29</span></button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h2">Pilih jam mulai</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+        <button class="slot">08:00</button>
+        <button class="slot slot-off" disabled>09:00</button>
+        <button class="slot slot-off" disabled>10:00</button>
+        <button class="slot slot-on">11:00</button>
+        <button class="slot">12:00</button>
+        <button class="slot">13:00</button>
+        <button class="slot slot-off" disabled>14:00</button>
+        <button class="slot">15:00</button>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: flex-start; padding: 12px; border-radius: 12px; background: #E8F0FE; font-size: 12px; line-height: 1.5; color: #1A3A7A;">
+        <svg class="ic" viewBox="0 0 24 24" style="width: 18px; height: 18px; color: #1D63ED;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>Perkiraan selesai <b class="num">13:30</b> (2 unit ±2,5 jam). Hanya jam dengan teknisi tersedia yang bisa dipilih.</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <label for="catatan" class="h2">Catatan keluhan <span style="font-weight: 500; color: #5B6780; font-size: 13px;">(opsional)</span></label>
+      <textarea id="catatan" rows="3" style="width: 100%; border: 1.5px solid #E3E8F2; border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 14px; line-height: 1.5; resize: none; background: #FFFFFF;">AC kamar depan (LG) kurang dingin dan ada tetesan air.</textarea>
+    </div>
+
+    <section style="background: #FFFFFF; border: 1px solid #E3E8F2; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h2">Ringkasan</h2>
+      <div class="row"><span style="color: #5B6780;">Jadwal</span><span style="font-weight: 700; text-align: right;">Sab, 26 Sep 2026 · 11:00</span></div>
+      <div class="row"><span style="color: #5B6780;">Alamat</span><span style="font-weight: 700; text-align: right;">Rumah · 8,4 km</span></div>
+      <div style="height: 1px; background: #E3E8F2;"></div>
+      <div class="row">
+        <div><div style="font-weight: 700;">Cuci AC</div><div style="font-size: 12px; color: #5B6780;">Daikin · 1 PK · Standar</div></div>
+        <span class="num" style="font-weight: 600; white-space: nowrap;">Rp75rb – 90rb</span>
+      </div>
+      <div class="row">
+        <div><div style="font-weight: 700;">Cuci AC</div><div style="font-size: 12px; color: #5B6780;">LG · 1½ PK · Inverter</div></div>
+        <span class="num" style="font-weight: 600; white-space: nowrap;">Rp110rb – 130rb</span>
+      </div>
+      <div class="row"><span style="color: #5B6780;">Transport (3,4 km di luar radius gratis)</span><span class="num" style="font-weight: 600; white-space: nowrap;">Rp12.000</span></div>
+      <div style="height: 1px; background: #E3E8F2;"></div>
+      <div class="row" style="align-items: center;"><span style="font-weight: 800;">Total estimasi</span><span class="num" style="font-size: 18px; font-weight: 800; color: #00084D;">Rp197.000 – Rp232.000</span></div>
+    </section>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px; line-height: 1.5; color: #33415C;">
+      <div style="display: flex; gap: 8px;"><svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px; color: #0F7B4F; margin-top: 1px;"><rect x="2" y="6" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg><span>Bayar setelah selesai — tunai atau transfer. Harga final ditentukan teknisi setelah pengecekan.</span></div>
+      <div style="display: flex; gap: 8px;"><svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px; color: #0F7B4F; margin-top: 1px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg><span>Garansi 7 hari. Pembatalan gratis hingga 3 jam sebelum jadwal.</span></div>
+    </div>
+
+    <div style="flex-grow: 1;"></div>
+    <button style="height: 54px; border-radius: 14px; border: 0; background: #1D63ED; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer;">Konfirmasi Order</button>
+  </div>
+</div>
+</body>
+</html>

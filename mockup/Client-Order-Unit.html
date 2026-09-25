@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client — Order, Unit AC</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F4F7FC;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.lbl{font-size:12px;font-weight:700;color:#5B6780;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px}
+.sel{width:100%;height:48px;border:1.5px solid #E3E8F2;border-radius:12px;padding:0 14px;font-family:inherit;font-size:15px;font-weight:600;color:#0B1533;background:#FFFFFF;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.seg{flex:1;height:40px;border-radius:10px;border:1.5px solid #E3E8F2;background:#FFFFFF;font-family:inherit;font-size:13px;font-weight:700;color:#33415C;cursor:pointer}
+.seg-on{background:#1D63ED;border-color:#1D63ED;color:#FFFFFF}
+.ghost{height:44px;border-radius:12px;border:1.5px solid #C9D8F8;background:#FFFFFF;color:#1D63ED;font-family:inherit;font-size:14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+.icon-btn{width:40px;height:40px;border-radius:10px;border:1px solid #E3E8F2;background:#FFFFFF;color:#5B6780;display:flex;align-items:center;justify-content:center;cursor:pointer}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 1120px; overflow: hidden; background: #F4F7FC; display: flex; flex-direction: column;">
+  <div style="background: #FFFFFF; padding: 16px 20px; border-bottom: 1px solid #E3E8F2; display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button aria-label="Kembali" class="icon-btn" style="width: 44px; height: 44px; color: #0B1533;"><svg class="ic" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
+      <h1 style="margin: 0; font-size: 18px; font-weight: 800; flex-grow: 1;">Buat Order</h1>
+    </div>
+    <ol style="margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700;">
+      <li style="display: flex; align-items: center; gap: 6px; color: #1D63ED;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #1D63ED; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center;">1</span>Unit AC</li>
+      <li style="flex-grow: 1; height: 2px; background: #E3E8F2;"></li>
+      <li style="display: flex; align-items: center; gap: 6px; color: #5B6780;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #E3E8F2; color: #5B6780; display: inline-flex; align-items: center; justify-content: center;">2</span>Jadwal</li>
+      <li style="flex-grow: 1; height: 2px; background: #E3E8F2;"></li>
+      <li style="display: flex; align-items: center; gap: 6px; color: #5B6780;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #E3E8F2; color: #5B6780; display: inline-flex; align-items: center; justify-content: center;">3</span>Ringkasan</li>
+    </ol>
+  </div>
+
+  <div style="padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; flex-grow: 1;">
+    <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #33415C;">
+      <svg class="ic" viewBox="0 0 24 24" style="color: #1D63ED; width: 18px; height: 18px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      <span style="flex-grow: 1;"><b style="color: #0B1533;">Rumah</b> · Jl. Kemang Raya No. 12 · 8,4 km</span>
+      <a href="#" style="font-weight: 700; min-height: 44px; display: inline-flex; align-items: center;">Ubah</a>
+    </div>
+
+    <section style="background: #FFFFFF; border: 1.5px solid #1D63ED; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 6px 18px rgba(29,99,237,0.10);">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="height: 26px; padding: 0 10px; border-radius: 8px; background: #E8F0FE; color: #1D63ED; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center;">UNIT 1</span>
+        <span style="flex-grow: 1;"></span>
+        <button class="icon-btn" aria-label="Salin unit 1"><svg class="ic" viewBox="0 0 24 24" style="width: 18px; height: 18px;"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+        <button class="icon-btn" aria-label="Hapus unit 1"><svg class="ic" viewBox="0 0 24 24" style="width: 18px; height: 18px;"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+      </div>
+      <div>
+        <span class="lbl">Merk</span>
+        <button class="sel">Daikin<svg class="ic" viewBox="0 0 24 24" style="width: 18px; height: 18px; color: #5B6780;"><path d="m6 9 6 6 6-6"></path></svg></button>
+      </div>
+      <div>
+        <span class="lbl">Kapasitas (PK)</span>
+        <div style="display: flex; gap: 6px;">
+          <button class="seg">½</button>
+          <button class="seg">¾</button>
+          <button class="seg seg-on">1</button>
+          <button class="seg">1½</button>
+          <button class="seg">2</button>
+          <button class="seg">2½</button>
+        </div>
+      </div>
+      <div>
+        <span class="lbl">Tipe</span>
+        <div style="display: flex; gap: 6px;">
+          <button class="seg seg-on">Standar</button>
+          <button class="seg">Low Watt</button>
+          <button class="seg">Inverter</button>
+        </div>
+      </div>
+      <div>
+        <span class="lbl">Layanan</span>
+        <button class="sel">Cuci AC<svg class="ic" viewBox="0 0 24 24" style="width: 18px; height: 18px; color: #5B6780;"><path d="m6 9 6 6 6-6"></path></svg></button>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: 12px; background: #F4F7FC;">
+        <span style="font-size: 12px; color: #5B6780; display: inline-flex; align-items: center; gap: 6px;"><svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>±1 jam</span>
+        <span class="num" style="font-size: 14px; font-weight: 800; color: #00084D;">Rp75.000 – Rp90.000</span>
+      </div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E3E8F2; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 12px;">
+      <span style="height: 26px; padding: 0 10px; border-radius: 8px; background: #F4F7FC; color: #33415C; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center;">UNIT 2</span>
+      <div style="flex-grow: 1; min-width: 0;">
+        <div style="font-size: 14px; font-weight: 700;">LG · 1½ PK · Inverter</div>
+        <div class="num" style="font-size: 12px; color: #5B6780;">Cuci AC · Rp110.000 – Rp130.000</div>
+      </div>
+      <svg class="ic" viewBox="0 0 24 24" style="color: #5B6780;"><path d="m6 9 6 6 6-6"></path></svg>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+      <button class="ghost"><svg class="ic" viewBox="0 0 24 24" style="width: 18px; height: 18px; stroke-width: 2.2;"><path d="M12 5v14M5 12h14"></path></svg>Tambah unit</button>
+      <button class="ghost"><svg class="ic" viewBox="0 0 24 24" style="width: 18px; height: 18px;"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Salin unit</button>
+    </div>
+
+    <section style="border: 1.5px dashed #9DBBF5; background: #F2F6FE; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <svg class="ic" viewBox="0 0 24 24" style="color: #1D63ED; width: 18px; height: 18px;"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg>
+        <span style="font-size: 14px; font-weight: 800; color: #00084D;">Terapkan ke semua unit</span>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="sel" style="height: 44px; font-size: 13px; flex: 1;">Layanan<svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px; color: #5B6780;"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <button class="sel" style="height: 44px; font-size: 13px; flex: 1.3;">Cuci AC<svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px; color: #5B6780;"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <button style="height: 44px; padding: 0 14px; border-radius: 12px; border: 0; background: #00084D; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;">Terapkan</button>
+      </div>
+      <span style="font-size: 12px; color: #33415C;">Bisa untuk Layanan, Merk, PK, atau Tipe — berlaku ke 2 unit.</span>
+    </section>
+
+    <div style="flex-grow: 1;"></div>
+  </div>
+
+  <div style="background: #FFFFFF; border-top: 1px solid #E3E8F2; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+      <div>
+        <div style="font-size: 12px; color: #5B6780;">Estimasi · 2 unit · ±2,5 jam</div>
+        <div class="num" style="font-size: 20px; font-weight: 800; letter-spacing: -0.3px; color: #00084D;">Rp185.000 – Rp220.000</div>
+      </div>
+      <span style="font-size: 11px; color: #5B6780; text-align: right; max-width: 90px;">+ transport Rp12.000</span>
+    </div>
+    <button style="height: 54px; border-radius: 14px; border: 0; background: #1D63ED; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">Lanjut pilih jadwal<svg class="ic" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></button>
+  </div>
+</div>
+</body>
+</html>

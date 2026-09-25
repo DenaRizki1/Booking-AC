@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client — Detail Order</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F4F7FC;color:#0B1533;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D63ED;text-decoration:none}a:hover{color:#1650C4}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.card{background:#FFFFFF;border:1px solid #E3E8F2;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.h2{margin:0;font-size:15px;font-weight:800}
+.photo{position:relative;flex:1;height:112px;border-radius:12px;overflow:hidden;background:#DCE5F3;display:flex;align-items:center;justify-content:center}
+.photo-tag{position:absolute;left:8px;top:8px;height:22px;padding:0 8px;border-radius:6px;font-size:11px;font-weight:700;display:inline-flex;align-items:center}
+.step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;font-size:10px;font-weight:700;color:#0F7B4F;text-align:center}
+.dot{width:22px;height:22px;border-radius:50%;background:#0F7B4F;color:#FFFFFF;display:flex;align-items:center;justify-content:center}
+.star{width:36px;height:36px;color:#F5A524}
+.icon-btn{width:44px;height:44px;border-radius:10px;border:1px solid #E3E8F2;background:#FFFFFF;color:#0B1533;display:flex;align-items:center;justify-content:center;cursor:pointer}
+
+body{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 1560px; overflow: hidden; background: #F4F7FC; display: flex; flex-direction: column;">
+  <div style="background: #FFFFFF; padding: 16px 20px; border-bottom: 1px solid #E3E8F2; display: flex; align-items: center; gap: 12px;">
+    <button aria-label="Kembali" class="icon-btn"><svg class="ic" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
+    <div style="flex-grow: 1;">
+      <h1 style="margin: 0; font-size: 17px; font-weight: 800;">ORD-2409-0012</h1>
+      <div style="font-size: 12px; color: #5B6780;">Sab, 26 Sep 2026 · 11:00–13:30</div>
+    </div>
+    <span style="height: 28px; padding: 0 12px; border-radius: 999px; background: #E3F6EC; color: #0B5C3B; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center;">Selesai</span>
+  </div>
+
+  <div style="padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 14px;">
+    <section class="card">
+      <div style="display: flex; align-items: flex-start; gap: 2px; position: relative;">
+        <div style="position: absolute; left: 30px; right: 30px; top: 11px; height: 2px; background: #0F7B4F;"></div>
+        <div class="step"><span class="dot" style="position: relative;"><svg class="ic" viewBox="0 0 24 24" style="width: 12px; height: 12px; stroke-width: 3.5;"><path d="M20 6 9 17l-5-5"></path></svg></span>Dipesan</div>
+        <div class="step"><span class="dot" style="position: relative;"><svg class="ic" viewBox="0 0 24 24" style="width: 12px; height: 12px; stroke-width: 3.5;"><path d="M20 6 9 17l-5-5"></path></svg></span>Ditugaskan</div>
+        <div class="step"><span class="dot" style="position: relative;"><svg class="ic" viewBox="0 0 24 24" style="width: 12px; height: 12px; stroke-width: 3.5;"><path d="M20 6 9 17l-5-5"></path></svg></span>Perjalanan</div>
+        <div class="step"><span class="dot" style="position: relative;"><svg class="ic" viewBox="0 0 24 24" style="width: 12px; height: 12px; stroke-width: 3.5;"><path d="M20 6 9 17l-5-5"></path></svg></span>Dikerjakan</div>
+        <div class="step"><span class="dot" style="position: relative;"><svg class="ic" viewBox="0 0 24 24" style="width: 12px; height: 12px; stroke-width: 3.5;"><path d="M20 6 9 17l-5-5"></path></svg></span>Selesai</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; padding-top: 4px;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: #00084D; color: #FFFFFF; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center;">RS</div>
+        <div style="flex-grow: 1;">
+          <div style="font-size: 14px; font-weight: 700;">Rudi Setiawan</div>
+          <div style="font-size: 12px; color: #5B6780;">Teknisi · Helper: Agus</div>
+        </div>
+        <span style="font-size: 13px; font-weight: 700; color: #0B1533;">★ 4,9</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 class="h2">Laporan pekerjaan</h2>
+        <span style="font-size: 12px; color: #5B6780;">Dikirim 13:18</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 12px; border-radius: 14px; background: #F4F7FC;">
+        <div style="display: flex; justify-content: space-between; gap: 8px;">
+          <div><div style="font-size: 12px; font-weight: 800; color: #1D63ED;">UNIT 1 · CUCI AC</div><div style="font-size: 13px; font-weight: 700;">Daikin · 1 PK · Standar</div></div>
+          <span class="num" style="font-size: 14px; font-weight: 800;">Rp85.000</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <div class="photo"><span class="photo-tag" style="background: #FFFFFF; color: #33415C;">Sebelum</span><svg width="90" height="44" viewBox="0 0 90 44"><rect x="2" y="2" width="86" height="30" rx="8" fill="#FFFFFF"></rect><rect x="2" y="22" width="86" height="10" fill="#B9C3D4"></rect><line x1="10" y1="27" x2="80" y2="27" stroke="#8C98AE" stroke-width="2"></line><path d="M20 36v6M45 36v6M70 36v6" stroke="#8C98AE" stroke-width="2" stroke-linecap="round"></path></svg></div>
+          <div class="photo" style="background: #D4E4FB;"><span class="photo-tag" style="background: #1D63ED; color: #FFFFFF;">Sesudah</span><svg width="90" height="44" viewBox="0 0 90 44"><rect x="2" y="2" width="86" height="30" rx="8" fill="#FFFFFF"></rect><rect x="2" y="22" width="86" height="10" fill="#E8F0FE"></rect><line x1="10" y1="27" x2="80" y2="27" stroke="#1D63ED" stroke-opacity="0.5" stroke-width="2"></line><path d="M20 36c3 3-3 4 0 7M45 36c3 3-3 4 0 7M70 36c3 3-3 4 0 7" stroke="#1D63ED" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></div>
+        </div>
+        <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #33415C;">Filter & evaporator sangat kotor, sudah dicuci. Tekanan freon normal.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 12px; border-radius: 14px; background: #F4F7FC;">
+        <div style="display: flex; justify-content: space-between; gap: 8px;">
+          <div><div style="font-size: 12px; font-weight: 800; color: #1D63ED;">UNIT 2 · CUCI AC</div><div style="font-size: 13px; font-weight: 700;">LG · 1½ PK · Inverter</div></div>
+          <span class="num" style="font-size: 14px; font-weight: 800;">Rp170.000</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <div class="photo"><span class="photo-tag" style="background: #FFFFFF; color: #33415C;">Sebelum</span><svg width="90" height="44" viewBox="0 0 90 44"><rect x="2" y="2" width="86" height="30" rx="8" fill="#FFFFFF"></rect><rect x="2" y="22" width="86" height="10" fill="#B9C3D4"></rect><line x1="10" y1="27" x2="80" y2="27" stroke="#8C98AE" stroke-width="2"></line><path d="M20 36v6M45 36v6M70 36v6" stroke="#8C98AE" stroke-width="2" stroke-linecap="round"></path></svg></div>
+          <div class="photo" style="background: #D4E4FB;"><span class="photo-tag" style="background: #1D63ED; color: #FFFFFF;">Sesudah</span><svg width="90" height="44" viewBox="0 0 90 44"><rect x="2" y="2" width="86" height="30" rx="8" fill="#FFFFFF"></rect><rect x="2" y="22" width="86" height="10" fill="#E8F0FE"></rect><line x1="10" y1="27" x2="80" y2="27" stroke="#1D63ED" stroke-opacity="0.5" stroke-width="2"></line><path d="M20 36c3 3-3 4 0 7M45 36c3 3-3 4 0 7M70 36c3 3-3 4 0 7" stroke="#1D63ED" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></div>
+        </div>
+        <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #33415C;">Saluran pembuangan tersumbat, sudah dibersihkan.</p>
+        <div style="display: flex; gap: 8px; align-items: flex-start; padding: 10px; border-radius: 10px; background: #FFF3DC; font-size: 12px; line-height: 1.45; color: #6B3F00;">
+          <svg class="ic" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+          <span>Di atas estimasi: ganti kapasitor 35µF (+Rp50.000)</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 class="h2">Pembayaran</h2>
+        <span style="height: 26px; padding: 0 10px; border-radius: 999px; background: #FFF3DC; color: #6B3F00; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center;">Belum dibayar</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: #5B6780;">Layanan (2 unit)</span><span class="num" style="font-weight: 600;">Rp255.000</span></div>
+      <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: #5B6780;">Transport</span><span class="num" style="font-weight: 600;">Rp12.000</span></div>
+      <div style="height: 1px; background: #E3E8F2;"></div>
+      <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-weight: 800;">Total</span><span class="num" style="font-size: 20px; font-weight: 800; color: #00084D;">Rp267.000</span></div>
+      <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #5B6780;">Bayar tunai ke teknisi, atau transfer ke [BANK] [NO. REKENING] a.n. [NAMA PERUSAHAAN].</p>
+    </section>
+
+    <section class="card" style="gap: 14px;">
+      <h2 class="h2">Beri ulasan untuk Rudi</h2>
+      <div style="display: flex; gap: 6px;" role="radiogroup" aria-label="Rating">
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="#E3E8F2"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>
+      </div>
+      <label for="ulasan" style="position: absolute; left: -9999px;">Ulasan</label>
+      <textarea id="ulasan" rows="3" placeholder="Ceritakan pengalaman Anda…" style="width: 100%; border: 1.5px solid #E3E8F2; border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 14px; line-height: 1.5; resize: none;">Teknisi datang tepat waktu dan rapi. Penjelasannya jelas.</textarea>
+      <button style="height: 48px; border-radius: 12px; border: 0; background: #1D63ED; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer;">Kirim Ulasan</button>
+    </section>
+
+    <section class="card" style="flex-direction: row; align-items: center; gap: 12px;">
+      <span style="width: 44px; height: 44px; border-radius: 12px; background: #E3F6EC; color: #0F7B4F; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+      </span>
+      <div style="flex-grow: 1;">
+        <div style="font-size: 14px; font-weight: 700;">Garansi aktif</div>
+        <div style="font-size: 12px; color: #5B6780;">Sampai Sab, 3 Okt 2026</div>
+      </div>
+      <button style="height: 44px; padding: 0 14px; border-radius: 12px; border: 1.5px solid #C9D8F8; background: #FFFFFF; color: #1D63ED; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;">Klaim Garansi</button>
+    </section>
+  </div>
+</div>
+</body>
+</html>
