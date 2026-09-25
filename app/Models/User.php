@@ -72,7 +72,7 @@ class User extends Authenticatable
         return match ($this->role) {
             UserRole::ADMIN => route('admin.dashboard'),
             UserRole::TEKNISI => route('teknisi.tasks'),
-            UserRole::CLIENT => url('/'),
+            UserRole::CLIENT => route('client.home'),
         };
     }
 

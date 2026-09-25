@@ -50,6 +50,14 @@ Reset database lokal kapan saja: `php artisan migrate:fresh --seed` (**hanya di 
 Data demo: 4 teknisi, 2 helper, 5 client, 20 order (semua status, termasuk 1 klaim garansi) dengan jadwal relatif terhadap hari ini.
 Identitas perusahaan masih placeholder **SejukAC** (T-004) dan bisa diubah di menu Pengaturan admin.
 
+## Login Google (client)
+
+1. Buat OAuth Client ID (Web) di Google Cloud Console (T-002).
+2. Authorized redirect URI: `http://127.0.0.1:8000/auth/google/callback` (atau `http://booking-ac.test/auth/google/callback` bila memakai Herd).
+3. Isi di `.env`: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, dan `GOOGLE_REDIRECT_URI` bila berbeda dari `APP_URL/auth/google/callback`.
+
+Sebelum kredensial diisi, di `APP_ENV=local` halaman `/masuk` menampilkan tombol **masuk sebagai client demo** (tanpa Google) untuk mencoba tampilan client.
+
 ## Test & kualitas kode
 
 Test memakai database MySQL terpisah `booking_ac_test` (lihat `phpunit.xml`).

@@ -73,7 +73,7 @@
             </form>
 
             <p class="mt-6 text-center text-[13px] text-muted">
-                Client? <a href="{{ url('/') }}" class="inline-flex min-h-11 items-center font-semibold text-primary hover:text-primary-hover">Masuk dengan Google</a>
+                Client? <a href="{{ route('client.login') }}" class="inline-flex min-h-11 items-center font-semibold text-primary hover:text-primary-hover">Masuk dengan Google</a>
             </p>
         </main>
     </div>

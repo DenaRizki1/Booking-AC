@@ -63,7 +63,7 @@ flowchart LR
 | [x] | T-205 | Model, relasi, cast & factory | M | Inti | T-204 |
 | [x] | T-206 | Seeder data awal + data demo | M | Inti | T-205 |
 | **F3** | | **Auth & role** | | | |
-| [ ] | T-301 | Login Google untuk client | M | Inti | T-205, T-002 |
+| [x] | T-301 | Login Google untuk client | M | Inti | T-205, T-002 |
 | [x] | T-302 | Login admin & teknisi (email + password) | S | Inti | T-205 |
 | [ ] | T-303 | Middleware role, route group, policy dasar | S | Inti | T-301, T-302 |
 | [ ] | T-304 | Lengkapi profil client (no. HP) | S | Inti | T-303 |
@@ -215,6 +215,7 @@ flowchart LR
 - `laravel/socialite`; route `auth/google/redirect` & `callback`.
 - User baru → dibuat dengan role `client`; user lama → di-link via email; akun non-client tidak boleh masuk lewat Google.
 - **Selesai jika:** test callback (Socialite di-mock) membuat/menautkan user; user nonaktif ditolak.
+- *Status:* kode & test selesai; login Google sungguhan aktif setelah kredensial T-002 diisi di `.env`. Di lokal tersedia login demo client (`/dev/login-as`).
 
 #### T-302 · Login admin & teknisi
 - Halaman login email + password (desain mengikuti mockup), rate limit 5x/menit, logout.
