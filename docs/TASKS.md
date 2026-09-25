@@ -52,7 +52,7 @@ flowchart LR
 | **F1** | | **Fondasi proyek** | | | |
 | [x] | T-101 | Buat project Laravel 12 + git | S | Inti | T-001 |
 | [x] | T-102 | Tailwind, Alpine, font & design token | S | Inti | T-101 |
-| [ ] | T-103 | Komponen Blade dasar (UI kit) | M | Inti | T-102 |
+| [x] | T-103 | Komponen Blade dasar (UI kit) | M | Inti | T-102 |
 | [x] | T-104 | Tooling: Pest, Pint, Larastan | S | Inti | T-101 |
 | [x] | T-105 | PHP Enum (role, status, dll.) | S | Inti | T-101 |
 | **F2** | | **Database** | | | |
