@@ -65,6 +65,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Halaman awal setelah login, sesuai peran.
+     */
+    public function homeUrl(): string
+    {
+        return match ($this->role) {
+            UserRole::ADMIN => route('admin.dashboard'),
+            UserRole::TEKNISI => route('teknisi.tasks'),
+            UserRole::CLIENT => url('/'),
+        };
+    }
+
+    /**
      * @return HasMany<CustomerAddress, $this>
      */
     public function addresses(): HasMany

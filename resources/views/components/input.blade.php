@@ -40,10 +40,14 @@
                 'focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15',
                 'disabled:cursor-not-allowed disabled:bg-surface-bg disabled:text-muted',
                 'pl-11' => $icon,
+                'pr-12' => isset($suffix),
                 'border-danger' => $message,
                 'border-line' => ! $message,
             ]) }}
         >
+        @isset($suffix)
+            <div class="absolute inset-y-0 right-0.5 flex items-center">{{ $suffix }}</div>
+        @endisset
     </div>
 
     @if ($hint)

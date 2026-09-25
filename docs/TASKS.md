@@ -64,7 +64,7 @@ flowchart LR
 | [x] | T-206 | Seeder data awal + data demo | M | Inti | T-205 |
 | **F3** | | **Auth & role** | | | |
 | [ ] | T-301 | Login Google untuk client | M | Inti | T-205, T-002 |
-| [ ] | T-302 | Login admin & teknisi (email + password) | S | Inti | T-205 |
+| [x] | T-302 | Login admin & teknisi (email + password) | S | Inti | T-205 |
 | [ ] | T-303 | Middleware role, route group, policy dasar | S | Inti | T-301, T-302 |
 | [ ] | T-304 | Lengkapi profil client (no. HP) | S | Inti | T-303 |
 | **F4** | | **Admin — master data** | | | |

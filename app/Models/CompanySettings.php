@@ -71,6 +71,18 @@ class CompanySettings extends Model
     }
 
     /**
+     * Nama perusahaan untuk tampilan; aman dipakai sebelum pengaturan diisi.
+     */
+    public static function companyName(): string
+    {
+        try {
+            return static::current()->company_name;
+        } catch (RuntimeException) {
+            return (string) config('app.name');
+        }
+    }
+
+    /**
      * Baris pengaturan (di-cache; cache dihapus otomatis saat disimpan).
      */
     public static function current(): self
