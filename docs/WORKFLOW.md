@@ -86,6 +86,8 @@ stateDiagram-v2
     DITUGASKAN --> MENUNGGU: Teknisi tolak / admin ganti teknisi
     DITUGASKAN --> DIBATALKAN: Client (≥ 3 jam) / Admin
     DIKONFIRMASI --> DIBATALKAN: Client (≥ 3 jam) / Admin
+    DITUGASKAN --> DITUGASKAN: Admin ganti teknisi
+    DIKONFIRMASI --> DITUGASKAN: Admin ganti teknisi
     DIKONFIRMASI --> DALAM_PERJALANAN: Teknisi berangkat
     DALAM_PERJALANAN --> DIKERJAKAN: Teknisi tiba & mulai
     DIKERJAKAN --> SELESAI: Teknisi kirim laporan + harga final
@@ -108,6 +110,12 @@ stateDiagram-v2
 | DITOLAK / DIBATALKAN | Admin / Client | Order berakhir tanpa dikerjakan |
 
 > Ulasan boleh diberikan sejak status **SELESAI**.
+
+Aturan implementasi (`OrderStatusService`):
+- Alasan **wajib** untuk DITOLAK, DIBATALKAN, dan teknisi menolak tugas (DITUGASKAN → MENUNGGU; teknisi dikosongkan).
+- Ganti teknisi oleh admin = transisi ke DITUGASKAN lagi (dicatat di log, `confirmed_at` direset).
+- Client hanya bisa mengubah order miliknya, teknisi hanya order yang ditugaskan kepadanya; akun nonaktif ditolak.
+- LUNAS hanya untuk order dengan `grand_total > 0`.
 
 ---
 
