@@ -1,11 +1,61 @@
+/* Font Plus Jakarta Sans di-host lokal (paket @fontsource, subset latin). */
+@import '@fontsource/plus-jakarta-sans/latin-400.css';
+@import '@fontsource/plus-jakarta-sans/latin-500.css';
+@import '@fontsource/plus-jakarta-sans/latin-600.css';
+@import '@fontsource/plus-jakarta-sans/latin-700.css';
+@import '@fontsource/plus-jakarta-sans/latin-800.css';
+
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../../app/**/*.php';
+@source not '../../mockup';
+@source not '../../docs';
 
+/* Design token — acuan: mockup/StyleGuide.html */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-primary: #1d63ed;
+    --color-primary-hover: #1650c4;
+    --color-navy: #00084d;
+    --color-blue-50: #e8f0fe;
+    --color-blue-100: #d4e4fb;
+    --color-blue-200: #c9d8f8;
+    --color-blue-800: #1a3a7a;
+    --color-ink: #0b1533;
+    --color-muted: #5b6780;
+    --color-line: #e3e8f2;
+    --color-surface: #ffffff;
+    --color-surface-bg: #f4f7fc;
+
+    --color-success: #0f7b4f;
+    --color-success-50: #e3f6ec;
+    --color-success-700: #0b5c3b;
+    --color-warning: #f5a524;
+    --color-warning-50: #fff3dc;
+    --color-warning-900: #6b3f00;
+    --color-danger: #b42318;
+    --color-danger-50: #fde8e8;
+    --color-danger-200: #f2c4c4;
+    --color-danger-700: #9b1c1c;
+
+    --radius-card: 1rem;
+}
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        @apply bg-surface-bg font-sans text-ink;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
 }

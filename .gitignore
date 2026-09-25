@@ -26,3 +26,4 @@ Thumbs.db
 # Salinan hasil sesi Cowork (bukan bagian kode)
 /Claude outputs/
 /database/*.sqlite
+/.claude/

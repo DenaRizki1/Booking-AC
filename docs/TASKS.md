@@ -51,7 +51,7 @@ flowchart LR
 | [ ] | T-004 | 👤 Tetapkan nama perusahaan, logo, rekening | S | Inti | – |
 | **F1** | | **Fondasi proyek** | | | |
 | [x] | T-101 | Buat project Laravel 12 + git | S | Inti | T-001 |
-| [ ] | T-102 | Tailwind, Alpine, font & design token | S | Inti | T-101 |
+| [x] | T-102 | Tailwind, Alpine, font & design token | S | Inti | T-101 |
 | [ ] | T-103 | Komponen Blade dasar (UI kit) | M | Inti | T-102 |
 | [x] | T-104 | Tooling: Pest, Pint, Larastan | S | Inti | T-101 |
 | [x] | T-105 | PHP Enum (role, status, dll.) | S | Inti | T-101 |

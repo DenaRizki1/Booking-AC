@@ -1,5 +1,7 @@
 <?php
 
 it('menampilkan halaman awal', function () {
-    $this->get('/')->assertOk();
+    $this->get('/')
+        ->assertOk()
+        ->assertSee(config('app.name'));
 });
