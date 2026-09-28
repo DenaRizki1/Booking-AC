@@ -72,7 +72,7 @@ flowchart LR
 | [x] | T-402 | Company profile & pengaturan (peta Leaflet) | M | Inti | T-401 |
 | [x] | T-403 | CRUD Merk, PK, Tipe AC | M | Inti | T-401 |
 | [x] | T-404 | CRUD Layanan | S | Inti | T-401 |
-| [ ] | T-405 | Matriks harga + "Terapkan ke semua/baris/kolom" | L | Inti | T-403, T-404 |
+| [x] | T-405 | Matriks harga + "Terapkan ke semua/baris/kolom" | L | Inti | T-403, T-404 |
 | [ ] | T-406 | CRUD Teknisi (sekaligus akun login) | M | Inti | T-401 |
 | [ ] | T-407 | CRUD Helper | S | Inti | T-401 |
 | [ ] | T-408 | Cuti teknisi & helper | S | Inti | T-406, T-407 |
@@ -258,6 +258,7 @@ flowchart LR
 - Panel "Isi cepat" (Alpine): Terapkan ke **semua** / **baris PK** / **kolom tipe**; sel target di-highlight; edit per sel tetap bisa.
 - Simpan sekali dengan `upsert()`.
 - **Selesai jika:** test validasi (`price_min ≤ price_max`, menit > 0) dan test upsert lulus; PK/tipe baru otomatis muncul sebagai sel kosong.
+- *Catatan:* sel yang dikosongkan (harga & durasi kosong) = baris harga dihapus; sakelar nonaktif = kombinasi tidak dilayani (`is_active = 0`). Logika simpan di `PriceMatrixService`.
 
 #### T-406 · CRUD Teknisi
 - Tambah teknisi = buat `users` (role teknisi, password awal) + `technicians`. Edit, nonaktifkan, reset password.

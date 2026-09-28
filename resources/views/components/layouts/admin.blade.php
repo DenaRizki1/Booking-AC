@@ -95,7 +95,7 @@
                     <x-icon name="menu" class="size-5" /><span class="sr-only">Buka menu</span>
                 </button>
 
-                <div class="min-w-0 flex-1">
+                <div class="min-w-0 flex-1 basis-72">
                     @if ($breadcrumbs)
                         <nav aria-label="Breadcrumb" class="mb-1">
                             <ol class="flex flex-wrap items-center gap-1 text-[13px] text-muted">
