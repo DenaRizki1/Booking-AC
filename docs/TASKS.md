@@ -68,7 +68,7 @@ flowchart LR
 | [x] | T-303 | Middleware role, route group, policy dasar | S | Inti | T-301, T-302 |
 | [x] | T-304 | Lengkapi profil client (no. HP) | S | Inti | T-303 |
 | **F4** | | **Admin — master data** | | | |
-| [ ] | T-401 | Layout admin + sidebar | S | Inti | T-103, T-303 |
+| [x] | T-401 | Layout admin + sidebar | S | Inti | T-103, T-303 |
 | [ ] | T-402 | Company profile & pengaturan (peta Leaflet) | M | Inti | T-401 |
 | [ ] | T-403 | CRUD Merk, PK, Tipe AC | M | Inti | T-401 |
 | [ ] | T-404 | CRUD Layanan | S | Inti | T-401 |
@@ -236,6 +236,7 @@ flowchart LR
 
 #### T-401 · Layout admin
 - Sidebar navy sesuai mockup, topbar, flash message, breadcrumb, badge jumlah order MENUNGGU.
+- *Catatan:* menu yang fiturnya belum dibuat tampil nonaktif ("Segera") sampai route-nya ada; menu "Data AC" ditambahkan untuk CRUD merk/PK/tipe (T-403). Di layar < 1024px sidebar menjadi drawer.
 
 #### T-402 · Company profile & pengaturan
 - Form semua kolom `company_settings`; pilih titik kantor di peta Leaflet (marker bisa digeser).

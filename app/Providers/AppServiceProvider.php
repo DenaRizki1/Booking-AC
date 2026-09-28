@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Models\Helper;
 use App\Models\Technician;
 use App\Models\User;
+use App\View\Composers\AdminLayoutComposer;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,5 +36,7 @@ class AppServiceProvider extends ServiceProvider
             'technician' => Technician::class,
             'helper' => Helper::class,
         ]);
+
+        View::composer('components.layouts.admin', AdminLayoutComposer::class);
     }
 }
