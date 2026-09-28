@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\AcMasterKind;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SaveAcMasterRequest;
+use App\Support\SortOrder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -59,23 +60,7 @@ class AcMasterController extends Controller
     {
         $direction = $request->validate(['direction' => ['required', 'in:up,down']])['direction'];
 
-        DB::transaction(function () use ($kind, $id, $direction) {
-            $ids = $kind->query()->lockForUpdate()->pluck('id')->all();
-            $position = array_search($id, $ids, true);
-            abort_if($position === false, 404);
-
-            $target = $direction === 'up' ? $position - 1 : $position + 1;
-            if (! isset($ids[$target])) {
-                return;
-            }
-
-            [$ids[$position], $ids[$target]] = [$ids[$target], $ids[$position]];
-
-            $class = $kind->modelClass();
-            foreach ($ids as $index => $recordId) {
-                $class::query()->whereKey($recordId)->update(['sort_order' => $index + 1]);
-            }
-        });
+        SortOrder::move($kind->query(), $id, $direction);
 
         return to_route('admin.ac.index', $kind);
     }

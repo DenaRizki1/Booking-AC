@@ -71,7 +71,7 @@ flowchart LR
 | [x] | T-401 | Layout admin + sidebar | S | Inti | T-103, T-303 |
 | [x] | T-402 | Company profile & pengaturan (peta Leaflet) | M | Inti | T-401 |
 | [x] | T-403 | CRUD Merk, PK, Tipe AC | M | Inti | T-401 |
-| [ ] | T-404 | CRUD Layanan | S | Inti | T-401 |
+| [x] | T-404 | CRUD Layanan | S | Inti | T-401 |
 | [ ] | T-405 | Matriks harga + "Terapkan ke semua/baris/kolom" | L | Inti | T-403, T-404 |
 | [ ] | T-406 | CRUD Teknisi (sekaligus akun login) | M | Inti | T-401 |
 | [ ] | T-407 | CRUD Helper | S | Inti | T-401 |
@@ -251,6 +251,7 @@ flowchart LR
 
 #### T-404 · CRUD Layanan
 - Tab "Info layanan": nama, slug otomatis, deskripsi, ikon, wajib helper, garansi (kosong = default), aktif.
+- *Catatan:* ikon dipilih dari daftar Lucide (`Service::ICONS`); slug dibuat ulang bila nama berubah dan unik termasuk layanan terhapus; hapus = soft delete (riwayat order tetap).
 
 #### T-405 · Matriks harga
 - Tab "Matriks harga" sesuai [mockup Admin-Harga](../mockup/Admin-Harga.html): grid PK × Tipe, tiap sel harga mulai/sampai, estimasi (jam, disimpan menit), sakelar aktif.

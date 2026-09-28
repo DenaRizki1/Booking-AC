@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AcMasterController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,8 @@ Route::prefix('data-ac')->name('ac.')->controller(AcMasterController::class)->gr
     Route::patch('/{kind}/{id}/urutan', 'move')->whereNumber('id')->name('move');
     Route::delete('/{kind}/{id}', 'destroy')->whereNumber('id')->name('destroy');
 });
+
+// Layanan (tab Info layanan; matriks harga di T-405).
+Route::patch('/layanan/{service}/aktif', [ServiceController::class, 'toggle'])->name('services.toggle');
+Route::patch('/layanan/{service}/urutan', [ServiceController::class, 'move'])->name('services.move');
+Route::resource('layanan', ServiceController::class)->except('show')->parameters(['layanan' => 'service'])->names('services');
