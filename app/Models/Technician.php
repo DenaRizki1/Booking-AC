@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Profil teknisi. Nama, email & no. HP ada di users (akun login).
@@ -81,5 +82,10 @@ class Technician extends Model
     public function leaves(): MorphMany
     {
         return $this->morphMany(StaffLeave::class, 'staff');
+    }
+
+    public function photoUrl(): ?string
+    {
+        return $this->photo ? Storage::disk('public')->url($this->photo) : null;
     }
 }

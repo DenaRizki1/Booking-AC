@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServicePriceController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\TechnicianController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,8 @@ Route::put('/layanan/{service}/harga', [ServicePriceController::class, 'update']
 Route::patch('/layanan/{service}/aktif', [ServiceController::class, 'toggle'])->name('services.toggle');
 Route::patch('/layanan/{service}/urutan', [ServiceController::class, 'move'])->name('services.move');
 Route::resource('layanan', ServiceController::class)->except('show')->parameters(['layanan' => 'service'])->names('services');
+
+// Teknisi (sekaligus akun login).
+Route::patch('/teknisi/{technician}/aktif', [TechnicianController::class, 'toggle'])->name('technicians.toggle');
+Route::put('/teknisi/{technician}/password', [TechnicianController::class, 'resetPassword'])->name('technicians.password');
+Route::resource('teknisi', TechnicianController::class)->except(['show', 'destroy'])->parameters(['teknisi' => 'technician'])->names('technicians');
