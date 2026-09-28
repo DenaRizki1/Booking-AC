@@ -76,7 +76,7 @@ flowchart LR
 | [x] | T-406 | CRUD Teknisi (sekaligus akun login) | M | Inti | T-401 |
 | [x] | T-407 | CRUD Helper | S | Inti | T-401 |
 | [x] | T-408 | Cuti teknisi & helper | S | Inti | T-406, T-407 |
-| [ ] | T-409 | Daftar client (lihat & nonaktifkan) | S | Lanjutan | T-401 |
+| [x] | T-409 | Daftar client (lihat & nonaktifkan) | S | Lanjutan | T-401 |
 | **F5** | | **Logika inti (service class + unit test)** | | | |
 | [x] | T-501 | Jarak Haversine & biaya transport | S | Inti | T-205 |
 | [x] | T-502 | Kalkulasi harga & durasi order | S | Inti | T-205 |
@@ -274,6 +274,7 @@ flowchart LR
 
 #### T-409 · Daftar client
 - Tabel client + jumlah order + alamat; tombol nonaktifkan.
+- *Catatan:* ada pencarian (nama/email/no. HP) & filter status; client nonaktif langsung dikeluarkan oleh middleware role dan tidak bisa login Google. Order aktifnya tetap berjalan (admin diberi peringatan).
 
 ---
 

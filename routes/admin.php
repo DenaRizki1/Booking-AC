@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AcMasterController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -49,3 +50,7 @@ Route::resource('helper', HelperController::class)->except(['show', 'destroy'])-
 Route::post('/teknisi/{technician}/cuti', [StaffLeaveController::class, 'storeForTechnician'])->name('technicians.leaves.store');
 Route::post('/helper/{helper}/cuti', [StaffLeaveController::class, 'storeForHelper'])->name('helpers.leaves.store');
 Route::delete('/cuti/{leave}', [StaffLeaveController::class, 'destroy'])->name('leaves.destroy');
+
+// Client (login Google): lihat & nonaktifkan.
+Route::get('/client', [ClientController::class, 'index'])->name('clients.index');
+Route::patch('/client/{client}/aktif', [ClientController::class, 'toggle'])->name('clients.toggle');
