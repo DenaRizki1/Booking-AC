@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AcMasterController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServicePriceController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -38,3 +39,7 @@ Route::resource('layanan', ServiceController::class)->except('show')->parameters
 Route::patch('/teknisi/{technician}/aktif', [TechnicianController::class, 'toggle'])->name('technicians.toggle');
 Route::put('/teknisi/{technician}/password', [TechnicianController::class, 'resetPassword'])->name('technicians.password');
 Route::resource('teknisi', TechnicianController::class)->except(['show', 'destroy'])->parameters(['teknisi' => 'technician'])->names('technicians');
+
+// Helper (tanpa akun login).
+Route::patch('/helper/{helper}/aktif', [HelperController::class, 'toggle'])->name('helpers.toggle');
+Route::resource('helper', HelperController::class)->except(['show', 'destroy'])->parameters(['helper' => 'helper'])->names('helpers');

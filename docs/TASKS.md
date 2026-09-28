@@ -74,7 +74,7 @@ flowchart LR
 | [x] | T-404 | CRUD Layanan | S | Inti | T-401 |
 | [x] | T-405 | Matriks harga + "Terapkan ke semua/baris/kolom" | L | Inti | T-403, T-404 |
 | [x] | T-406 | CRUD Teknisi (sekaligus akun login) | M | Inti | T-401 |
-| [ ] | T-407 | CRUD Helper | S | Inti | T-401 |
+| [x] | T-407 | CRUD Helper | S | Inti | T-401 |
 | [ ] | T-408 | Cuti teknisi & helper | S | Inti | T-406, T-407 |
 | [ ] | T-409 | Daftar client (lihat & nonaktifkan) | S | Lanjutan | T-401 |
 | **F5** | | **Logika inti (service class + unit test)** | | | |
