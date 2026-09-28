@@ -7,7 +7,7 @@
     <h2 class="text-lg font-extrabold text-ink">Pilih tanggal</h2>
     <p class="text-[15px] text-ink-soft" x-text="day?.month"></p>
 </div>
-<div class="-mx-4 flex snap-x gap-2.5 overflow-x-auto px-4 pb-2" role="listbox" aria-label="Tanggal">
+<div class="-mx-4 flex snap-x gap-2.5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-7 sm:overflow-visible sm:px-0" role="listbox" aria-label="Tanggal">
     <template x-for="d in dates" :key="d.date">
         <button
             type="button"
@@ -16,7 +16,7 @@
             :aria-selected="d.date === date"
             :aria-disabled="!d.working || d.full"
             :aria-label="d.long + (!d.working ? ' — libur' : d.full ? ' — penuh' : '')"
-            class="flex min-h-[84px] w-[72px] shrink-0 snap-start flex-col items-center justify-center rounded-2xl border-[1.5px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25"
+            class="flex min-h-[84px] w-[72px] shrink-0 snap-start flex-col sm:w-auto items-center justify-center rounded-2xl border-[1.5px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25"
             :class="d.date === date ? 'border-primary bg-primary text-white' : (!d.working || d.full) ? 'cursor-not-allowed border-transparent text-muted/70' : 'border-line bg-white text-ink'"
         >
             <span class="text-[13px] font-semibold" x-text="d.day"></span>
@@ -28,7 +28,7 @@
 
 {{-- Jam --}}
 <h2 class="mt-5 mb-3 text-lg font-extrabold text-ink">Pilih jam mulai</h2>
-<div class="grid grid-cols-4 gap-2" role="listbox" aria-label="Jam mulai">
+<div class="grid grid-cols-4 gap-2 sm:grid-cols-6" role="listbox" aria-label="Jam mulai">
     <template x-for="s in day?.slots ?? []" :key="s.time">
         <button
             type="button"

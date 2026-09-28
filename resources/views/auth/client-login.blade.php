@@ -6,22 +6,27 @@
         : collect();
 @endphp
 
-<x-layouts.base title="Masuk" class="min-h-screen bg-surface-bg">
-    <div class="mx-auto flex min-h-screen max-w-[480px] flex-col bg-white md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-3xl md:border md:border-line">
-        {{-- Hero (mockup Client-Login) --}}
-        <section class="relative flex min-h-[420px] flex-col overflow-hidden bg-primary px-6 pt-7 text-white">
-            <div aria-hidden="true" class="absolute -top-30 -right-38 size-90 rounded-full border-[1.5px] border-white/15"></div>
-            <div aria-hidden="true" class="absolute -top-15 -right-22 size-60 rounded-full border-[1.5px] border-white/15"></div>
+<x-layouts.base title="Masuk" class="min-h-screen bg-white">
+    <div class="grid min-h-screen lg:grid-cols-2">
+        {{-- Panel merek (mockup Client-Login) --}}
+        <section class="relative flex flex-col overflow-hidden bg-primary px-6 py-8 text-white sm:px-10 lg:px-14 lg:py-12">
+            <div aria-hidden="true" class="absolute -top-32 -right-40 size-[460px] rounded-full border-[1.5px] border-white/15"></div>
+            <div aria-hidden="true" class="absolute -top-16 -right-24 size-[300px] rounded-full border-[1.5px] border-white/15"></div>
 
             <div class="relative flex items-center gap-2.5">
-                <span class="flex size-10 items-center justify-center rounded-xl bg-white text-primary">
+                <span class="flex size-11 items-center justify-center rounded-xl bg-white text-primary">
                     <x-icon name="snowflake" class="size-6" stroke-width="2.2" />
                 </span>
                 <span class="text-xl font-extrabold tracking-tight">{{ $company }}</span>
             </div>
 
-            <div class="relative flex flex-1 items-center justify-center py-6" aria-hidden="true">
-                <svg width="280" height="240" viewBox="0 0 300 260" fill="none">
+            <div class="relative mt-10 max-w-lg lg:mt-16">
+                <h1 class="text-[32px] leading-[1.1] font-extrabold tracking-tight lg:text-5xl">Servis AC tanpa ribet, teknisi datang tepat jadwal.</h1>
+                <p class="mt-4 text-base leading-relaxed text-white/85 lg:text-lg">Pilih unit, layanan, dan jam. Estimasi harga langsung terlihat, bayar setelah pekerjaan selesai.</p>
+            </div>
+
+            <div class="relative flex flex-1 items-center justify-center py-8" aria-hidden="true">
+                <svg width="340" height="294" class="max-w-full" viewBox="0 0 300 260" fill="none">
                     <rect x="30" y="40" width="240" height="84" rx="18" fill="#FFFFFF"/>
                     <rect x="30" y="98" width="240" height="26" fill="#E8F0FE"/>
                     <rect x="30" y="40" width="240" height="84" rx="18" stroke="#00084D" stroke-opacity="0.08" stroke-width="2"/>
@@ -38,44 +43,51 @@
                 </svg>
             </div>
 
-            <ul class="relative flex flex-wrap gap-2 pb-7">
+            <ul class="relative flex flex-wrap gap-2">
                 @foreach ($services as $service)
-                    <li class="inline-flex h-8 items-center rounded-full bg-white/15 px-3 text-[13px] font-semibold">{{ $service }}</li>
+                    <li class="inline-flex h-9 items-center rounded-full bg-white/15 px-4 text-sm font-semibold">{{ $service }}</li>
                 @endforeach
             </ul>
         </section>
 
-        <main class="flex flex-1 flex-col gap-3 px-6 pt-8 pb-7">
-            <h1 class="text-[30px] leading-[1.15] font-extrabold tracking-tight text-navy">Servis AC tanpa ribet, teknisi datang tepat jadwal.</h1>
-            <p class="text-[15px] leading-relaxed text-muted">Pilih unit, layanan, dan jam. Estimasi harga langsung terlihat, bayar setelah pekerjaan selesai.</p>
+        {{-- Panel masuk --}}
+        <main class="flex items-center justify-center px-6 py-10 sm:px-10">
+            <div class="w-full max-w-md">
+                <h2 class="text-3xl font-extrabold tracking-tight text-navy">Masuk</h2>
+                <p class="mt-2 text-[15px] text-muted">Masuk dengan akun Google untuk membuat dan memantau order servis AC Anda.</p>
 
-            <x-flash class="mt-2" />
+                <x-flash class="mt-5" />
 
-            <div class="flex-1"></div>
-
-            <a href="{{ route('auth.google.redirect') }}" class="flex min-h-[54px] items-center justify-center gap-3 rounded-[14px] border-[1.5px] border-[#D5DEEE] bg-white text-base font-bold text-ink hover:bg-surface-bg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25">
-                <span aria-hidden="true" class="inline-flex size-[26px] items-center justify-center rounded-full bg-blue-50 text-sm font-extrabold text-primary">G</span>
-                Masuk dengan Google
-            </a>
-            <p class="mt-1 text-center text-xs leading-normal text-muted">Dengan masuk, Anda menyetujui Syarat Layanan dan Kebijakan Privasi {{ $company }}.</p>
-
-            <div class="flex justify-center pt-2">
-                <a href="{{ route('login') }}" class="inline-flex min-h-11 items-center gap-1.5 text-[13px] font-semibold text-primary hover:text-primary-hover">
-                    <x-icon name="user-cog" class="size-4" />
-                    Masuk sebagai Admin / Teknisi
+                <a href="{{ route('auth.google.redirect') }}" class="mt-6 flex min-h-[54px] items-center justify-center gap-3 rounded-[14px] border-[1.5px] border-[#D5DEEE] bg-white text-base font-bold text-ink hover:bg-surface-bg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25">
+                    <span aria-hidden="true" class="inline-flex size-[26px] items-center justify-center rounded-full bg-blue-50 text-sm font-extrabold text-primary">G</span>
+                    Masuk dengan Google
                 </a>
-            </div>
+                <p class="mt-3 text-center text-xs leading-normal text-muted">Dengan masuk, Anda menyetujui Syarat Layanan dan Kebijakan Privasi {{ $company }}.</p>
 
-            @if ($demoClients->isNotEmpty())
-                <div class="mt-2 rounded-xl border border-dashed border-warning bg-warning-50 p-3">
-                    <p class="text-xs font-bold text-warning-900">Mode lokal — masuk sebagai client demo (tanpa Google):</p>
-                    <div class="mt-2 flex flex-wrap gap-2">
-                        @foreach ($demoClients as $demo)
-                            <a href="{{ route('dev.login-as', $demo) }}" class="inline-flex min-h-11 items-center rounded-lg border border-warning/40 bg-white px-3 text-[13px] font-semibold text-warning-900 hover:bg-warning-50">{{ $demo->name }}</a>
-                        @endforeach
-                    </div>
+                <ul class="mt-8 space-y-3 border-t border-line pt-6 text-sm text-ink-soft">
+                    <li class="flex gap-2"><x-icon name="calendar" class="size-5 shrink-0 text-primary" /> Pilih jadwal sesuai ketersediaan teknisi.</li>
+                    <li class="flex gap-2"><x-icon name="credit-card" class="size-5 shrink-0 text-primary" /> Bayar setelah selesai — tunai atau transfer.</li>
+                    <li class="flex gap-2"><x-icon name="shield-check" class="size-5 shrink-0 text-primary" /> Garansi pekerjaan & laporan foto sebelum/sesudah.</li>
+                </ul>
+
+                <div class="mt-6 flex justify-center">
+                    <a href="{{ route('login') }}" class="inline-flex min-h-11 items-center gap-1.5 text-[13px] font-semibold text-primary hover:text-primary-hover">
+                        <x-icon name="user-cog" class="size-4" />
+                        Masuk sebagai Admin / Teknisi
+                    </a>
                 </div>
-            @endif
+
+        @if ($demoClients->isNotEmpty())
+            <div class="mt-2 rounded-xl border border-dashed border-warning bg-warning-50 p-3">
+                <p class="text-xs font-bold text-warning-900">Mode lokal — masuk sebagai client demo (tanpa Google):</p>
+                <div class="mt-2 flex flex-wrap gap-2">
+                    @foreach ($demoClients as $demo)
+                        <a href="{{ route('dev.login-as', $demo) }}" class="inline-flex min-h-11 items-center rounded-lg border border-warning/40 bg-white px-3 text-[13px] font-semibold text-warning-900 hover:bg-warning-50">{{ $demo->name }}</a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+            </div>
         </main>
     </div>
 </x-layouts.base>

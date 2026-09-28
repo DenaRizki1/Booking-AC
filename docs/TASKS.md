@@ -304,6 +304,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-601 · Layout client + beranda
 - Layout mobile-first (tetap rapi di desktop: kolom tengah maks. 480px), bottom nav (Beranda, Order, Alamat, Profil).
+- *Perubahan (28 Sep 2026, permintaan user):* tampilan client diubah menjadi **layout web** — navbar atas (Beranda, Order Saya, Alamat, Buat Order, menu akun), konten lebar maks. 1152px, halaman form dua kolom dengan ringkasan melekat di kanan; tetap responsif (di layar kecil menu jadi tombol). Isi & alur tetap mengikuti mockup.
 - Beranda sesuai [mockup](../mockup/Client-Beranda.html): kartu order aktif, daftar layanan + harga mulai, garansi aktif, tombol Buat Order.
 
 #### T-602 · Alamat saya

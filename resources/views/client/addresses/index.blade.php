@@ -4,9 +4,9 @@
     $fee = app(\App\Services\TransportFeeCalculator::class);
 @endphp
 
-<x-layouts.client title="Alamat saya">
+<x-layouts.client title="Alamat saya" subtitle="Alamat & titik lokasi untuk kunjungan teknisi.">
     <x-slot:actions>
-        <x-button :href="route('client.addresses.create')" size="sm" icon="plus">Tambah</x-button>
+        <x-button :href="route('client.addresses.create')" icon="plus">Tambah alamat</x-button>
     </x-slot:actions>
 
     @if ($addresses->isEmpty())
@@ -16,14 +16,14 @@
             </x-empty-state>
         </x-card>
     @else
-        <ul class="space-y-3">
+        <ul class="grid gap-4 md:grid-cols-2">
             @foreach ($addresses as $address)
                 @php
                     $inRange = $fee->isWithinRange((float) $address->distance_km, $settings);
                     $transport = $inRange ? $fee->feeFor((float) $address->distance_km, $settings) : null;
                 @endphp
-                <li class="rounded-2xl border-[1.5px] bg-white p-4 {{ $address->is_default ? 'border-primary' : 'border-line' }}">
-                    <div class="flex items-start gap-3">
+                <li class="flex flex-col rounded-2xl border-[1.5px] bg-white p-5 {{ $address->is_default ? 'border-primary' : 'border-line' }}">
+                    <div class="mb-4 flex items-start gap-3">
                         <span class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-primary">
                             <x-icon :name="match ($address->label) { 'Rumah' => 'house', 'Kantor' => 'building-2', default => 'map-pin' }" class="size-5" />
                         </span>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-3 flex flex-wrap gap-2 border-t border-line pt-3">
+                    <div class="mt-auto flex flex-wrap gap-2 border-t border-line pt-3">
                         <x-button :href="route('client.addresses.edit', $address)" variant="secondary" size="sm" icon="pencil">Ubah</x-button>
                         @unless ($address->is_default)
                             <form method="POST" action="{{ route('client.addresses.default', $address) }}">

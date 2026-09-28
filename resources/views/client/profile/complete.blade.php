@@ -1,4 +1,4 @@
-<x-layouts.client title="Lengkapi profil" :nav="false">
+<x-layouts.client title="Lengkapi profil" subtitle="Satu langkah lagi sebelum membuat order." width="narrow">
     <div class="mb-6 flex items-center gap-3">
         <x-avatar :name="$user->name" :src="$user->avatar" size="lg" />
         <div>
