@@ -41,7 +41,10 @@ class HelperController extends Controller
 
     public function edit(Helper $helper): View
     {
-        return view('admin.helpers.form', ['helper' => $helper->loadCount($this->orderCounts())]);
+        return view('admin.helpers.form', [
+            'helper' => $helper->loadCount($this->orderCounts()),
+            'leaves' => $helper->leaves()->whereDate('leave_date', '>=', today())->orderBy('leave_date')->get(),
+        ]);
     }
 
     public function update(SaveHelperRequest $request, Helper $helper): RedirectResponse

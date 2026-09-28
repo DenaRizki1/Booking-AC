@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServicePriceController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\StaffLeaveController;
 use App\Http\Controllers\Admin\TechnicianController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +44,8 @@ Route::resource('teknisi', TechnicianController::class)->except(['show', 'destro
 // Helper (tanpa akun login).
 Route::patch('/helper/{helper}/aktif', [HelperController::class, 'toggle'])->name('helpers.toggle');
 Route::resource('helper', HelperController::class)->except(['show', 'destroy'])->parameters(['helper' => 'helper'])->names('helpers');
+
+// Cuti teknisi & helper (dipecah per hari).
+Route::post('/teknisi/{technician}/cuti', [StaffLeaveController::class, 'storeForTechnician'])->name('technicians.leaves.store');
+Route::post('/helper/{helper}/cuti', [StaffLeaveController::class, 'storeForHelper'])->name('helpers.leaves.store');
+Route::delete('/cuti/{leave}', [StaffLeaveController::class, 'destroy'])->name('leaves.destroy');

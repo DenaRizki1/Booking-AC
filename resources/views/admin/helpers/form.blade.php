@@ -51,4 +51,8 @@
             @endif
         </div>
     </form>
+
+    @if ($editing)
+        @include('admin.partials.staff-leaves', ['leaves' => $leaves, 'action' => route('admin.helpers.leaves.store', $helper)])
+    @endif
 </x-layouts.admin>

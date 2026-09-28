@@ -55,7 +55,10 @@ class TechnicianController extends Controller
             'orders as done_orders_count' => fn (Builder $query) => $query->whereIn('status', [OrderStatus::SELESAI, OrderStatus::LUNAS]),
         ]);
 
-        return view('admin.technicians.form', ['technician' => $technician]);
+        return view('admin.technicians.form', [
+            'technician' => $technician,
+            'leaves' => $technician->leaves()->whereDate('leave_date', '>=', today())->orderBy('leave_date')->get(),
+        ]);
     }
 
     public function update(SaveTechnicianRequest $request, Technician $technician): RedirectResponse

@@ -75,7 +75,7 @@ flowchart LR
 | [x] | T-405 | Matriks harga + "Terapkan ke semua/baris/kolom" | L | Inti | T-403, T-404 |
 | [x] | T-406 | CRUD Teknisi (sekaligus akun login) | M | Inti | T-401 |
 | [x] | T-407 | CRUD Helper | S | Inti | T-401 |
-| [ ] | T-408 | Cuti teknisi & helper | S | Inti | T-406, T-407 |
+| [x] | T-408 | Cuti teknisi & helper | S | Inti | T-406, T-407 |
 | [ ] | T-409 | Daftar client (lihat & nonaktifkan) | S | Lanjutan | T-401 |
 | **F5** | | **Logika inti (service class + unit test)** | | | |
 | [x] | T-501 | Jarak Haversine & biaya transport | S | Inti | T-205 |
@@ -270,6 +270,7 @@ flowchart LR
 #### T-408 · Cuti
 - Dari halaman teknisi/helper: tambah/hapus tanggal cuti (bisa rentang tanggal → dipecah per hari).
 - Peringatan jika tanggal cuti bentrok dengan order yang sudah ditugaskan.
+- *Catatan:* kartu Cuti ada di halaman ubah teknisi & helper; rentang maks. 62 hari per input, tanggal yang sudah tercatat dilewati. Logika di `StaffLeaveService`.
 
 #### T-409 · Daftar client
 - Tabel client + jumlah order + alamat; tombol nonaktifkan.

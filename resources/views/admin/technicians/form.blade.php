@@ -95,6 +95,8 @@
     </form>
 
     @if ($editing)
+        @include('admin.partials.staff-leaves', ['leaves' => $leaves, 'action' => route('admin.technicians.leaves.store', $technician)])
+
         <x-modal name="reset-password" title="Reset password" :show="$errors->resetPassword->any()">
             <form id="reset-password-form" method="POST" action="{{ route('admin.technicians.password', $technician) }}" class="flex flex-col gap-3" novalidate>
                 @csrf
