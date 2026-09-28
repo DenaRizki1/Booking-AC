@@ -165,7 +165,7 @@ Index: `role`.
 | deleted_at | TIMESTAMP | ✓ | NULL | Soft delete — order lama tetap valid |
 
 Index: `user_id`.
-> Jika koordinat kantor atau radius diubah, jalankan ulang perhitungan `distance_km` (command artisan).
+> Jika koordinat kantor diubah dari halaman Pengaturan, job `RecalculateAddressDistances` (antrean) menghitung ulang `distance_km` semua alamat. Manual: `php artisan addresses:recalculate-distances`. Perubahan radius tidak perlu hitung ulang karena jangkauan dicek dari `distance_km` saat dipakai.
 
 ### `company_settings`
 **Hanya 1 baris.** Profil perusahaan + semua pengaturan yang bisa diubah admin.

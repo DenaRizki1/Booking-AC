@@ -3,9 +3,9 @@
  * Marker tetap di tengah; peta yang digeser. Jarak & biaya transport dihitung langsung
  * dengan aturan yang sama seperti server (DistanceService & TransportFeeCalculator).
  */
+import { reverseGeocode, searchAddress } from '../lib/nominatim';
+
 const EARTH_RADIUS_KM = 6371;
-const NOMINATIM = 'https://nominatim.openstreetmap.org';
-const MIN_REQUEST_GAP_MS = 1100; // kebijakan Nominatim: maks. 1 request/detik
 
 export function haversineKm(fromLat, fromLng, toLat, toLng) {
     const rad = (deg) => (deg * Math.PI) / 180;
@@ -28,7 +28,6 @@ const radius = (value) => new Intl.NumberFormat('id-ID', { maximumFractionDigits
 
 export default function mapPicker(config) {
     let map = null;
-    let lastRequestAt = 0;
     let searchTimer = null;
     let reverseTimer = null;
 
@@ -107,8 +106,7 @@ export default function mapPicker(config) {
         async search() {
             this.searching = true;
             try {
-                const params = new URLSearchParams({ format: 'jsonv2', q: this.query, countrycodes: 'id', limit: '5', 'accept-language': 'id' });
-                this.results = (await this.nominatim(`/search?${params}`)) ?? [];
+                this.results = (await searchAddress(this.query)) ?? [];
                 this.message = this.results.length ? '' : 'Alamat tidak ditemukan. Coba kata kunci lain.';
             } catch {
                 this.message = 'Pencarian sedang tidak tersedia. Geser peta secara manual.';
@@ -154,8 +152,7 @@ export default function mapPicker(config) {
             clearTimeout(reverseTimer);
             reverseTimer = setTimeout(async () => {
                 try {
-                    const params = new URLSearchParams({ format: 'jsonv2', lat: this.lat, lon: this.lng, zoom: '18', 'accept-language': 'id' });
-                    const result = await this.nominatim(`/reverse?${params}`);
+                    const result = await reverseGeocode(this.lat, this.lng);
                     if (result?.display_name && !this.addressTouched) {
                         this.address = result.display_name;
                     }
@@ -163,21 +160,6 @@ export default function mapPicker(config) {
                     // Abaikan: client tetap bisa mengetik alamat sendiri.
                 }
             }, 900);
-        },
-
-        async nominatim(path) {
-            const wait = lastRequestAt + MIN_REQUEST_GAP_MS - Date.now();
-            if (wait > 0) {
-                await new Promise((resolve) => setTimeout(resolve, wait));
-            }
-            lastRequestAt = Date.now();
-
-            const response = await fetch(NOMINATIM + path, { headers: { Accept: 'application/json' } });
-            if (!response.ok) {
-                throw new Error(`Nominatim ${response.status}`);
-            }
-
-            return response.json();
         },
     };
 }

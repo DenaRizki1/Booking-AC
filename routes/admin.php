@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -8,3 +9,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', DashboardController::class)->name('dashboard');
+
+Route::get('/pengaturan', [SettingsController::class, 'edit'])->name('settings.edit');
+Route::put('/pengaturan', [SettingsController::class, 'update'])->name('settings.update');

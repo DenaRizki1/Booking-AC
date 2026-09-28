@@ -69,7 +69,7 @@ flowchart LR
 | [x] | T-304 | Lengkapi profil client (no. HP) | S | Inti | T-303 |
 | **F4** | | **Admin — master data** | | | |
 | [x] | T-401 | Layout admin + sidebar | S | Inti | T-103, T-303 |
-| [ ] | T-402 | Company profile & pengaturan (peta Leaflet) | M | Inti | T-401 |
+| [x] | T-402 | Company profile & pengaturan (peta Leaflet) | M | Inti | T-401 |
 | [ ] | T-403 | CRUD Merk, PK, Tipe AC | M | Inti | T-401 |
 | [ ] | T-404 | CRUD Layanan | S | Inti | T-401 |
 | [ ] | T-405 | Matriks harga + "Terapkan ke semua/baris/kolom" | L | Inti | T-403, T-404 |
@@ -242,6 +242,7 @@ flowchart LR
 - Form semua kolom `company_settings`; pilih titik kantor di peta Leaflet (marker bisa digeser).
 - Jika koordinat/radius berubah → job `RecalculateAddressDistances` menghitung ulang `distance_km` semua alamat.
 - **Selesai jika:** validasi (`max_radius > free_radius`, `close_time > open_time`) & test job lulus.
+- *Catatan:* job hanya diantrekan bila titik kantor berpindah (jarak tidak bergantung pada radius); jalankan worker antrean (`composer run dev` sudah menyertakan `queue:listen`). Pesan validasi Bahasa Indonesia ditambahkan di `lang/id/validation.php`.
 
 #### T-403 · CRUD Merk, PK, Tipe
 - Satu pola CRUD reusable: tabel, tambah/edit di modal, aktif/nonaktif, urutkan (sort_order).
