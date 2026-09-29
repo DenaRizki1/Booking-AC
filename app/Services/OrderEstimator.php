@@ -68,7 +68,7 @@ class OrderEstimator
             ->whereHas('service', fn (Builder $query) => $query->where('is_active', true))
             ->whereHas('capacity', fn (Builder $query) => $query->where('is_active', true))
             ->whereHas('type', fn (Builder $query) => $query->where('is_active', true))
-            ->with('service')
+            ->with(['service', 'capacity', 'type'])
             ->get()
             ->keyBy(fn (ServicePrice $price) => $this->key($price->service_id, $price->ac_capacity_id, $price->ac_type_id));
     }

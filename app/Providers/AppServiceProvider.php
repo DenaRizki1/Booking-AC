@@ -6,6 +6,7 @@ use App\Models\Helper;
 use App\Models\Technician;
 use App\Models\User;
 use App\View\Composers\AdminLayoutComposer;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -38,5 +39,8 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         View::composer('components.layouts.admin', AdminLayoutComposer::class);
+
+        // Deteksi N+1: relasi yang belum di-eager-load melempar exception di lokal & test.
+        Model::preventLazyLoading(! $this->app->isProduction());
     }
 }

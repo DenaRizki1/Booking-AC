@@ -115,7 +115,7 @@ flowchart LR
 | **F10** | | **Uji & rilis** | | | |
 | [x] | T-1001 | Test alur end-to-end | M | Inti | T-804 |
 | [x] | T-1002 | Review keamanan | S | Inti | T-1001 |
-| [ ] | T-1003 | Review performa & query | S | Lanjutan | T-1001 |
+| [x] | T-1003 | Review performa & query | S | Lanjutan | T-1001 |
 | [ ] | T-1004 | Persiapan deploy | M | Inti | T-1002 |
 | [ ] | T-1005 | 👤 UAT per role | M | Inti | T-1004 |
 
@@ -450,6 +450,8 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-1003 · Review performa
 - Cek N+1 (eager loading), `preventLazyLoading()` di lokal, index terpakai (`EXPLAIN` query jadwal).
+- *Hasil:* `Model::preventLazyLoading()` aktif di luar produksi; seluruh test + semua halaman 3 peran dicek tanpa pelanggaran (1 N+1 diperbaiki di `OrderEstimator`: eager load `capacity` & `type`). Test `tests/Feature/Performance/QueryCountTest.php` memastikan jumlah query halaman daftar tetap walau data bertambah.
+- *EXPLAIN:* cek bentrok jadwal memakai `orders_technician_schedule_index` (technician_id, scheduled_start) dengan "Not exists"; jadwal harian memakai `orders_status_schedule_index` (status, scheduled_start) — tidak ada full scan pada `orders`.
 
 #### T-1004 · Persiapan deploy
 - `.env.production.example`, `storage:link`, queue worker (Supervisor), scheduler (cron), backup database harian, HTTPS, redirect URI Google produksi.

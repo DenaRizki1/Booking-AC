@@ -143,7 +143,7 @@ it('mencatat riwayat status order berurutan', function () {
         'from_status' => OrderStatus::MENUNGGU, 'to_status' => OrderStatus::DITUGASKAN, 'changed_by' => $admin->id,
     ]);
 
-    $logs = $order->statusLogs;
+    $logs = $order->statusLogs()->with('changedBy')->get();
 
     expect($logs)->toHaveCount(2)
         ->and($logs[0]->from_status)->toBeNull()
