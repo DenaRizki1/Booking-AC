@@ -2,12 +2,6 @@
 @use('App\Http\Controllers\Client\OrderController')
 @use('App\Support\Format')
 
-@php
-    $total = fn ($order) => $order->grand_total !== null
-        ? Format::rupiah($order->grand_total)
-        : Format::rupiahRange($order->est_price_min + $order->transport_fee, $order->est_price_max + $order->transport_fee);
-@endphp
-
 <x-layouts.client title="Order saya" subtitle="Pantau status, laporan, dan pembayaran order Anda.">
     <x-slot:actions>
         <x-button :href="route('client.orders.create')" icon="plus">Buat Order</x-button>
@@ -64,7 +58,7 @@
                             <td class="px-5 py-4 whitespace-nowrap text-ink-soft">{{ Format::date($order->scheduled_start) }}<span class="block text-[13px] text-muted">{{ $order->scheduled_start->format('H:i') }}–{{ $order->scheduled_end->format('H:i') }}</span></td>
                             <td class="max-w-64 truncate px-5 py-4 text-ink-soft">{{ $order->items_count }} unit · {{ $order->items->pluck('service_name')->unique()->implode(', ') }}</td>
                             <td class="px-5 py-4 text-ink-soft">{{ $order->technician?->user->name ?? '–' }}</td>
-                            <td class="px-5 py-4 text-right font-bold whitespace-nowrap text-ink tabular-nums">{{ $total($order) }}</td>
+                            <td class="px-5 py-4 text-right font-bold whitespace-nowrap text-ink tabular-nums">{{ Format::orderTotal($order) }}</td>
                             <td class="px-5 py-4"><x-badge :status="$order->status" size="sm" /></td>
                         </tr>
                     @endforeach
@@ -85,7 +79,7 @@
                             <x-badge :status="$order->status" size="sm" />
                         </div>
                         <p class="mt-3 truncate text-[15px] text-ink-soft">{{ $order->items_count }} unit · {{ $order->items->pluck('service_name')->unique()->implode(', ') }}</p>
-                        <p class="mt-1 text-right text-sm font-bold text-ink">{{ $total($order) }}</p>
+                        <p class="mt-1 text-right text-sm font-bold text-ink">{{ Format::orderTotal($order) }}</p>
                     </a>
                 </li>
             @endforeach

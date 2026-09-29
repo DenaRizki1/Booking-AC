@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\Order;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
 
@@ -10,6 +11,14 @@ use Illuminate\Support\Carbon;
  */
 final class Format
 {
+    /** Total order: grand total bila sudah final, selain itu rentang estimasi + transport. */
+    public static function orderTotal(Order $order): string
+    {
+        return $order->grand_total !== null
+            ? self::rupiah($order->grand_total)
+            : self::rupiahRange($order->est_price_min + $order->transport_fee, $order->est_price_max + $order->transport_fee);
+    }
+
     /** Rp75.000 */
     public static function rupiah(int $amount): string
     {

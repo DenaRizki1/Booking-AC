@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AcMasterController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HelperController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServicePriceController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', DashboardController::class)->name('dashboard');
+
+// Operasional order.
+Route::get('/order', [OrderController::class, 'index'])->name('orders.index');
 
 Route::get('/pengaturan', [SettingsController::class, 'edit'])->name('settings.edit');
 Route::put('/pengaturan', [SettingsController::class, 'update'])->name('settings.update');

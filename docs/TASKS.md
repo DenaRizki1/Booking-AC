@@ -94,7 +94,7 @@ flowchart LR
 | [x] | T-608 | Rating & ulasan | S | Inti | T-607 |
 | [x] | T-609 | Klaim garansi | M | Lanjutan | T-607 |
 | **F7** | | **Admin — operasional order** | | | |
-| [ ] | T-701 | Daftar order + filter | M | Inti | T-604 |
+| [x] | T-701 | Daftar order + filter | M | Inti | T-604 |
 | [ ] | T-702 | Detail order + assign teknisi & helper | L | Inti | T-701, T-503, T-408 |
 | [ ] | T-703 | Tolak & batalkan order oleh admin | S | Inti | T-702 |
 | [ ] | T-704 | Konfirmasi pembayaran → LUNAS | S | Inti | T-702 |
@@ -355,6 +355,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-701 · Daftar order
 - Tab per status, filter tanggal/jenis/teknisi, cari kode/nama client, pagination.
+- *Catatan:* tab = kelompok status (Menunggu · Dijadwalkan · Berjalan · Belum lunas · Lunas · Ditolak/batal · Semua); jumlah per tab ikut filter.
 
 #### T-702 · Detail order + assign
 - Sesuai [mockup Admin-Assign](../mockup/Admin-Assign.html): info client + peta mini, unit & estimasi, catatan.
