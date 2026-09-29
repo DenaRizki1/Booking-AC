@@ -41,6 +41,14 @@
 
     <div class="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_480px]">
         <div class="flex min-w-0 flex-col gap-5">
+            @php($lastLog = $order->statusLogs->last())
+            @if ($order->status === \App\Enums\OrderStatus::MENUNGGU && $lastLog?->from_status === \App\Enums\OrderStatus::DITUGASKAN)
+                <div role="alert" class="flex items-start gap-3 rounded-card border border-warning/40 bg-warning-50 px-5 py-4 text-sm text-warning-900">
+                    <x-icon name="user-x" class="mt-0.5 size-5 shrink-0" />
+                    <p><b>{{ $lastLog->changedBy?->name ?? 'Teknisi' }}</b> melepas tugas ini ({{ Format::shortDate($lastLog->created_at) }} · {{ $lastLog->created_at->format('H:i') }}). {{ $lastLog->note }}. Tugaskan ke teknisi lain.</p>
+                </div>
+            @endif
+
             {{-- Client & lokasi --}}
             <section class="grid overflow-hidden rounded-card border border-line bg-white md:grid-cols-[minmax(0,1fr)_260px]">
                 <div class="flex flex-col gap-3 p-5">

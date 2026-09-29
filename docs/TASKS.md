@@ -103,7 +103,7 @@ flowchart LR
 | [x] | T-707 | Daftar ulasan | S | Lanjutan | T-608 |
 | **F8** | | **Teknisi** | | | |
 | [x] | T-801 | Layout teknisi + daftar tugas | M | Inti | T-702 |
-| [ ] | T-802 | Terima / tolak tugas | S | Inti | T-801 |
+| [x] | T-802 | Terima / tolak tugas | S | Inti | T-801 |
 | [ ] | T-803 | Berangkat & mulai kerja | S | Inti | T-802 |
 | [ ] | T-804 | Laporan per unit (foto, catatan, harga final) | L | Inti | T-803 |
 | [ ] | T-805 | Riwayat tugas & rating saya | S | Lanjutan | T-804 |
@@ -394,6 +394,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-802 · Terima / tolak tugas
 - Terima → DIKONFIRMASI. Tolak (alasan wajib) → MENUNGGU, `technician_id` dikosongkan, admin diberi tahu.
+- *Catatan:* sebelum F9 (notifikasi), "admin diberi tahu" = order kembali ke tab Menunggu + peringatan "… melepas tugas ini" beserta alasannya di detail order admin.
 
 #### T-803 · Berangkat & mulai
 - Tombol sesuai status: Berangkat → DALAM_PERJALANAN; Tiba & mulai → DIKERJAKAN.

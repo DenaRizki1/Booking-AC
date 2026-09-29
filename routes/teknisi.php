@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Teknisi\AccountController;
 use App\Http\Controllers\Teknisi\TaskController;
+use App\Http\Controllers\Teknisi\TaskStatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -11,3 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TaskController::class, 'index'])->name('tasks');
 Route::get('/tugas/{order:code}', [TaskController::class, 'show'])->name('tasks.show');
 Route::get('/akun', AccountController::class)->name('account');
+
+// Aksi status tugas.
+Route::post('/tugas/{order:code}/terima', [TaskStatusController::class, 'accept'])->name('tasks.accept');
+Route::post('/tugas/{order:code}/tolak', [TaskStatusController::class, 'reject'])->name('tasks.reject');
