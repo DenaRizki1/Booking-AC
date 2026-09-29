@@ -106,7 +106,7 @@ flowchart LR
 | [x] | T-802 | Terima / tolak tugas | S | Inti | T-801 |
 | [x] | T-803 | Berangkat & mulai kerja | S | Inti | T-802 |
 | [x] | T-804 | Laporan per unit (foto, catatan, harga final) | L | Inti | T-803 |
-| [ ] | T-805 | Riwayat tugas & rating saya | S | Lanjutan | T-804 |
+| [x] | T-805 | Riwayat tugas & rating saya | S | Lanjutan | T-804 |
 | **F9** | | **Notifikasi** | | | |
 | [ ] | T-901 | Setup mail, queue & template email | S | Lanjutan | T-003, T-504 |
 | [ ] | T-902 | Kelas notifikasi per event | M | Lanjutan | T-901 |
@@ -410,6 +410,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-805 · Riwayat & rating
 - Daftar tugas selesai + ulasan yang diterima.
+- *Catatan:* daftar tugas selesai = tab Riwayat di halaman Tugas; menu **Ulasan** menampilkan rating, sebaran bintang, dan ulasan yang diterima.
 
 ---
 
