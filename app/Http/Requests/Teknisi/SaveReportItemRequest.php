@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Teknisi;
 
+use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
@@ -15,7 +16,10 @@ class SaveReportItemRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return true;
+        // Cek kepemilikan order sebelum validasi agar pesan validasi tidak bocor ke pengguna lain.
+        $order = $this->route('order');
+
+        return $order instanceof Order && (bool) $this->user()?->can('view', $order);
     }
 
     protected function prepareForValidation(): void

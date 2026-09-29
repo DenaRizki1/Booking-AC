@@ -114,7 +114,7 @@ flowchart LR
 | [ ] | T-904 | Pengingat H-1 (scheduler) | S | Lanjutan | T-902 |
 | **F10** | | **Uji & rilis** | | | |
 | [x] | T-1001 | Test alur end-to-end | M | Inti | T-804 |
-| [ ] | T-1002 | Review keamanan | S | Inti | T-1001 |
+| [x] | T-1002 | Review keamanan | S | Inti | T-1001 |
 | [ ] | T-1003 | Review performa & query | S | Lanjutan | T-1001 |
 | [ ] | T-1004 | Persiapan deploy | M | Inti | T-1002 |
 | [ ] | T-1005 | 👤 UAT per role | M | Inti | T-1004 |
@@ -439,6 +439,14 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-1002 · Review keamanan
 - Semua route dilindungi policy; validasi `FormRequest` di semua input; upload hanya gambar (mime + ukuran maks. 5 MB); rate limit login & pembuatan order; CSRF; tidak ada data client lain yang bocor lewat ID.
+- *Hasil review (test: `tests/Feature/Security/SecurityReviewTest.php`):*
+  - Semua route `admin.*`, `teknisi.*`, `client.*` diverifikasi otomatis memakai `web` (CSRF) + `auth` + `role:*`.
+  - FormRequest yang menyentuh order/alamat kini mengecek kepemilikan di `authorize()` **sebelum** validasi (pesan validasi tidak bocor ke pengguna lain); aksi status teknisi cek kepemilikan dulu.
+  - Validasi inline yang mengubah data dipindah ke FormRequest (urutan, reset password, tolak tugas, foto laporan). Filter GET (daftar order/ulasan/jadwal) tetap validasi inline.
+  - Upload: semua hanya gambar JPG/PNG/WEBP maks. 5 MB (foto laporan sebelumnya 12 MB; bukti bayar tidak lagi menerima PDF).
+  - Disk privat `local` tidak lagi dilayani lewat URL (`serve => false`); bukti bayar hanya lewat route admin.
+  - Header keamanan (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS bila HTTPS) lewat middleware `AddSecurityHeaders`.
+  - Rate limit: login 5x/menit, buat order & klaim garansi 10x/menit (diuji).
 
 #### T-1003 · Review performa
 - Cek N+1 (eager loading), `preventLazyLoading()` di lokal, index terpakai (`EXPLAIN` query jadwal).

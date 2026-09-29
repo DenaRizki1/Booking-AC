@@ -33,7 +33,8 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // Disk privat (bukti bayar) tidak dilayani lewat URL; dibuka lewat route admin.
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],

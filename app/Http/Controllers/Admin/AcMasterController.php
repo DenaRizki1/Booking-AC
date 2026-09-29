@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\AcMasterKind;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MoveSortOrderRequest;
 use App\Http\Requests\Admin\SaveAcMasterRequest;
 use App\Support\SortOrder;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -56,11 +56,9 @@ class AcMasterController extends Controller
         return $this->back($kind, $record->is_active ? "{$name} diaktifkan." : "{$name} dinonaktifkan dan tidak bisa dipilih client.");
     }
 
-    public function move(Request $request, AcMasterKind $kind, int $id): RedirectResponse
+    public function move(MoveSortOrderRequest $request, AcMasterKind $kind, int $id): RedirectResponse
     {
-        $direction = $request->validate(['direction' => ['required', 'in:up,down']])['direction'];
-
-        SortOrder::move($kind->query(), $id, $direction);
+        SortOrder::move($kind->query(), $id, $request->direction());
 
         return to_route('admin.ac.index', $kind);
     }

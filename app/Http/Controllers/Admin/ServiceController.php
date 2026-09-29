@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MoveSortOrderRequest;
 use App\Http\Requests\Admin\SaveServiceRequest;
 use App\Models\CompanySettings;
 use App\Models\Service;
 use App\Support\SortOrder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ServiceController extends Controller
@@ -74,11 +74,9 @@ class ServiceController extends Controller
             : "{$service->name} dinonaktifkan dan tidak bisa dipesan client.");
     }
 
-    public function move(Request $request, Service $service): RedirectResponse
+    public function move(MoveSortOrderRequest $request, Service $service): RedirectResponse
     {
-        $direction = $request->validate(['direction' => ['required', 'in:up,down']])['direction'];
-
-        SortOrder::move($this->ordered(), $service->id, $direction);
+        SortOrder::move($this->ordered(), $service->id, $request->direction());
 
         return to_route('admin.services.index');
     }

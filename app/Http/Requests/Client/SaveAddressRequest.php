@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Client;
 
 use App\Models\CompanySettings;
+use App\Models\CustomerAddress;
 use App\Services\DistanceService;
 use App\Services\TransportFeeCalculator;
 use App\Support\Format;
@@ -18,7 +19,9 @@ class SaveAddressRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return true;
+        $address = $this->route('address');
+
+        return ! $address instanceof CustomerAddress || (bool) $this->user()?->can('update', $address);
     }
 
     /**

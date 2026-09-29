@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Client;
 
+use App\Models\Order;
 use App\Support\BookingCalendar;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Http\FormRequest;
@@ -10,7 +11,10 @@ class StoreWarrantyClaimRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        // Cek kepemilikan order sebelum validasi agar pesan validasi tidak bocor ke pengguna lain.
+        $order = $this->route('order');
+
+        return $order instanceof Order && (bool) $this->user()?->can('view', $order);
     }
 
     /**

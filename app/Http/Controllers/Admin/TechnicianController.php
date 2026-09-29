@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ResetTechnicianPasswordRequest;
 use App\Http\Requests\Admin\SaveTechnicianRequest;
 use App\Models\Technician;
 use App\Services\TechnicianAccountService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class TechnicianController extends Controller
@@ -83,16 +82,9 @@ class TechnicianController extends Controller
         return $this->withReassignWarning(back()->with('success', "{$name} dinonaktifkan: tidak bisa login dan tidak muncul saat assign."), $technician);
     }
 
-    public function resetPassword(Request $request, Technician $technician): RedirectResponse
+    public function resetPassword(ResetTechnicianPasswordRequest $request, Technician $technician): RedirectResponse
     {
-        $password = $request->validateWithBag('resetPassword', [
-            'password' => ['required', 'string', Password::min(8)],
-        ], [
-            'password.required' => 'Password baru wajib diisi.',
-            'password.min' => 'Password baru minimal 8 karakter.',
-        ])['password'];
-
-        $this->accounts->resetPassword($technician, $password);
+        $this->accounts->resetPassword($technician, (string) $request->validated('password'));
 
         return to_route('admin.technicians.edit', $technician)
             ->with('success', "Password {$technician->user->name} direset. Sesi login lamanya sudah diakhiri.");

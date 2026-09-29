@@ -23,7 +23,7 @@ class ConfirmPaymentRequest extends FormRequest
     {
         return [
             'payment_method' => ['required', Rule::enum(PaymentMethod::class)],
-            'payment_proof' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,pdf', 'max:5120'],
+            'payment_proof' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ];
     }
 
@@ -35,7 +35,7 @@ class ConfirmPaymentRequest extends FormRequest
         return [
             'payment_method.required' => 'Pilih metode pembayaran.',
             'payment_method.*' => 'Metode pembayaran tidak valid.',
-            'payment_proof.mimes' => 'Bukti bayar harus foto (JPG/PNG/WEBP) atau PDF.',
+            'payment_proof.mimes' => 'Bukti bayar harus foto JPG, PNG, atau WEBP.',
             'payment_proof.max' => 'Ukuran bukti bayar maksimal 5 MB.',
             'payment_proof.*' => 'Bukti bayar tidak valid.',
         ];

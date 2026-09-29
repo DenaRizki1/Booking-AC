@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Teknisi;
 
 use App\Enums\OrderStatus;
-use App\Enums\PhotoKind;
 use App\Exceptions\ReportIncompleteException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teknisi\SaveReportItemRequest;
+use App\Http\Requests\Teknisi\StoreReportPhotosRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderPhoto;
@@ -14,7 +14,6 @@ use App\Services\OrderReportService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 /**
@@ -43,22 +42,11 @@ class ReportController extends Controller
         ]);
     }
 
-    public function storePhotos(Request $request, Order $order, OrderItem $item): RedirectResponse
+    public function storePhotos(StoreReportPhotosRequest $request, Order $order, OrderItem $item): RedirectResponse
     {
         $this->authorizeItem($order, $item);
 
-        $validated = $request->validate([
-            'kind' => ['required', Rule::in([PhotoKind::SEBELUM->value, PhotoKind::SESUDAH->value])],
-            'photos' => ['required', 'array', 'max:'.OrderReportService::MAX_PHOTOS_PER_KIND],
-            'photos.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:12288'],
-        ], [
-            'photos.required' => 'Pilih foto terlebih dahulu.',
-            'photos.*.image' => 'File harus berupa foto.',
-            'photos.*.mimes' => 'Foto harus JPG, PNG, atau WEBP.',
-            'photos.*.max' => 'Ukuran foto maksimal 12 MB.',
-        ]);
-
-        $kind = PhotoKind::from($validated['kind']);
+        $kind = $request->kind();
 
         try {
             foreach ($request->file('photos', []) as $file) {

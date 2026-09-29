@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AddSecurityHeaders;
 use App\Http\Middleware\EnsureClientProfileIsComplete;
 use App\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Foundation\Application;
@@ -34,6 +35,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => EnsureUserHasRole::class,
             'profile.complete' => EnsureClientProfileIsComplete::class,
         ]);
+
+        $middleware->web(append: [AddSecurityHeaders::class]);
 
         // User yang sudah login diarahkan ke halaman awal perannya.
         $middleware->redirectUsersTo(fn (Request $request) => $request->user()?->homeUrl() ?? '/');

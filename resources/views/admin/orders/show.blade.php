@@ -343,8 +343,8 @@
 
                             <div>
                                 <x-label for="f-payment-proof">Bukti bayar (opsional)</x-label>
-                                <input id="f-payment-proof" type="file" name="payment_proof" accept="image/jpeg,image/png,image/webp,application/pdf" class="block w-full text-[13px] text-ink-soft file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-xl file:border-[1.5px] file:border-blue-200 file:bg-white file:px-4 file:text-sm file:font-bold file:text-primary hover:file:bg-blue-50">
-                                <p class="mt-1 text-xs text-muted">Foto/PDF, maks. 5 MB. Disimpan privat, hanya admin yang bisa membuka.</p>
+                                <input id="f-payment-proof" type="file" name="payment_proof" accept="image/jpeg,image/png,image/webp" class="block w-full text-[13px] text-ink-soft file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-xl file:border-[1.5px] file:border-blue-200 file:bg-white file:px-4 file:text-sm file:font-bold file:text-primary hover:file:bg-blue-50">
+                                <p class="mt-1 text-xs text-muted">Foto JPG/PNG/WEBP, maks. 5 MB. Disimpan privat, hanya admin yang bisa membuka.</p>
                                 <x-field-error :messages="array_filter([$paymentErrors->first('payment_proof')])" />
                             </div>
 
