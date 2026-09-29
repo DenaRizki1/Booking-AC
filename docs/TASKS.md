@@ -95,7 +95,7 @@ flowchart LR
 | [x] | T-609 | Klaim garansi | M | Lanjutan | T-607 |
 | **F7** | | **Admin — operasional order** | | | |
 | [x] | T-701 | Daftar order + filter | M | Inti | T-604 |
-| [ ] | T-702 | Detail order + assign teknisi & helper | L | Inti | T-701, T-503, T-408 |
+| [x] | T-702 | Detail order + assign teknisi & helper | L | Inti | T-701, T-503, T-408 |
 | [ ] | T-703 | Tolak & batalkan order oleh admin | S | Inti | T-702 |
 | [ ] | T-704 | Konfirmasi pembayaran → LUNAS | S | Inti | T-702 |
 | [ ] | T-705 | Jadwal harian (timeline) | M | Lanjutan | T-702 |
@@ -363,6 +363,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 - Helper wajib jika `requires_helper`.
 - Simpan dengan `lockForUpdate()` + cek ulang bentrok; ganti teknisi (status kembali DITUGASKAN, dicatat di log).
 - **Selesai jika:** feature test: assign sukses, assign bentrok ditolak, helper wajib divalidasi.
+- *Catatan:* logika di `OrderAssignmentService` (kunci baris order + staf, cek ulang lewat `ScheduleService::isFree`). Mengganti **helper saja** pada order DITUGASKAN/DIKONFIRMASI tidak mengubah status; mengganti teknisi → DITUGASKAN + log "Tim diganti: A → B".
 
 #### T-703 · Tolak & batalkan oleh admin
 - Tolak (MENUNGGU → DITOLAK) dan batalkan (sebelum DALAM_PERJALANAN) dengan alasan wajib.

@@ -53,6 +53,7 @@ Dokumen perencanaan aplikasi web booking servis AC dengan 3 interface: **Client*
 16. Admin boleh menumpuk beberapa order untuk satu teknisi/helper di hari yang sama, **asalkan jam tidak bentrok**.
 17. Rentang waktu order = `jam_mulai` s/d `jam_mulai + Σ estimasi_jam + buffer_perjalanan`.
 18. Teknisi/helper dianggap **free** jika: aktif, tidak cuti, dan tidak punya order lain yang rentang waktunya beririsan.
+    - Admin boleh mengganti tim selama order MENUNGGU / DITUGASKAN / DIKONFIRMASI. Ganti teknisi → status kembali DITUGASKAN (teknisi baru konfirmasi ulang); ganti helper saja tidak mengubah status.
     - Mencatat cuti **tidak** membatalkan atau melepas order yang sudah ditugaskan; admin diberi peringatan berisi daftar order yang bentrok untuk di-assign ulang.
 19. Saat client memilih jam, sistem hanya menampilkan slot di mana **minimal 1 teknisi free** (dan 1 helper free bila order butuh helper), dalam jam operasional.
     - Order yang **belum di-assign** (MENUNGGU) ikut memakai kapasitas: slot tersedia hanya bila jumlah teknisi free **lebih banyak** dari jumlah order tanpa teknisi yang beririsan dengan slot tersebut (sama untuk helper pada order wajib helper yang belum punya helper). Ini mencegah lebih banyak order di satu jam daripada jumlah teknisi.

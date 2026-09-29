@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use App\Http\Controllers\Controller;
+use App\Models\CompanySettings;
 use App\Models\Order;
 use App\Models\Technician;
+use App\Services\OrderAssignmentService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -69,6 +71,27 @@ class OrderController extends Controller
             'tabCounts' => $tabCounts,
             'filters' => $filters,
             'technicians' => Technician::query()->with('user:id,name')->get()->sortBy('user.name'),
+        ]);
+    }
+
+    public function show(Order $order, OrderAssignmentService $assignments): View
+    {
+        $order->load([
+            'client:id,name,email,phone,avatar',
+            'technician.user:id,name,phone',
+            'helper:id,name,phone',
+            'items.photos',
+            'parentOrder:id,code,technician_id',
+            'statusLogs.changedBy:id,name,role',
+            'review',
+            'paidConfirmedBy:id,name',
+        ]);
+
+        return view('admin.orders.show', [
+            'order' => $order,
+            'canAssign' => $assignments->canAssign($order),
+            'candidates' => $assignments->canAssign($order) ? $assignments->candidates($order) : null,
+            'settings' => CompanySettings::current(),
         ]);
     }
 
