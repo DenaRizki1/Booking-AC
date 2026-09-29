@@ -41,6 +41,7 @@ function orderIn(OrderStatus $status, array $attributes = []): Order
 describe('alur normal', function () {
     it('menjalankan order dari MENUNGGU sampai LUNAS dan mencatat semuanya', function () {
         Event::fake([OrderStatusChanged::class]);
+        $this->travelTo(CarbonImmutable::parse('2026-10-06 07:00')); // hari jadwal: teknisi boleh berangkat
         $order = orderIn(OrderStatus::MENUNGGU);
         $techUser = $this->technician->user;
 
@@ -59,7 +60,7 @@ describe('alur normal', function () {
             ->and($order->paid_confirmed_by)->toBe($this->admin->id);
 
         foreach (['assigned_at', 'confirmed_at', 'departed_at', 'started_at', 'completed_at', 'paid_at'] as $column) {
-            expect($order->{$column}?->toDateTimeString())->toBe('2026-10-05 07:00:00', $column);
+            expect($order->{$column}?->toDateTimeString())->toBe('2026-10-06 07:00:00', $column);
         }
 
         $logs = $order->statusLogs;

@@ -16,3 +16,5 @@ Route::get('/akun', AccountController::class)->name('account');
 // Aksi status tugas.
 Route::post('/tugas/{order:code}/terima', [TaskStatusController::class, 'accept'])->name('tasks.accept');
 Route::post('/tugas/{order:code}/tolak', [TaskStatusController::class, 'reject'])->name('tasks.reject');
+Route::post('/tugas/{order:code}/berangkat', [TaskStatusController::class, 'depart'])->name('tasks.depart');
+Route::post('/tugas/{order:code}/mulai', [TaskStatusController::class, 'start'])->name('tasks.start');

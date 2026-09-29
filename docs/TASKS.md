@@ -104,7 +104,7 @@ flowchart LR
 | **F8** | | **Teknisi** | | | |
 | [x] | T-801 | Layout teknisi + daftar tugas | M | Inti | T-702 |
 | [x] | T-802 | Terima / tolak tugas | S | Inti | T-801 |
-| [ ] | T-803 | Berangkat & mulai kerja | S | Inti | T-802 |
+| [x] | T-803 | Berangkat & mulai kerja | S | Inti | T-802 |
 | [ ] | T-804 | Laporan per unit (foto, catatan, harga final) | L | Inti | T-803 |
 | [ ] | T-805 | Riwayat tugas & rating saya | S | Lanjutan | T-804 |
 | **F9** | | **Notifikasi** | | | |
@@ -399,6 +399,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 #### T-803 · Berangkat & mulai
 - Tombol sesuai status: Berangkat → DALAM_PERJALANAN; Tiba & mulai → DIKERJAKAN.
 - Tombol navigasi membuka Google Maps ke `lat,lng` order.
+- *Catatan:* Berangkat hanya bisa di hari jadwal (aturan ditambahkan di WORKFLOW & `OrderStatusService`).
 
 #### T-804 · Laporan per unit
 - Sesuai [mockup](../mockup/Teknisi-Laporan.html): tab per unit, upload foto sebelum/sesudah (kamera HP via `<input capture>`), kompres & resize di server (`intervention/image`, maks. 1600px), catatan, harga final.

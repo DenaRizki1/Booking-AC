@@ -173,6 +173,10 @@ class OrderStatusService
             );
         }
 
+        if ($to === OrderStatus::DALAM_PERJALANAN && CarbonImmutable::instance($order->scheduled_start)->startOfDay()->isAfter(CarbonImmutable::today())) {
+            throw new InvalidStatusTransitionException('Tombol Berangkat baru bisa dipakai pada hari jadwal.');
+        }
+
         if ($to === OrderStatus::LUNAS && (int) $order->grand_total <= 0) {
             throw new InvalidStatusTransitionException('Order tanpa tagihan tidak perlu dikonfirmasi pembayarannya.');
         }

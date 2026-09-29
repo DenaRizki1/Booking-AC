@@ -36,6 +36,16 @@ class TaskStatusController extends Controller
         return $this->change($request, $order, OrderStatus::MENUNGGU, 'Ditolak teknisi: '.trim($reason), 'Tugas ditolak. Admin akan menugaskan teknisi lain.', route('teknisi.tasks'));
     }
 
+    public function depart(Request $request, Order $order): RedirectResponse
+    {
+        return $this->change($request, $order, OrderStatus::DALAM_PERJALANAN, null, 'Status: dalam perjalanan. Client bisa melihat Anda sedang menuju lokasi.');
+    }
+
+    public function start(Request $request, Order $order): RedirectResponse
+    {
+        return $this->change($request, $order, OrderStatus::DIKERJAKAN, null, 'Pekerjaan dimulai. Isi laporan tiap unit setelah selesai.');
+    }
+
     private function change(Request $request, Order $order, OrderStatus $to, ?string $note, string $message, ?string $redirect = null): RedirectResponse
     {
         try {

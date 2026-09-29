@@ -116,6 +116,7 @@ stateDiagram-v2
 Aturan implementasi (`OrderStatusService`):
 - Alasan **wajib** untuk DITOLAK, DIBATALKAN, dan teknisi menolak tugas (DITUGASKAN → MENUNGGU; teknisi dikosongkan).
 - Ganti teknisi oleh admin = transisi ke DITUGASKAN lagi (dicatat di log, `confirmed_at` direset).
+- Teknisi baru bisa **Berangkat** (→ DALAM_PERJALANAN) pada hari jadwal (atau setelahnya bila terlambat), tidak sebelum hari H.
 - Client hanya bisa mengubah order miliknya, teknisi hanya order yang ditugaskan kepadanya; akun nonaktif ditolak.
 - LUNAS hanya untuk order dengan `grand_total > 0`.
 
