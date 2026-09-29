@@ -102,7 +102,7 @@ flowchart LR
 | [x] | T-706 | Dashboard statistik | S | Lanjutan | T-704 |
 | [x] | T-707 | Daftar ulasan | S | Lanjutan | T-608 |
 | **F8** | | **Teknisi** | | | |
-| [ ] | T-801 | Layout teknisi + daftar tugas | M | Inti | T-702 |
+| [x] | T-801 | Layout teknisi + daftar tugas | M | Inti | T-702 |
 | [ ] | T-802 | Terima / tolak tugas | S | Inti | T-801 |
 | [ ] | T-803 | Berangkat & mulai kerja | S | Inti | T-802 |
 | [ ] | T-804 | Laporan per unit (foto, catatan, harga final) | L | Inti | T-803 |
@@ -390,6 +390,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-801 · Layout teknisi + daftar tugas
 - Mobile-first sesuai [mockup](../mockup/Teknisi-Tugas.html): header ringkasan, tab Hari ini / Mendatang / Riwayat, kartu tugas urut jam.
+- *Catatan:* tetap mobile-first (dipakai di lapangan), di laptop tampil sebagai kolom tengah maks. 672px. Tab Hari ini juga memuat tugas aktif dari hari sebelumnya (label "Terlewat"). Ada halaman detail tugas & halaman Akun (keluar).
 
 #### T-802 · Terima / tolak tugas
 - Terima → DIKONFIRMASI. Tolak (alasan wajib) → MENUNGGU, `technician_id` dikosongkan, admin diberi tahu.
