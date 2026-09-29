@@ -30,7 +30,7 @@
             </header>
         @endif
 
-        <main @class(['flex flex-1 flex-col gap-3 px-4 py-4', 'pb-28' => ! isset($footer), 'pb-44' => isset($footer)])>
+        <main @class(['flex flex-1 flex-col gap-3 px-4 py-4', 'pb-28' => ! isset($footer), 'pb-60' => isset($footer)])>
             <x-flash />
             {{ $slot }}
         </main>

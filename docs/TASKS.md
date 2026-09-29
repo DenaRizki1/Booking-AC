@@ -105,7 +105,7 @@ flowchart LR
 | [x] | T-801 | Layout teknisi + daftar tugas | M | Inti | T-702 |
 | [x] | T-802 | Terima / tolak tugas | S | Inti | T-801 |
 | [x] | T-803 | Berangkat & mulai kerja | S | Inti | T-802 |
-| [ ] | T-804 | Laporan per unit (foto, catatan, harga final) | L | Inti | T-803 |
+| [x] | T-804 | Laporan per unit (foto, catatan, harga final) | L | Inti | T-803 |
 | [ ] | T-805 | Riwayat tugas & rating saya | S | Lanjutan | T-804 |
 | **F9** | | **Notifikasi** | | | |
 | [ ] | T-901 | Setup mail, queue & template email | S | Lanjutan | T-003, T-504 |
@@ -406,6 +406,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 - Harga > estimasi maks → keterangan wajib.
 - Kirim laporan: semua unit lengkap (min. 1 foto sesudah) → SELESAI, hitung `final_price`, `grand_total`, `warranty_until` tiap unit.
 - **Selesai jika:** feature test: kirim tanpa foto ditolak; total & garansi terhitung benar.
+- *Catatan:* foto disimpan sebagai JPEG (kualitas 80, maks. 1600px) di `storage/app/public/orders/{order_id}`; maks. 6 foto per jenis per unit. `warranty_until` = tanggal laporan dikirim + `order_items.warranty_days`. Logika di `OrderReportService`.
 
 #### T-805 · Riwayat & rating
 - Daftar tugas selesai + ulasan yang diterima.

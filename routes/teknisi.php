@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Teknisi\AccountController;
+use App\Http\Controllers\Teknisi\ReportController;
 use App\Http\Controllers\Teknisi\TaskController;
 use App\Http\Controllers\Teknisi\TaskStatusController;
 use Illuminate\Support\Facades\Route;
@@ -18,3 +19,10 @@ Route::post('/tugas/{order:code}/terima', [TaskStatusController::class, 'accept'
 Route::post('/tugas/{order:code}/tolak', [TaskStatusController::class, 'reject'])->name('tasks.reject');
 Route::post('/tugas/{order:code}/berangkat', [TaskStatusController::class, 'depart'])->name('tasks.depart');
 Route::post('/tugas/{order:code}/mulai', [TaskStatusController::class, 'start'])->name('tasks.start');
+
+// Laporan pekerjaan per unit.
+Route::get('/tugas/{order:code}/laporan', [ReportController::class, 'edit'])->name('reports.edit');
+Route::post('/tugas/{order:code}/laporan/unit/{item}/foto', [ReportController::class, 'storePhotos'])->name('reports.photos.store');
+Route::delete('/tugas/{order:code}/laporan/foto/{photo}', [ReportController::class, 'destroyPhoto'])->name('reports.photos.destroy');
+Route::put('/tugas/{order:code}/laporan/unit/{item}', [ReportController::class, 'updateItem'])->name('reports.items.update');
+Route::post('/tugas/{order:code}/laporan/kirim', [ReportController::class, 'submit'])->name('reports.submit');
