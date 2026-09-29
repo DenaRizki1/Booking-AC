@@ -9,6 +9,7 @@ use App\Models\CompanySettings;
 use App\Models\Order;
 use App\Models\Technician;
 use App\Services\OrderAssignmentService;
+use App\Services\OrderStatusService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -74,7 +75,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function show(Order $order, OrderAssignmentService $assignments): View
+    public function show(Request $request, Order $order, OrderAssignmentService $assignments, OrderStatusService $statuses): View
     {
         $order->load([
             'client:id,name,email,phone,avatar',
@@ -92,6 +93,7 @@ class OrderController extends Controller
             'canAssign' => $assignments->canAssign($order),
             'candidates' => $assignments->canAssign($order) ? $assignments->candidates($order) : null,
             'settings' => CompanySettings::current(),
+            'allowed' => $statuses->allowedTransitions($order, $request->user()),
         ]);
     }
 

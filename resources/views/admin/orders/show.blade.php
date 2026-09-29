@@ -31,6 +31,12 @@
             <x-badge variant="success">Garansi</x-badge>
         @endif
         <x-badge :status="$order->status" />
+        @if (in_array(\App\Enums\OrderStatus::DITOLAK, $allowed, true))
+            <x-button variant="danger" icon="circle-x" x-on:click="$dispatch('open-modal', 'order-reject')">Tolak order</x-button>
+        @endif
+        @if (in_array(\App\Enums\OrderStatus::DIBATALKAN, $allowed, true))
+            <x-button variant="danger" icon="ban" x-on:click="$dispatch('open-modal', 'order-cancel')">Batalkan</x-button>
+        @endif
     </x-slot:actions>
 
     <div class="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_480px]">
@@ -57,7 +63,7 @@
                         <x-badge size="sm">Transport {{ $order->transport_fee ? Format::rupiah($order->transport_fee) : 'gratis' }}</x-badge>
                     </div>
                 </div>
-                <div class="relative min-h-44 bg-[#E8EDF5]" x-data="miniMap(@js(['lat' => (float) $order->lat, 'lng' => (float) $order->lng]))">
+                <div class="relative isolate min-h-44 bg-[#E8EDF5]" x-data="miniMap(@js(['lat' => (float) $order->lat, 'lng' => (float) $order->lng]))">
                     <div x-ref="map" class="absolute inset-0 z-0" aria-label="Peta lokasi client"></div>
                     <a href="{{ $mapsUrl }}" target="_blank" rel="noopener" class="absolute right-3 bottom-3 z-[500] inline-flex min-h-10 items-center gap-1.5 rounded-xl bg-white px-3 text-[13px] font-bold text-primary shadow">
                         <x-icon name="external-link" class="size-4" /> Buka peta
@@ -292,4 +298,24 @@
             @endif
         </div>
     </div>
+
+    @foreach ([
+        'reject' => [\App\Enums\OrderStatus::DITOLAK, 'Tolak order', 'Order baru ditolak (mis. di luar jangkauan atau jadwal penuh). Alasan ditampilkan ke client.', 'admin.orders.reject', 'Tolak order'],
+        'cancel' => [\App\Enums\OrderStatus::DIBATALKAN, 'Batalkan order', 'Order dibatalkan dan jadwal teknisi/helper dilepas. Alasan ditampilkan ke client.', 'admin.orders.cancel', 'Batalkan order'],
+    ] as $action => [$target, $modalTitle, $description, $route, $submit])
+        @if (in_array($target, $allowed, true))
+            <x-modal :name="'order-'.$action" :title="$modalTitle" :show="$errors->reason->any() && old('_modal') === $action">
+                <form id="form-{{ $action }}" method="POST" action="{{ route($route, $order) }}" class="flex flex-col gap-3" novalidate>
+                    @csrf
+                    <input type="hidden" name="_modal" value="{{ $action }}">
+                    <p class="text-sm text-ink-soft">{{ $description }}</p>
+                    <x-textarea name="reason" :id="'reason-'.$action" label="Alasan" rows="3" :error="old('_modal') === $action ? ($errors->reason->first('reason') ?: null) : null" maxlength="500" required autofocus />
+                </form>
+                <x-slot:footer>
+                    <x-button variant="secondary" x-on:click="$dispatch('close-modal', 'order-{{ $action }}')">Kembali</x-button>
+                    <x-button type="submit" :form="'form-'.$action" variant="danger-solid">{{ $submit }}</x-button>
+                </x-slot:footer>
+            </x-modal>
+        @endif
+    @endforeach
 </x-layouts.admin>

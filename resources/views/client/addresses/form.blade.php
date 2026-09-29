@@ -30,7 +30,7 @@
 
         <div class="grid items-start gap-6 lg:grid-cols-5">
             {{-- Peta (mockup Client-Alamat) --}}
-            <div class="relative h-[55vh] min-h-96 overflow-hidden rounded-card border border-line bg-[#E8EDF5] lg:col-span-3 lg:h-[600px]">
+            <div class="relative isolate h-[55vh] min-h-96 overflow-hidden rounded-card border border-line bg-[#E8EDF5] lg:col-span-3 lg:h-[600px]">
                 <div x-ref="map" class="absolute inset-0 z-0" aria-label="Peta lokasi" role="application"></div>
 
                 <div class="absolute inset-x-4 top-4 z-[500]">

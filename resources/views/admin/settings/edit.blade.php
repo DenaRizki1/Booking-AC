@@ -35,7 +35,7 @@
                 <input type="hidden" name="lng" :value="lng">
 
                 <div class="lg:col-span-3">
-                    <div class="relative h-[420px] overflow-hidden rounded-2xl border border-line bg-[#E8EDF5]">
+                    <div class="relative isolate h-[420px] overflow-hidden rounded-2xl border border-line bg-[#E8EDF5]">
                         <div x-ref="map" class="absolute inset-0 z-0" aria-label="Peta titik kantor" role="application"></div>
 
                         <div class="absolute inset-x-3 top-3 z-[500]">
