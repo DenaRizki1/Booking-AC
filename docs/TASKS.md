@@ -113,7 +113,7 @@ flowchart LR
 | [ ] | T-903 | Lonceng notifikasi in-app (3 role) | M | Lanjutan | T-902 |
 | [ ] | T-904 | Pengingat H-1 (scheduler) | S | Lanjutan | T-902 |
 | **F10** | | **Uji & rilis** | | | |
-| [ ] | T-1001 | Test alur end-to-end | M | Inti | T-804 |
+| [x] | T-1001 | Test alur end-to-end | M | Inti | T-804 |
 | [ ] | T-1002 | Review keamanan | S | Inti | T-1001 |
 | [ ] | T-1003 | Review performa & query | S | Lanjutan | T-1001 |
 | [ ] | T-1004 | Persiapan deploy | M | Inti | T-1002 |
@@ -435,6 +435,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-1001 · Test alur end-to-end
 - Feature test satu skenario utuh: client order 2 unit → admin assign → teknisi terima, berangkat, mulai, laporan → admin LUNAS → client ulasan → klaim garansi.
+- *Catatan:* `tests/Feature/EndToEnd/OrderLifecycleTest.php` — semua langkah lewat HTTP, termasuk order garansi sampai SELESAI tanpa tagihan.
 
 #### T-1002 · Review keamanan
 - Semua route dilindungi policy; validasi `FormRequest` di semua input; upload hanya gambar (mime + ukuran maks. 5 MB); rate limit login & pembuatan order; CSRF; tidak ada data client lain yang bocor lewat ID.
