@@ -98,7 +98,7 @@ flowchart LR
 | [x] | T-702 | Detail order + assign teknisi & helper | L | Inti | T-701, T-503, T-408 |
 | [x] | T-703 | Tolak & batalkan order oleh admin | S | Inti | T-702 |
 | [x] | T-704 | Konfirmasi pembayaran → LUNAS | S | Inti | T-702 |
-| [ ] | T-705 | Jadwal harian (timeline) | M | Lanjutan | T-702 |
+| [x] | T-705 | Jadwal harian (timeline) | M | Lanjutan | T-702 |
 | [ ] | T-706 | Dashboard statistik | S | Lanjutan | T-704 |
 | [ ] | T-707 | Daftar ulasan | S | Lanjutan | T-608 |
 | **F8** | | **Teknisi** | | | |
@@ -376,6 +376,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-705 · Jadwal harian
 - Timeline teknisi & helper per hari sesuai [mockup Admin-Jadwal](../mockup/Admin-Jadwal.html): blok per order berwarna status, buffer bergaris, garis waktu sekarang, navigasi tanggal.
+- *Catatan:* tampilan **Hari** saja (tombol "Minggu" di mockup belum dibuat). Order MENUNGGU pada tanggal itu ditampilkan sebagai peringatan di atas timeline; blok bisa diklik ke detail order.
 
 #### T-706 · Dashboard
 - Kartu: menunggu assign, jadwal hari ini, total belum lunas, rating rata-rata; tabel order menunggu; beban teknisi hari ini.

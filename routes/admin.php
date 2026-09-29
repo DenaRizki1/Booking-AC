@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\OrderAssignmentController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\OrderPaymentController;
 use App\Http\Controllers\Admin\OrderStatusController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServicePriceController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', DashboardController::class)->name('dashboard');
 
 // Operasional order.
+Route::get('/jadwal', ScheduleController::class)->name('schedule');
 Route::get('/order', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/order/{order:code}', [OrderController::class, 'show'])->name('orders.show');
 Route::put('/order/{order:code}/tim', OrderAssignmentController::class)->name('orders.assign');

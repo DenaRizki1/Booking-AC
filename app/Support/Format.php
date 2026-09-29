@@ -95,7 +95,8 @@ final class Format
         return 'https://wa.me/'.preg_replace('/^0/', '62', (string) preg_replace('/\D/', '', (string) $phone));
     }
 
-    private static function decimal(float $value): string
+    /** 1,5 (maks. 1 desimal, tanpa nol di belakang) */
+    public static function decimal(float $value): string
     {
         return rtrim(rtrim(number_format($value, 1, ',', '.'), '0'), ',');
     }
