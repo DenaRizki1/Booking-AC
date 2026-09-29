@@ -100,7 +100,7 @@ flowchart LR
 | [x] | T-704 | Konfirmasi pembayaran → LUNAS | S | Inti | T-702 |
 | [x] | T-705 | Jadwal harian (timeline) | M | Lanjutan | T-702 |
 | [x] | T-706 | Dashboard statistik | S | Lanjutan | T-704 |
-| [ ] | T-707 | Daftar ulasan | S | Lanjutan | T-608 |
+| [x] | T-707 | Daftar ulasan | S | Lanjutan | T-608 |
 | **F8** | | **Teknisi** | | | |
 | [ ] | T-801 | Layout teknisi + daftar tugas | M | Inti | T-702 |
 | [ ] | T-802 | Terima / tolak tugas | S | Inti | T-801 |
