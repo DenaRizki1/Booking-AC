@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\OrderAssignmentController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\OrderPaymentController;
 use App\Http\Controllers\Admin\OrderStatusController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServicePriceController;
@@ -26,6 +27,8 @@ Route::get('/order/{order:code}', [OrderController::class, 'show'])->name('order
 Route::put('/order/{order:code}/tim', OrderAssignmentController::class)->name('orders.assign');
 Route::post('/order/{order:code}/tolak', [OrderStatusController::class, 'reject'])->name('orders.reject');
 Route::post('/order/{order:code}/batal', [OrderStatusController::class, 'cancel'])->name('orders.cancel');
+Route::post('/order/{order:code}/pembayaran', [OrderPaymentController::class, 'store'])->name('orders.payment');
+Route::get('/order/{order:code}/bukti-bayar', [OrderPaymentController::class, 'proof'])->name('orders.payment-proof');
 
 Route::get('/pengaturan', [SettingsController::class, 'edit'])->name('settings.edit');
 Route::put('/pengaturan', [SettingsController::class, 'update'])->name('settings.update');

@@ -291,6 +291,61 @@
                 </x-card>
             @endif
 
+            {{-- Pembayaran --}}
+            @if (in_array($order->status, [\App\Enums\OrderStatus::SELESAI, \App\Enums\OrderStatus::LUNAS], true))
+                <x-card title="Pembayaran">
+                    <div class="flex items-baseline justify-between gap-3">
+                        <span class="text-[13px] text-muted">Total tagihan</span>
+                        <span class="text-xl font-extrabold text-ink tabular-nums">{{ Format::rupiah((int) $order->grand_total) }}</span>
+                    </div>
+
+                    @if ($order->status === \App\Enums\OrderStatus::LUNAS)
+                        <dl class="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 border-t border-[#EEF2F8] pt-3 text-[13px]">
+                            <dt class="text-muted">Status</dt><dd><x-badge variant="success" size="sm">Lunas</x-badge></dd>
+                            <dt class="text-muted">Metode</dt><dd class="font-semibold text-ink">{{ $order->payment_method?->label() }}</dd>
+                            <dt class="text-muted">Dikonfirmasi</dt><dd class="text-ink">{{ $order->paid_at ? Format::date($order->paid_at).' · '.$order->paid_at->format('H:i') : '–' }} oleh {{ $order->paidConfirmedBy?->name ?? '–' }}</dd>
+                            @if ($order->payment_proof)
+                                <dt class="text-muted">Bukti</dt><dd><a href="{{ route('admin.orders.payment-proof', $order) }}" target="_blank" class="font-bold text-primary">Lihat bukti bayar</a></dd>
+                            @endif
+                        </dl>
+                    @elseif ((int) $order->grand_total <= 0)
+                        <p class="mt-3 rounded-xl bg-success-50 px-3 py-2 text-[13px] text-success-700">Order tanpa tagihan (mis. klaim garansi Rp0) — tidak perlu konfirmasi pembayaran.</p>
+                    @else
+                        @php($paymentErrors = $errors->payment)
+                        <form method="POST" action="{{ route('admin.orders.payment', $order) }}" enctype="multipart/form-data" x-data="{ method: @js(old('payment_method', '')) }" class="mt-3 flex flex-col gap-3 border-t border-[#EEF2F8] pt-3" novalidate>
+                            @csrf
+                            <fieldset>
+                                <legend class="mb-1.5 text-[13px] font-semibold text-ink-soft">Metode pembayaran <span class="text-danger" aria-hidden="true">*</span></legend>
+                                <div class="grid grid-cols-2 gap-2">
+                                    @foreach (\App\Enums\PaymentMethod::cases() as $paymentMethod)
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="payment_method" value="{{ $paymentMethod->value }}" x-model="method" class="peer sr-only">
+                                            <span class="flex min-h-11 items-center justify-center gap-2 rounded-xl border-[1.5px] border-line text-sm font-bold text-ink-soft peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary peer-focus-visible:ring-4 peer-focus-visible:ring-primary/25">
+                                                <x-icon :name="$paymentMethod === \App\Enums\PaymentMethod::TUNAI ? 'banknote' : 'landmark'" class="size-4" /> {{ $paymentMethod->label() }}
+                                            </span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                                <x-field-error :messages="array_filter([$paymentErrors->first('payment_method')])" />
+                            </fieldset>
+
+                            <div x-show="method === 'TRANSFER'" x-cloak class="rounded-xl bg-surface-bg px-3 py-2 text-[13px] text-ink-soft">
+                                Rekening tujuan: <b class="text-ink">{{ $settings->bank_name ?? '–' }} {{ $settings->bank_account_no }}</b> a.n. {{ $settings->bank_account_name ?? '–' }}
+                            </div>
+
+                            <div>
+                                <x-label for="f-payment-proof">Bukti bayar (opsional)</x-label>
+                                <input id="f-payment-proof" type="file" name="payment_proof" accept="image/jpeg,image/png,image/webp,application/pdf" class="block w-full text-[13px] text-ink-soft file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-xl file:border-[1.5px] file:border-blue-200 file:bg-white file:px-4 file:text-sm file:font-bold file:text-primary hover:file:bg-blue-50">
+                                <p class="mt-1 text-xs text-muted">Foto/PDF, maks. 5 MB. Disimpan privat, hanya admin yang bisa membuka.</p>
+                                <x-field-error :messages="array_filter([$paymentErrors->first('payment_proof')])" />
+                            </div>
+
+                            <x-button type="submit" icon="badge-check" block ::disabled="!method">Konfirmasi lunas</x-button>
+                        </form>
+                    @endif
+                </x-card>
+            @endif
+
             @if ($order->status_reason)
                 <x-card title="Alasan">
                     <p class="text-sm text-ink-soft">{{ $order->status_reason }}</p>

@@ -502,7 +502,7 @@ erDiagram
 | completed_at | DATETIME | ✓ | NULL | Awal hitungan garansi |
 | cancelled_at | DATETIME | ✓ | NULL | Juga dipakai untuk DITOLAK |
 | payment_method | VARCHAR(10) | ✓ | NULL | `TUNAI` · `TRANSFER` |
-| payment_proof | VARCHAR(255) | ✓ | NULL | Path bukti transfer (opsional) |
+| payment_proof | VARCHAR(255) | ✓ | NULL | Path bukti transfer (opsional), disk privat `local` — hanya admin |
 | paid_at | DATETIME | ✓ | NULL | |
 | paid_confirmed_by | BIGINT UNSIGNED | ✓ | NULL | FK → users.id (admin) |
 

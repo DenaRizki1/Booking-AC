@@ -97,7 +97,7 @@ flowchart LR
 | [x] | T-701 | Daftar order + filter | M | Inti | T-604 |
 | [x] | T-702 | Detail order + assign teknisi & helper | L | Inti | T-701, T-503, T-408 |
 | [x] | T-703 | Tolak & batalkan order oleh admin | S | Inti | T-702 |
-| [ ] | T-704 | Konfirmasi pembayaran → LUNAS | S | Inti | T-702 |
+| [x] | T-704 | Konfirmasi pembayaran → LUNAS | S | Inti | T-702 |
 | [ ] | T-705 | Jadwal harian (timeline) | M | Lanjutan | T-702 |
 | [ ] | T-706 | Dashboard statistik | S | Lanjutan | T-704 |
 | [ ] | T-707 | Daftar ulasan | S | Lanjutan | T-608 |
@@ -372,6 +372,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 #### T-704 · Konfirmasi pembayaran
 - Dari order SELESAI: pilih metode (tunai/transfer), upload bukti (opsional) → LUNAS, catat `paid_confirmed_by`.
 - Order dengan `grand_total = 0` tidak butuh langkah ini.
+- *Catatan:* bukti bayar disimpan di disk privat (`storage/app/private/payment-proofs`) dan dibuka lewat route admin; file dihapus lagi bila konfirmasi gagal.
 
 #### T-705 · Jadwal harian
 - Timeline teknisi & helper per hari sesuai [mockup Admin-Jadwal](../mockup/Admin-Jadwal.html): blok per order berwarna status, buffer bergaris, garis waktu sekarang, navigasi tanggal.
