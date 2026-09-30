@@ -109,7 +109,7 @@ flowchart LR
 | [x] | T-805 | Riwayat tugas & rating saya | S | Lanjutan | T-804 |
 | **F9** | | **Notifikasi** | | | |
 | [x] | T-901 | Setup mail, queue & template email | S | Lanjutan | T-003, T-504 |
-| [ ] | T-902 | Kelas notifikasi per event | M | Lanjutan | T-901 |
+| [x] | T-902 | Kelas notifikasi per event | M | Lanjutan | T-901 |
 | [ ] | T-903 | Lonceng notifikasi in-app (3 role) | M | Lanjutan | T-902 |
 | [ ] | T-904 | Pengingat H-1 (scheduler) | S | Lanjutan | T-902 |
 | **F10** | | **Uji & rilis** | | | |
@@ -423,6 +423,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 #### T-902 · Kelas notifikasi
 - Sesuai tabel WORKFLOW bagian 14, channel `database` + `mail`, dikirim via listener `OrderStatusChanged` (queued).
 - **Selesai jika:** test `Notification::fake()` untuk tiap event.
+- *Catatan:* kelas di `app/Notifications` (dasar `OrderNotification`), listener `SendOrderStatusNotifications` (queued). Pelaku perubahan tidak dinotifikasi; akun nonaktif dilewati. Pembatalan: oleh client → admin + teknisi; oleh admin → client + teknisi. Penggantian helper saja tidak mengirim notifikasi (bukan perubahan status).
 
 #### T-903 · Lonceng in-app
 - Ikon lonceng + jumlah belum dibaca di 3 layout; daftar notifikasi; tandai dibaca; klik membuka order terkait.
