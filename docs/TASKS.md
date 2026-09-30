@@ -116,7 +116,7 @@ flowchart LR
 | [x] | T-1001 | Test alur end-to-end | M | Inti | T-804 |
 | [x] | T-1002 | Review keamanan | S | Inti | T-1001 |
 | [x] | T-1003 | Review performa & query | S | Lanjutan | T-1001 |
-| [ ] | T-1004 | Persiapan deploy | M | Inti | T-1002 |
+| [x] | T-1004 | Persiapan deploy | M | Inti | T-1002 |
 | [ ] | T-1005 | 👤 UAT per role | M | Inti | T-1004 |
 
 ---
@@ -456,6 +456,8 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 #### T-1004 · Persiapan deploy
 - `.env.production.example`, `storage:link`, queue worker (Supervisor), scheduler (cron), backup database harian, HTTPS, redirect URI Google produksi.
 - Pilihan hosting diputuskan saat task ini (VPS / Laravel Forge / shared hosting yang mendukung queue).
+- *Keputusan (30 Sep 2026):* **komputer sendiri + Cloudflare Tunnel** (HTTPS di Cloudflare, tanpa buka port). Panduan: `deploy/README.md`.
+- *Dibuat:* `.env.production.example`; konfigurasi Nginx, Cloudflare Tunnel, launchd (macOS) / Supervisor + cron (Linux) di `deploy/`; `trustProxies` 127.0.0.1 + paksa `https` di produksi; command `backup:database` (mysqldump → .sql.gz, dijadwalkan 02:00, simpan 14 hari) dan `user:password` untuk mengganti password admin bawaan.
 
 #### T-1005 · 👤 UAT per role
 - Checklist uji manual oleh Anda: 1 client, 1 admin, 2 teknisi, 1 hari simulasi order nyata.

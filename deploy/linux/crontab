@@ -1,0 +1,2 @@
+# Linux: sudo crontab -u www-data -e  → tambahkan baris berikut (scheduler Laravel tiap menit)
+* * * * * cd /var/www/booking-ac && php artisan schedule:run >> /dev/null 2>&1

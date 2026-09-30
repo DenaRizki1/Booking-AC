@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Scheduler Laravel (pengganti cron): menjalankan schedule:run tiap 60 detik.
+     launchctl load -w ~/Library/LaunchAgents/id.booking-ac.scheduler.plist -->
+<plist version="1.0">
+<dict>
+    <key>Label</key><string>id.booking-ac.scheduler</string>
+    <key>WorkingDirectory</key><string>/Users/USER/booking-ac</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/php</string>
+        <string>artisan</string>
+        <string>schedule:run</string>
+    </array>
+    <key>StartInterval</key><integer>60</integer>
+    <key>StandardOutPath</key><string>/Users/USER/booking-ac/storage/logs/scheduler.log</string>
+    <key>StandardErrorPath</key><string>/Users/USER/booking-ac/storage/logs/scheduler.log</string>
+</dict>
+</plist>

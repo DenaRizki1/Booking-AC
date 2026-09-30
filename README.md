@@ -58,6 +58,11 @@ Identitas perusahaan masih placeholder **SejukAC** (T-004) dan bisa diubah di me
 
 Sebelum kredensial diisi, di `APP_ENV=local` halaman `/masuk` menampilkan tombol **masuk sebagai client demo** (tanpa Google) untuk mencoba tampilan client.
 
+## Deploy produksi
+
+Panduan lengkap (komputer sendiri + Cloudflare Tunnel, Nginx, queue worker, scheduler, backup harian): [deploy/README.md](deploy/README.md).
+Contoh environment produksi: [`.env.production.example`](.env.production.example).
+
 ## Test & kualitas kode
 
 Test memakai database MySQL terpisah `booking_ac_test` (lihat `phpunit.xml`).

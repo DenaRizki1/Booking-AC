@@ -38,6 +38,10 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->web(append: [AddSecurityHeaders::class]);
 
+        // Produksi di balik Cloudflare Tunnel → Nginx (lokal): percayai proxy lokal agar
+        // IP client & skema HTTPS terbaca dari header X-Forwarded-*.
+        $middleware->trustProxies(at: ['127.0.0.1', '::1']);
+
         // User yang sudah login diarahkan ke halaman awal perannya.
         $middleware->redirectUsersTo(fn (Request $request) => $request->user()?->homeUrl() ?? '/');
 

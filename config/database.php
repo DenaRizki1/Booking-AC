@@ -19,6 +19,9 @@ return [
 
     'default' => env('DB_CONNECTION', 'sqlite'),
 
+    // Lokasi mysqldump untuk `php artisan backup:database` (Homebrew: /opt/homebrew/bin/mysqldump).
+    'mysqldump' => env('DB_DUMP_BINARY', 'mysqldump'),
+
     /*
     |--------------------------------------------------------------------------
     | Database Connections

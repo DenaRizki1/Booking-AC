@@ -9,6 +9,7 @@ use App\View\Composers\AdminLayoutComposer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -39,6 +40,11 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         View::composer('components.layouts.admin', AdminLayoutComposer::class);
+
+        // HTTPS diterminasi Cloudflare; pastikan semua URL yang dibuat memakai https.
+        if ($this->app->isProduction() && str_starts_with((string) config('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
 
         // Deteksi N+1: relasi yang belum di-eager-load melempar exception di lokal & test.
         Model::preventLazyLoading(! $this->app->isProduction());

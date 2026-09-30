@@ -1,0 +1,11 @@
+# Cloudflare Tunnel: Cloudflare (HTTPS) → cloudflared di komputer ini → Nginx 127.0.0.1:8080
+# Letakkan di ~/.cloudflared/config.yml (macOS/Linux user) atau /etc/cloudflared/config.yml (service).
+tunnel: <TUNNEL-ID>
+credentials-file: /Users/<user>/.cloudflared/<TUNNEL-ID>.json
+
+ingress:
+  - hostname: <domain-anda>
+    service: http://127.0.0.1:8080
+    originRequest:
+      httpHostHeader: <domain-anda>
+  - service: http_status:404
