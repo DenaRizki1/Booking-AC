@@ -111,7 +111,7 @@ flowchart LR
 | [x] | T-901 | Setup mail, queue & template email | S | Lanjutan | T-003, T-504 |
 | [x] | T-902 | Kelas notifikasi per event | M | Lanjutan | T-901 |
 | [x] | T-903 | Lonceng notifikasi in-app (3 role) | M | Lanjutan | T-902 |
-| [ ] | T-904 | Pengingat H-1 (scheduler) | S | Lanjutan | T-902 |
+| [x] | T-904 | Pengingat H-1 (scheduler) | S | Lanjutan | T-902 |
 | **F10** | | **Uji & rilis** | | | |
 | [x] | T-1001 | Test alur end-to-end | M | Inti | T-804 |
 | [x] | T-1002 | Review keamanan | S | Inti | T-1001 |
@@ -431,6 +431,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-904 · Pengingat H-1
 - Command terjadwal tiap hari 18:00 → email ke client & teknisi untuk order besok.
+- *Catatan:* `php artisan orders:send-reminders` (status MENUNGGU/DITUGASKAN/DIKONFIRMASI; teknisi hanya bila sudah ditugaskan). Tiap order diingatkan sekali per hari (kunci cache), aman bila scheduler berjalan ulang.
 
 ---
 

@@ -11,3 +11,4 @@ Artisan::command('addresses:recalculate-distances', function () {
 
 // Jadwal (jalankan `php artisan schedule:work` atau cron/launchd `schedule:run` tiap menit).
 Schedule::command('backup:database')->dailyAt('02:00')->withoutOverlapping()->onOneServer();
+Schedule::command('orders:send-reminders')->dailyAt('18:00')->withoutOverlapping()->onOneServer();
