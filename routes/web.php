@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Auth\StaffLoginController;
 use App\Http\Controllers\Dev\LoginAsController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,13 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/logout', [StaffLoginController::class, 'destroy'])->middleware('auth')->name('logout');
+
+// Notifikasi in-app (ketiga peran).
+Route::middleware(['auth', 'role:admin|teknisi|client'])->prefix('notifikasi')->name('notifications.')->controller(NotificationController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/baca-semua', 'readAll')->name('read-all');
+    Route::get('/{id}', 'open')->whereUuid('id')->name('open');
+});
 
 // Alat pengembangan — hanya untuk APP_ENV=local (dicek di tiap handler).
 Route::get('/dev/ui', function () {

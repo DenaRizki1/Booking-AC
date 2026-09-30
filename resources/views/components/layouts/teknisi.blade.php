@@ -23,9 +23,11 @@
                 </a>
                 <h1 class="min-w-0 flex-1 truncate text-base font-extrabold text-ink">{{ $title }}</h1>
                 {{ $headerActions ?? '' }}
+                @unless (request()->routeIs('notifications.*'))<x-notification-bell />@endunless
             </header>
         @else
-            <header class="flex flex-col gap-4 bg-navy px-5 pt-5 pb-4 text-white">
+            <header class="relative flex flex-col gap-4 bg-navy px-5 pt-5 pb-4 text-white">
+                <div class="absolute top-4 right-3"><x-notification-bell variant="dark" /></div>
                 {{ $header ?? '' }}
             </header>
         @endif

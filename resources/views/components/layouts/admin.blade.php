@@ -122,9 +122,7 @@
 
                 {{ $actions ?? '' }}
 
-                <a href="#" class="flex size-11 items-center justify-center rounded-xl border border-line bg-white text-ink hover:bg-surface-bg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25">
-                    <x-icon name="bell" class="size-5" /><span class="sr-only">Notifikasi</span>
-                </a>
+                <x-notification-bell class="border border-line bg-white" />
             </header>
 
             <x-flash />

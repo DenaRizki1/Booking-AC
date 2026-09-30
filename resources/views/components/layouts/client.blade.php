@@ -47,9 +47,7 @@
             <div class="ml-auto flex items-center gap-2">
                 <span class="hidden lg:block"><x-button :href="route('client.orders.create')" size="sm" icon="plus" class="whitespace-nowrap">Buat Order</x-button></span>
 
-                <a href="#" class="flex size-11 items-center justify-center rounded-xl text-ink-soft hover:bg-surface-bg hover:text-ink focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25">
-                    <x-icon name="bell" class="size-5" /><span class="sr-only">Notifikasi</span>
-                </a>
+                <x-notification-bell />
 
                 @if ($user)
                     <div class="relative hidden md:block" x-on:click.outside="account = false">

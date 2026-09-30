@@ -3,7 +3,7 @@
 
 <x-layouts.teknisi title="Tugas">
     <x-slot:header>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 pr-11">
             <x-avatar :name="$technician->user->name" :src="$technician->photoUrl()" class="bg-primary!" />
             <div class="min-w-0 flex-1">
                 <p class="text-[13px] text-white/75">{{ Format::date(now()) }}</p>
