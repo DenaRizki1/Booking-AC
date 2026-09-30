@@ -108,7 +108,7 @@ flowchart LR
 | [x] | T-804 | Laporan per unit (foto, catatan, harga final) | L | Inti | T-803 |
 | [x] | T-805 | Riwayat tugas & rating saya | S | Lanjutan | T-804 |
 | **F9** | | **Notifikasi** | | | |
-| [ ] | T-901 | Setup mail, queue & template email | S | Lanjutan | T-003, T-504 |
+| [x] | T-901 | Setup mail, queue & template email | S | Lanjutan | T-003, T-504 |
 | [ ] | T-902 | Kelas notifikasi per event | M | Lanjutan | T-901 |
 | [ ] | T-903 | Lonceng notifikasi in-app (3 role) | M | Lanjutan | T-902 |
 | [ ] | T-904 | Pengingat H-1 (scheduler) | S | Lanjutan | T-902 |
@@ -418,6 +418,7 @@ Semua di `app/Services`, tanpa ketergantungan ke controller, **wajib unit test**
 
 #### T-901 · Setup mail & queue
 - Mail SMTP dari `.env`, queue driver `database`, template email markdown ber-branding (logo, warna biru).
+- *Catatan:* dikerjakan sebelum T-003 dengan `MAIL_MAILER=log` (email tertulis di `storage/logs`); setelah Mailpit/SMTP siap cukup ubah `MAIL_*` di `.env`. Tema `booking` di `resources/views/vendor/mail`, teks template notifikasi Bahasa Indonesia, pratinjau lokal di `/dev/mail`.
 
 #### T-902 · Kelas notifikasi
 - Sesuai tabel WORKFLOW bagian 14, channel `database` + `mail`, dikirim via listener `OrderStatusChanged` (queued).

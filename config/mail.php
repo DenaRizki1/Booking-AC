@@ -110,6 +110,20 @@ return [
     |
     */
 
+    /*
+    |--------------------------------------------------------------------------
+    | Template email markdown (resources/views/vendor/mail, tema "booking")
+    |--------------------------------------------------------------------------
+    */
+
+    'markdown' => [
+        'theme' => env('MAIL_MARKDOWN_THEME', 'booking'),
+
+        'paths' => [
+            resource_path('views/vendor/mail'),
+        ],
+    ],
+
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),

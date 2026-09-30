@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Auth\StaffLoginController;
 use App\Http\Controllers\Dev\LoginAsController;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Route;
 
 // Halaman awal: tamu → login client, user → halaman awal perannya.
@@ -31,3 +32,15 @@ Route::get('/dev/ui', function () {
     return view('dev.ui');
 })->name('dev.ui');
 Route::get('/dev/login-as/{user}', LoginAsController::class)->name('dev.login-as');
+Route::get('/dev/mail', function () {
+    abort_unless(app()->environment('local'), 404);
+
+    // Pratinjau template email (tema "booking").
+    return (new MailMessage)
+        ->subject('Contoh email')
+        ->greeting('Halo, Dena!')
+        ->line('Order ORD-2609-0012 sudah ditugaskan ke teknisi Rudi Setiawan.')
+        ->action('Lihat order', url('/order'))
+        ->line('Terima kasih telah menggunakan layanan kami.')
+        ->render();
+})->name('dev.mail');
