@@ -59,7 +59,6 @@ Login memakai **Firebase Authentication** (popup Google di browser, ID token div
 3. Authentication → Settings → Authorized domains: tambahkan domain/host yang dipakai (`localhost` sudah ada; tambahkan `127.0.0.1` bila perlu).
 4. Isi di `.env`: `FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`, `FIREBASE_APP_ID` (nilai publik, bukan rahasia), lalu `php artisan config:clear`.
 
-Sebelum kredensial diisi, di `APP_ENV=local` halaman `/masuk` menampilkan tombol **masuk sebagai client demo** (tanpa Google) untuk mencoba tampilan client.
 
 ## Deploy produksi
 

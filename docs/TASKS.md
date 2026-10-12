@@ -215,7 +215,7 @@ flowchart LR
 - Firebase Authentication: popup Google di browser (JS SDK) → ID token dikirim ke `POST /auth/firebase`; server memverifikasi JWT dengan sertifikat publik Google (`firebase/php-jwt`, `FirebaseTokenVerifier`).
 - User baru → dibuat dengan role `client`; user lama → di-link via email; akun non-client tidak boleh masuk lewat Google.
 - **Selesai jika:** test `POST /auth/firebase` (verifier di-mock; verifikasi JWT diuji terpisah) membuat/menautkan user; user nonaktif ditolak.
-- *Status:* kode & test selesai; login Google sungguhan aktif setelah konfigurasi Firebase T-002 diisi di `.env`. Di lokal tersedia login demo client (`/dev/login-as`).
+- *Status:* kode & test selesai; login Google sungguhan aktif setelah konfigurasi Firebase T-002 diisi di `.env`. Tombol login demo client di `/masuk` sudah dihapus; `/dev/login-as/{user}` tetap ada khusus `APP_ENV=local`.
 
 #### T-302 · Login admin & teknisi
 - Halaman login email + password (desain mengikuti mockup), rate limit 5x/menit, logout.

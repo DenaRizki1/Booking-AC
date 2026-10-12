@@ -3,6 +3,7 @@
 use App\Enums\UserRole;
 use App\Models\User;
 use App\Services\FirebaseTokenVerifier;
+use Illuminate\Testing\TestResponse;
 
 /**
  * Login lewat Firebase: verifier token di-mock; verifikasi JWT diuji di FirebaseTokenVerifierTest.
@@ -22,7 +23,7 @@ function fakeFirebaseUser(array $claims = []): void
     app()->instance(FirebaseTokenVerifier::class, $verifier);
 }
 
-function firebaseLogin(?string $token = 'token-valid'): Illuminate\Testing\TestResponse
+function firebaseLogin(?string $token = 'token-valid'): TestResponse
 {
     return test()->postJson('/auth/firebase', ['id_token' => $token]);
 }
@@ -116,15 +117,12 @@ it('mewajibkan id_token', function () {
     firebaseLogin(null)->assertUnprocessable()->assertJsonValidationErrors('id_token');
 });
 
-it('menyediakan login demo hanya di environment local', function () {
-    $client = User::factory()->create();
-
-    $this->get(route('dev.login-as', $client))->assertNotFound();
-    $this->assertGuest();
-
+it('tidak menampilkan tombol login demo di halaman masuk', function () {
+    User::factory()->create(['name' => 'Client Demo Uji']);
     app()->detectEnvironment(fn () => 'local');
 
-    $this->get('/masuk')->assertSee('Mode lokal')->assertSee($client->name);
-    $this->get(route('dev.login-as', $client))->assertRedirect(route('client.home'));
-    $this->assertAuthenticatedAs($client);
+    $this->get('/masuk')
+        ->assertOk()
+        ->assertDontSee('Mode lokal')
+        ->assertDontSee('Client Demo Uji');
 });

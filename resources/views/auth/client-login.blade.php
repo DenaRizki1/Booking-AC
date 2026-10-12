@@ -1,9 +1,6 @@
 @php
     $company = \App\Models\CompanySettings::companyName();
     $services = \App\Models\Service::query()->where('is_active', true)->orderBy('sort_order')->pluck('name');
-    $demoClients = app()->environment('local')
-        ? \App\Models\User::query()->where('role', 'client')->where('is_active', true)->orderBy('id')->limit(5)->get(['id', 'name'])
-        : collect();
 @endphp
 
 <x-layouts.base title="Masuk" class="min-h-screen bg-white">
@@ -85,17 +82,6 @@
                         Masuk sebagai Admin / Teknisi
                     </a>
                 </div>
-
-        @if ($demoClients->isNotEmpty())
-            <div class="mt-2 rounded-xl border border-dashed border-warning bg-warning-50 p-3">
-                <p class="text-xs font-bold text-warning-900">Mode lokal — masuk sebagai client demo (tanpa Google):</p>
-                <div class="mt-2 flex flex-wrap gap-2">
-                    @foreach ($demoClients as $demo)
-                        <a href="{{ route('dev.login-as', $demo) }}" class="inline-flex min-h-11 items-center rounded-lg border border-warning/40 bg-white px-3 text-[13px] font-semibold text-warning-900 hover:bg-warning-50">{{ $demo->name }}</a>
-                    @endforeach
-                </div>
-            </div>
-        @endif
             </div>
         </main>
     </div>
