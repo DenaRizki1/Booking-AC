@@ -31,15 +31,34 @@ export default function firebaseLogin(config) {
                 const response = await window.axios.post(config.endpoint, { id_token: idToken });
                 window.location.assign(response.data.redirect);
             } catch (e) {
-                const cancelled = ['auth/popup-closed-by-user', 'auth/cancelled-popup-request'].includes(e?.code);
-                this.error = cancelled
-                    ? ''
-                    : e?.response?.data?.message
-                        ?? (e?.code === 'auth/popup-blocked'
-                            ? 'Popup diblokir browser. Izinkan popup lalu coba lagi.'
-                            : 'Login Google gagal atau dibatalkan. Silakan coba lagi.');
+                console.error('[firebase-login]', e);
+                this.error = this.messageFor(e);
                 this.loading = false;
             }
+        },
+
+        messageFor(e) {
+            const code = e?.code ?? '';
+            const hints = {
+                'auth/popup-closed-by-user': '',
+                'auth/cancelled-popup-request': '',
+                'auth/popup-blocked': 'Popup diblokir browser. Izinkan popup lalu coba lagi.',
+                'auth/unauthorized-domain': `Domain "${window.location.hostname}" belum didaftarkan di Firebase (Authentication → Settings → Authorized domains).`,
+                'auth/operation-not-allowed': 'Provider Google belum diaktifkan di Firebase (Authentication → Sign-in method).',
+                'auth/api-key-not-valid.-please-pass-a-valid-api-key.': 'FIREBASE_API_KEY tidak valid.',
+                'auth/invalid-api-key': 'FIREBASE_API_KEY tidak valid.',
+                'auth/network-request-failed': 'Koneksi ke Google gagal. Periksa internet Anda.',
+            };
+
+            if (code in hints) {
+                return hints[code] ? `${hints[code]} (${code})` : '';
+            }
+
+            if (e?.response) {
+                return `${e.response.data?.message ?? 'Server menolak login.'} (HTTP ${e.response.status})`;
+            }
+
+            return `Login Google gagal. Silakan coba lagi.${code ? ` (${code})` : e?.message ? ` (${e.message})` : ''}`;
         },
     };
 }
