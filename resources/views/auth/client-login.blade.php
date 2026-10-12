@@ -58,10 +58,19 @@
 
                 <x-flash class="mt-5" />
 
-                <a href="{{ route('auth.google.redirect') }}" class="mt-6 flex min-h-[54px] items-center justify-center gap-3 rounded-[14px] border-[1.5px] border-[#D5DEEE] bg-white text-base font-bold text-ink hover:bg-surface-bg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25">
-                    <span aria-hidden="true" class="inline-flex size-[26px] items-center justify-center rounded-full bg-blue-50 text-sm font-extrabold text-primary">G</span>
-                    Masuk dengan Google
-                </a>
+                <div x-data="firebaseLogin(@js(['firebase' => [
+                    'apiKey' => config('services.firebase.api_key'),
+                    'authDomain' => config('services.firebase.auth_domain'),
+                    'projectId' => config('services.firebase.project_id'),
+                    'appId' => config('services.firebase.app_id'),
+                ], 'endpoint' => route('auth.firebase')]))">
+                    <p x-show="error" x-cloak x-text="error" role="alert" class="mt-5 rounded-xl border border-danger/20 bg-danger-50 px-4 py-3 text-sm font-semibold text-danger-700"></p>
+
+                    <button type="button" @click="signIn()" :disabled="loading" :aria-busy="loading" class="mt-6 flex min-h-[54px] w-full items-center justify-center gap-3 rounded-[14px] border-[1.5px] border-[#D5DEEE] bg-white text-base font-bold text-ink hover:bg-surface-bg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 disabled:cursor-wait disabled:opacity-70">
+                        <span aria-hidden="true" class="inline-flex size-[26px] items-center justify-center rounded-full bg-blue-50 text-sm font-extrabold text-primary">G</span>
+                        <span x-text="loading ? 'Membuka Google…' : 'Masuk dengan Google'">Masuk dengan Google</span>
+                    </button>
+                </div>
                 <p class="mt-3 text-center text-xs leading-normal text-muted">Dengan masuk, Anda menyetujui Syarat Layanan dan Kebijakan Privasi {{ $company }}.</p>
 
                 <ul class="mt-8 space-y-3 border-t border-line pt-6 text-sm text-ink-soft">

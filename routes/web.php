@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\GoogleLoginController;
+use App\Http\Controllers\Auth\FirebaseLoginController;
 use App\Http\Controllers\Auth\StaffLoginController;
 use App\Http\Controllers\Dev\LoginAsController;
 use App\Http\Controllers\NotificationController;
@@ -15,9 +15,8 @@ Route::get('/', fn (Request $request) => $request->user()
 
 Route::middleware('guest')->group(function () {
     // Client: login Google.
-    Route::get('/masuk', [GoogleLoginController::class, 'create'])->name('client.login');
-    Route::get('/auth/google/redirect', [GoogleLoginController::class, 'redirect'])->name('auth.google.redirect');
-    Route::get('/auth/google/callback', [GoogleLoginController::class, 'callback'])->name('auth.google.callback');
+    Route::get('/masuk', [FirebaseLoginController::class, 'create'])->name('client.login');
+    Route::post('/auth/firebase', [FirebaseLoginController::class, 'store'])->name('auth.firebase');
 
     // Admin & teknisi: email + password.
     Route::get('/login', [StaffLoginController::class, 'create'])->name('login');

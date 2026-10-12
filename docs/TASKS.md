@@ -132,10 +132,10 @@ flowchart LR
 - **Selesai jika:** `php -v` ≥ 8.3, `composer -V` jalan, bisa login ke MySQL.
 - *Status:* MySQL 9.3 (Homebrew) aktif, database `booking_ac` + `booking_ac_test` dibuat. PHP masih 8.2 (cukup untuk Laravel 12); Herd belum terpasang → pakai `php artisan serve`.
 
-#### T-002 · 👤 Google OAuth Client ID
-- Google Cloud Console → buat project → OAuth consent screen (External) → Credentials → OAuth Client ID (Web).
-- Authorized redirect URI: `http://booking-ac.test/auth/google/callback` (tambahkan domain produksi nanti).
-- **Selesai jika:** punya `GOOGLE_CLIENT_ID` dan `GOOGLE_CLIENT_SECRET` (simpan, jangan dikirim di chat — isi sendiri di `.env`).
+#### T-002 · 👤 Firebase Authentication (Google sign-in)
+- Firebase Console → buat project → Authentication → aktifkan provider **Google** → daftarkan Web app → salin `firebaseConfig`.
+- Authentication → Settings → Authorized domains: tambahkan host lokal/produksi.
+- **Selesai jika:** `FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`, `FIREBASE_APP_ID` terisi di `.env` (nilai publik; service account tidak diperlukan).
 
 #### T-003 · 👤 SMTP untuk development
 - Pakai **Mailpit** (gratis, lokal) atau akun Mailtrap.
@@ -212,10 +212,10 @@ flowchart LR
 ### F3 — Auth & Role
 
 #### T-301 · Login Google (client)
-- `laravel/socialite`; route `auth/google/redirect` & `callback`.
+- Firebase Authentication: popup Google di browser (JS SDK) → ID token dikirim ke `POST /auth/firebase`; server memverifikasi JWT dengan sertifikat publik Google (`firebase/php-jwt`, `FirebaseTokenVerifier`).
 - User baru → dibuat dengan role `client`; user lama → di-link via email; akun non-client tidak boleh masuk lewat Google.
-- **Selesai jika:** test callback (Socialite di-mock) membuat/menautkan user; user nonaktif ditolak.
-- *Status:* kode & test selesai; login Google sungguhan aktif setelah kredensial T-002 diisi di `.env`. Di lokal tersedia login demo client (`/dev/login-as`).
+- **Selesai jika:** test `POST /auth/firebase` (verifier di-mock; verifikasi JWT diuji terpisah) membuat/menautkan user; user nonaktif ditolak.
+- *Status:* kode & test selesai; login Google sungguhan aktif setelah konfigurasi Firebase T-002 diisi di `.env`. Di lokal tersedia login demo client (`/dev/login-as`).
 
 #### T-302 · Login admin & teknisi
 - Halaman login email + password (desain mengikuti mockup), rate limit 5x/menit, logout.

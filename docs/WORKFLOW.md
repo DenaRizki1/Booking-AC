@@ -608,7 +608,7 @@ erDiagram
 
 | Kebutuhan | Rekomendasi |
 |---|---|
-| Login Google (client) | `laravel/socialite` |
+| Login Google (client) | Firebase Authentication (JS SDK) + verifikasi ID token via `firebase/php-jwt` |
 | Login admin & teknisi | Auth bawaan Laravel (session), guard sama dengan kolom `role` |
 | Hak akses | Middleware `role:client/admin/teknisi` + Policy (mis. teknisi hanya lihat order miliknya) |
 | Peta & titik koordinat | Leaflet + tile OpenStreetMap; marker bisa di-drag; tombol "Lokasi saya" (Geolocation API) |

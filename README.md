@@ -52,9 +52,12 @@ Identitas perusahaan masih placeholder **SejukAC** (T-004) dan bisa diubah di me
 
 ## Login Google (client)
 
-1. Buat OAuth Client ID (Web) di Google Cloud Console (T-002).
-2. Authorized redirect URI: `http://127.0.0.1:8000/auth/google/callback` (atau `http://booking-ac.test/auth/google/callback` bila memakai Herd).
-3. Isi di `.env`: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, dan `GOOGLE_REDIRECT_URI` bila berbeda dari `APP_URL/auth/google/callback`.
+Login memakai **Firebase Authentication** (popup Google di browser, ID token diverifikasi server tanpa service account).
+
+1. Firebase Console → buat project → Authentication → Sign-in method → aktifkan **Google** (T-002).
+2. Project settings → Your apps → daftarkan Web app, salin `firebaseConfig`.
+3. Authentication → Settings → Authorized domains: tambahkan domain/host yang dipakai (`localhost` sudah ada; tambahkan `127.0.0.1` bila perlu).
+4. Isi di `.env`: `FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`, `FIREBASE_APP_ID` (nilai publik, bukan rahasia), lalu `php artisan config:clear`.
 
 Sebelum kredensial diisi, di `APP_ENV=local` halaman `/masuk` menampilkan tombol **masuk sebagai client demo** (tanpa Google) untuk mencoba tampilan client.
 

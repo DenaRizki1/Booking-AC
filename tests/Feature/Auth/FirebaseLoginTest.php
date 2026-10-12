@@ -2,22 +2,29 @@
 
 use App\Enums\UserRole;
 use App\Models\User;
-use Laravel\Socialite\Facades\Socialite;
-use Laravel\Socialite\Two\InvalidStateException;
-use Laravel\Socialite\Two\User as GoogleUser;
+use App\Services\FirebaseTokenVerifier;
 
-function fakeGoogleUser(array $attributes = []): GoogleUser
+/**
+ * Login lewat Firebase: verifier token di-mock; verifikasi JWT diuji di FirebaseTokenVerifierTest.
+ *
+ * @param  array<string, mixed>  $claims
+ */
+function fakeFirebaseUser(array $claims = []): void
 {
-    $googleUser = (new GoogleUser)->map(array_merge([
-        'id' => '109876543210',
+    $verifier = Mockery::mock(FirebaseTokenVerifier::class);
+    $verifier->shouldReceive('verify')->with('token-valid')->andReturn(array_merge([
+        'uid' => '109876543210',
         'name' => 'Dena Rizki',
         'email' => 'dena@gmail.com',
-        'avatar' => 'https://lh3.googleusercontent.com/a/foto',
-    ], $attributes));
+        'picture' => 'https://lh3.googleusercontent.com/a/foto',
+    ], $claims));
 
-    Socialite::shouldReceive('driver->user')->andReturn($googleUser);
+    app()->instance(FirebaseTokenVerifier::class, $verifier);
+}
 
-    return $googleUser;
+function firebaseLogin(?string $token = 'token-valid'): Illuminate\Testing\TestResponse
+{
+    return test()->postJson('/auth/firebase', ['id_token' => $token]);
 }
 
 it('menampilkan halaman login client', function () {
@@ -32,16 +39,10 @@ it('mengarahkan tamu dari halaman awal ke login client', function () {
     $this->get('/')->assertRedirect('/masuk');
 });
 
-it('mengarahkan tombol login ke Google', function () {
-    Socialite::shouldReceive('driver->redirect')->andReturn(redirect('https://accounts.google.com/o/oauth2/auth'));
-
-    $this->get('/auth/google/redirect')->assertRedirect('https://accounts.google.com/o/oauth2/auth');
-});
-
 it('membuat akun client baru dari data Google', function () {
-    fakeGoogleUser();
+    fakeFirebaseUser();
 
-    $this->get('/auth/google/callback')->assertRedirect(route('client.home'));
+    firebaseLogin()->assertOk()->assertJson(['redirect' => route('client.home')]);
 
     $user = User::sole();
     expect($user->role)->toBe(UserRole::CLIENT)
@@ -56,9 +57,9 @@ it('membuat akun client baru dari data Google', function () {
 
 it('menautkan akun client lama lewat email', function () {
     $existing = User::factory()->create(['email' => 'dena@gmail.com', 'google_id' => null]);
-    fakeGoogleUser(['email' => 'DENA@gmail.com']);
+    fakeFirebaseUser(['email' => 'DENA@gmail.com']);
 
-    $this->get('/auth/google/callback');
+    firebaseLogin()->assertOk();
 
     expect(User::count())->toBe(1)
         ->and($existing->fresh()->google_id)->toBe('109876543210');
@@ -67,9 +68,9 @@ it('menautkan akun client lama lewat email', function () {
 
 it('mengenali user lewat google_id walau email Google berubah', function () {
     $existing = User::factory()->create(['google_id' => '109876543210', 'email' => 'lama@gmail.com']);
-    fakeGoogleUser(['email' => 'baru@gmail.com']);
+    fakeFirebaseUser(['email' => 'baru@gmail.com']);
 
-    $this->get('/auth/google/callback');
+    firebaseLogin()->assertOk();
 
     expect(User::count())->toBe(1);
     $this->assertAuthenticatedAs($existing);
@@ -77,11 +78,11 @@ it('mengenali user lewat google_id walau email Google berubah', function () {
 
 it('menolak akun admin atau teknisi masuk lewat Google', function (string $role) {
     User::factory()->{$role}()->create(['email' => 'staf@gmail.com']);
-    fakeGoogleUser(['email' => 'staf@gmail.com']);
+    fakeFirebaseUser(['email' => 'staf@gmail.com']);
 
-    $this->get('/auth/google/callback')
-        ->assertRedirect('/masuk')
-        ->assertSessionHas('error', 'Akun admin/teknisi masuk lewat halaman login staf, bukan Google.');
+    firebaseLogin()
+        ->assertForbidden()
+        ->assertJson(['message' => 'Akun admin/teknisi masuk lewat halaman login staf, bukan Google.']);
 
     $this->assertGuest();
 })->with(['admin', 'teknisi']);
@@ -89,24 +90,30 @@ it('menolak akun admin atau teknisi masuk lewat Google', function (string $role)
 it('menolak client yang dinonaktifkan atau dihapus', function (string $state) {
     $client = User::factory()->create(['email' => 'dena@gmail.com']);
     $state === 'inactive' ? $client->update(['is_active' => false]) : $client->delete();
-    fakeGoogleUser();
+    fakeFirebaseUser();
 
-    $this->get('/auth/google/callback')
-        ->assertRedirect('/masuk')
-        ->assertSessionHas('error', 'Akun Anda dinonaktifkan. Silakan hubungi admin.');
+    firebaseLogin()
+        ->assertForbidden()
+        ->assertJson(['message' => 'Akun Anda dinonaktifkan. Silakan hubungi admin.']);
 
     $this->assertGuest();
     expect(User::withTrashed()->count())->toBe(1);
 })->with(['inactive', 'deleted']);
 
-it('menangani login Google yang gagal atau dibatalkan', function () {
-    Socialite::shouldReceive('driver->user')->andThrow(new InvalidStateException);
+it('menolak token Firebase yang tidak valid', function () {
+    $verifier = Mockery::mock(FirebaseTokenVerifier::class);
+    $verifier->shouldReceive('verify')->andThrow(new InvalidArgumentException('rusak'));
+    app()->instance(FirebaseTokenVerifier::class, $verifier);
 
-    $this->get('/auth/google/callback')
-        ->assertRedirect('/masuk')
-        ->assertSessionHas('error', 'Login Google gagal atau dibatalkan. Silakan coba lagi.');
+    firebaseLogin('token-palsu')
+        ->assertUnprocessable()
+        ->assertJson(['message' => 'Login Google gagal atau dibatalkan. Silakan coba lagi.']);
 
     $this->assertGuest();
+});
+
+it('mewajibkan id_token', function () {
+    firebaseLogin(null)->assertUnprocessable()->assertJsonValidationErrors('id_token');
 });
 
 it('menyediakan login demo hanya di environment local', function () {

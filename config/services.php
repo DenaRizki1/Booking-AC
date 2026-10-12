@@ -28,10 +28,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT_URI', '/auth/google/callback'),
+    // Login Google lewat Firebase Authentication (nilai ini publik, bukan rahasia).
+    'firebase' => [
+        'api_key' => env('FIREBASE_API_KEY'),
+        'auth_domain' => env('FIREBASE_AUTH_DOMAIN'),
+        'project_id' => env('FIREBASE_PROJECT_ID'),
+        'app_id' => env('FIREBASE_APP_ID'),
     ],
 
     'slack' => [
