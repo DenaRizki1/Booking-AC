@@ -91,8 +91,10 @@ tidak melindungi dari kerusakan disk. Pulihkan: `gunzip -c file.sql.gz | mysql -
 
 ## 8. Google login produksi
 
-Google Cloud Console → OAuth Client → **Authorized redirect URIs**: `https://<domain-anda>/auth/google/callback`
-(dan origin `https://<domain-anda>`). Isi `GOOGLE_CLIENT_ID/SECRET` di `.env`, lalu `php artisan config:cache`.
+Firebase Console → Authentication → Settings → **Authorized domains** → tambahkan `<domain-anda>`
+(tanpa `https://`). Pastikan provider Google sudah aktif di Sign-in method. Isi `FIREBASE_API_KEY`,
+`FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`, `FIREBASE_APP_ID` di `.env`, lalu `php artisan config:cache`.
+Tidak perlu redirect URI manual dan tidak perlu file service account.
 
 ## 9. Deploy ulang (update kode)
 
