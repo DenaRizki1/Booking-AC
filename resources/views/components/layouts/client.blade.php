@@ -21,9 +21,7 @@
     <header x-data="{ menu: false, account: false }" class="sticky top-0 z-40 border-b border-line bg-white">
         <div class="mx-auto flex h-[72px] max-w-6xl items-center gap-4 px-4 sm:px-6 lg:gap-6">
             <a href="{{ route('client.home') }}" class="flex min-h-11 shrink-0 items-center gap-2.5">
-                <span class="flex size-10 items-center justify-center rounded-xl bg-primary text-white">
-                    <x-icon name="snowflake" class="size-6" stroke-width="2.2" />
-                </span>
+                <x-brand-logo />
                 <span class="text-lg font-extrabold tracking-tight text-navy">{{ $company }}</span>
             </a>
 

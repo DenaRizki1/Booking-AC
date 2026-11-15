@@ -10,9 +10,7 @@
             <div aria-hidden="true" class="absolute -top-14 -right-22 size-60 rounded-full border-[1.5px] border-white/15"></div>
 
             <a href="{{ url('/') }}" class="relative inline-flex min-h-11 items-center gap-2.5">
-                <span class="flex size-10 items-center justify-center rounded-xl bg-white text-primary">
-                    <x-icon name="snowflake" class="size-6" stroke-width="2.2" />
-                </span>
+                <x-brand-logo />
                 <span class="text-xl font-extrabold tracking-tight">{{ $company }}</span>
             </a>
 

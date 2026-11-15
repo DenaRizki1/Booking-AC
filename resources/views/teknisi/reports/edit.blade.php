@@ -16,7 +16,7 @@
     <p class="-mt-1 text-[13px] text-muted">{{ $order->code }} · {{ $order->client->name }}</p>
 
     {{-- Tab unit --}}
-    <nav class="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1" aria-label="Unit">
+    <nav class="flex flex-wrap gap-3 pb-1" aria-label="Unit">
         @foreach ($order->items as $unit)
             @php($current = $loop->index === $index)
             <a
@@ -37,7 +37,7 @@
         @endforeach
     </nav>
 
-    <section class="flex flex-col gap-5 rounded-card border border-line bg-white p-4">
+    <section class="flex flex-col gap-5 rounded-card border border-line bg-white p-5 sm:p-6">
         <div class="flex items-start justify-between gap-3">
             <div>
                 <p class="text-xs font-extrabold tracking-wide text-primary uppercase">{{ $item->service_name }}</p>
@@ -50,47 +50,49 @@
         </div>
 
         {{-- Foto sebelum / sesudah --}}
-        @foreach ([PhotoKind::SEBELUM, PhotoKind::SESUDAH] as $kind)
-            @php($photos = $item->photos->where('kind', $kind)->values())
-            <div>
-                <div class="mb-2 flex items-center justify-between text-[13px]">
-                    <span class="font-bold text-ink">Foto {{ strtolower($kind->label()) }}</span>
-                    @if ($kind === PhotoKind::SESUDAH && $photos->isEmpty())
-                        <span class="font-semibold text-danger">Wajib min. 1</span>
-                    @else
-                        <span class="text-muted">{{ $photos->count() }} foto</span>
-                    @endif
-                </div>
-                <div class="grid grid-cols-3 gap-2 sm:grid-cols-4">
-                    @foreach ($photos as $photo)
-                        <div class="relative aspect-square overflow-hidden rounded-xl bg-surface-bg">
-                            <img src="{{ Storage::disk('public')->url($photo->path) }}" alt="Foto {{ strtolower($kind->label()) }} unit {{ $unitNumber }}" loading="lazy" class="size-full object-cover">
-                            <form method="POST" action="{{ route('teknisi.reports.photos.destroy', [$order, $photo]) }}" class="absolute top-1 right-1">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="flex size-9 items-center justify-center rounded-lg bg-navy/70 text-white hover:bg-danger" onclick="return confirm('Hapus foto ini?')">
-                                    <x-icon name="trash-2" class="size-4" /><span class="sr-only">Hapus foto</span>
-                                </button>
-                            </form>
-                        </div>
-                    @endforeach
+        <div class="grid items-start gap-6 md:grid-cols-2">
+            @foreach ([PhotoKind::SEBELUM, PhotoKind::SESUDAH] as $kind)
+                @php($photos = $item->photos->where('kind', $kind)->values())
+                <div>
+                    <div class="mb-2 flex items-center justify-between text-[13px]">
+                        <span class="font-bold text-ink">Foto {{ strtolower($kind->label()) }}</span>
+                        @if ($kind === PhotoKind::SESUDAH && $photos->isEmpty())
+                            <span class="font-semibold text-danger">Wajib min. 1</span>
+                        @else
+                            <span class="text-muted">{{ $photos->count() }} foto</span>
+                        @endif
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 sm:grid-cols-4">
+                        @foreach ($photos as $photo)
+                            <div class="relative aspect-square overflow-hidden rounded-xl bg-surface-bg">
+                                <img src="{{ Storage::disk('public')->url($photo->path) }}" alt="Foto {{ strtolower($kind->label()) }} unit {{ $unitNumber }}" loading="lazy" class="size-full object-cover">
+                                <form method="POST" action="{{ route('teknisi.reports.photos.destroy', [$order, $photo]) }}" class="absolute top-1 right-1">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="flex size-9 items-center justify-center rounded-lg bg-navy/70 text-white hover:bg-danger" onclick="return confirm('Hapus foto ini?')">
+                                        <x-icon name="trash-2" class="size-4" /><span class="sr-only">Hapus foto</span>
+                                    </button>
+                                </form>
+                            </div>
+                        @endforeach
 
-                    @if ($photos->count() < \App\Services\OrderReportService::MAX_PHOTOS_PER_KIND)
-                        <form method="POST" action="{{ route('teknisi.reports.photos.store', [$order, $item]) }}" enctype="multipart/form-data" x-data="{ uploading: false }" x-on:submit="uploading = true" @class(['aspect-square' => $photos->isNotEmpty(), 'col-span-3 sm:col-span-4' => $photos->isEmpty()])>
-                            @csrf
-                            <input type="hidden" name="kind" value="{{ $kind->value }}">
-                            <label @class([
-                                'flex size-full cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-[1.5px] border-dashed border-blue-200 bg-[#F2F6FE] text-primary hover:bg-blue-50',
-                                'min-h-24' => $photos->isEmpty(),
-                            ]) :class="uploading && 'animate-pulse pointer-events-none'">
-                                <x-icon name="camera" class="size-6" />
-                                <span class="text-xs font-bold" x-text="uploading ? 'Mengunggah…' : @js($photos->isEmpty() ? 'Ambil foto / pilih dari galeri' : 'Tambah')"></span>
-                                <input type="file" name="photos[]" accept="image/*" capture="environment" multiple class="sr-only" x-on:change="if ($event.target.files.length) $el.form.requestSubmit()">
-                            </label>
-                        </form>
-                    @endif
+                        @if ($photos->count() < \App\Services\OrderReportService::MAX_PHOTOS_PER_KIND)
+                            <form method="POST" action="{{ route('teknisi.reports.photos.store', [$order, $item]) }}" enctype="multipart/form-data" x-data="{ uploading: false }" x-on:submit="uploading = true" @class(['aspect-square' => $photos->isNotEmpty(), 'col-span-3 sm:col-span-4' => $photos->isEmpty()])>
+                                @csrf
+                                <input type="hidden" name="kind" value="{{ $kind->value }}">
+                                <label @class([
+                                    'flex size-full cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-[1.5px] border-dashed border-blue-200 bg-[#F2F6FE] text-primary hover:bg-blue-50',
+                                    'min-h-24' => $photos->isEmpty(),
+                                ]) :class="uploading && 'animate-pulse pointer-events-none'">
+                                    <x-icon name="camera" class="size-6" />
+                                    <span class="text-xs font-bold" x-text="uploading ? 'Mengunggah…' : @js($photos->isEmpty() ? 'Ambil foto / pilih dari galeri' : 'Tambah')"></span>
+                                    <input type="file" name="photos[]" accept="image/*" capture="environment" multiple class="sr-only" x-on:change="if ($event.target.files.length) $el.form.requestSubmit()">
+                                </label>
+                            </form>
+                        @endif
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
         <x-field-error name="photos" />
         <x-field-error name="photos.0" />
 
@@ -104,7 +106,7 @@
                 get amount() { return Number(String(this.price).replace(/\D/g, '')) || 0; },
                 format() { const d = String(this.price).replace(/\D/g, ''); this.price = d === '' ? '' : new Intl.NumberFormat('id-ID').format(Number(d)); },
             }"
-            class="flex flex-col gap-4 border-t border-[#EEF2F8] pt-4"
+            class="grid items-start gap-5 border-t border-[#EEF2F8] pt-5 md:grid-cols-2"
             novalidate
         >
             @csrf
@@ -122,24 +124,28 @@
                 <x-input name="price_note" label="Keterangan tambahan harga" :value="$item->price_note" placeholder="Mis. ganti kapasitor 35µF (+Rp50.000)" maxlength="500" />
             </div>
 
-            <x-button type="submit" variant="secondary" size="lg" block>Simpan Unit {{ $unitNumber }}</x-button>
+            <div class="md:col-span-2">
+                <x-button type="submit" variant="secondary" size="lg">Simpan Unit {{ $unitNumber }}</x-button>
+            </div>
         </form>
     </section>
 
     <x-slot:footer>
-        <div class="flex items-center justify-between gap-3">
-            <div>
-                <p class="text-xs text-muted">Total harga final · {{ $order->items->count() }} unit</p>
-                <p class="text-lg font-extrabold text-ink tabular-nums">{{ Format::rupiah($finalTotal) }}</p>
+        <div class="grid items-center gap-5 xl:grid-cols-2">
+            <div class="flex items-center justify-between gap-3">
+                <div>
+                    <p class="text-xs text-muted">Total harga final · {{ $order->items->count() }} unit</p>
+                    <p class="text-lg font-extrabold text-ink tabular-nums">{{ Format::rupiah($finalTotal) }}</p>
+                </div>
+                <span class="text-xs text-muted tabular-nums">+ transport {{ Format::rupiah((int) $order->transport_fee) }}</span>
             </div>
-            <span class="text-xs text-muted tabular-nums">+ transport {{ Format::rupiah((int) $order->transport_fee) }}</span>
+            <form method="POST" action="{{ route('teknisi.reports.submit', $order) }}" class="mt-2" x-data x-on:submit="if (! confirm('Kirim laporan? Status order menjadi Selesai dan tidak bisa diubah lagi.')) $event.preventDefault()">
+                @csrf
+                <x-button type="submit" size="lg" icon="send" block :disabled="! $allComplete">Kirim Laporan &amp; Selesai</x-button>
+                @unless ($allComplete)
+                    <p class="mt-1.5 text-center text-xs text-muted">Lengkapi harga final & min. 1 foto sesudah di setiap unit.</p>
+                @endunless
+            </form>
         </div>
-        <form method="POST" action="{{ route('teknisi.reports.submit', $order) }}" class="mt-2" x-data x-on:submit="if (! confirm('Kirim laporan? Status order menjadi Selesai dan tidak bisa diubah lagi.')) $event.preventDefault()">
-            @csrf
-            <x-button type="submit" size="lg" icon="send" block :disabled="! $allComplete">Kirim Laporan &amp; Selesai</x-button>
-            @unless ($allComplete)
-                <p class="mt-1.5 text-center text-xs text-muted">Lengkapi harga final & min. 1 foto sesudah di setiap unit.</p>
-            @endunless
-        </form>
     </x-slot:footer>
 </x-layouts.teknisi>

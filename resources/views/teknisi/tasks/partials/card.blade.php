@@ -7,7 +7,7 @@
 @endphp
 
 <article @class([
-    'flex flex-col gap-2.5 rounded-[18px] border bg-white p-3.5',
+    'flex flex-col gap-2.5 rounded-[18px] border bg-white p-5',
     'border-line opacity-70' => $done,
     'border-[1.5px] border-primary shadow-[0_8px_22px_rgba(29,99,237,0.14)]' => $highlight,
     'border-line' => ! $done && ! $highlight,

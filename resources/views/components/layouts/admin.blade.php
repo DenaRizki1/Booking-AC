@@ -23,9 +23,7 @@
             aria-label="Menu admin"
         >
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-2 pb-6">
-                <span class="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-primary">
-                    <x-icon name="snowflake" class="size-5" stroke-width="2.2" />
-                </span>
+                <x-brand-logo />
                 <span class="min-w-0">
                     <span class="block truncate text-[17px] font-extrabold">{{ $company }}</span>
                     <span class="block text-[11px] text-white/60">Panel Admin</span>

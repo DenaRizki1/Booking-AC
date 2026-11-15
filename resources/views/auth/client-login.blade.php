@@ -11,9 +11,7 @@
             <div aria-hidden="true" class="absolute -top-16 -right-24 size-[300px] rounded-full border-[1.5px] border-white/15"></div>
 
             <div class="relative flex items-center gap-2.5">
-                <span class="flex size-11 items-center justify-center rounded-xl bg-white text-primary">
-                    <x-icon name="snowflake" class="size-6" stroke-width="2.2" />
-                </span>
+                <x-brand-logo />
                 <span class="text-xl font-extrabold tracking-tight">{{ $company }}</span>
             </div>
 

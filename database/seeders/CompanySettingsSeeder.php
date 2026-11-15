@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class CompanySettingsSeeder extends Seeder
 {
     /**
-     * Satu baris pengaturan. Identitas perusahaan masih placeholder "SejukAC"
+     * Satu baris pengaturan. Identitas perusahaan masih placeholder "Service AC"
      * (T-004) — bisa diubah admin di menu Pengaturan.
      */
     public function run(): void
@@ -18,7 +18,7 @@ class CompanySettingsSeeder extends Seeder
         }
 
         CompanySettings::create([
-            'company_name' => 'SejukAC',
+            'company_name' => 'Service AC',
             'phone' => '081234567890',
             'email' => 'halo@sejukac.test',
             'address' => 'Jl. Kemang Raya No. 10, Bangka, Mampang Prapatan, Jakarta Selatan',

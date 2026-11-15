@@ -1,0 +1,16 @@
+{
+  "name": "Service AC",
+  "short_name": "Service AC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00084D",
+  "icons": [
+    {
+      "src": "/images/logo-era.png",
+      "sizes": "500x500",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
